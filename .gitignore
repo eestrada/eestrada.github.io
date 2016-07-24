@@ -1,5 +1,16 @@
+# Mac OSX
+.DS_Store
+
+# Emacs / DrRacket backups & auto save files
+*~
+\#*\#
+.\#*
+
+# Emacs tags
+TAGS
+
 # frog build files
 .frog
 
-# Distribution / packaging
+# Python Distribution / packaging
 _venv/
