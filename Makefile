@@ -1,6 +1,6 @@
 .PHONY: all build safe-build serve preview setup clean
 
-all: clean safe-build
+all: clean build
 
 build:
 	source _venv/bin/activate; raco frog --build
