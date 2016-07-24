@@ -1,4 +1,0 @@
-About
-=====
-
-Some information here.
