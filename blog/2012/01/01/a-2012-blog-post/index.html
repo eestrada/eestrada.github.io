@@ -138,14 +138,18 @@ function foo()
 <p>Yields this:</p>
 
 <div class="brush: js">
- <pre><code>/**
- * Some JavaScript
- */
-function foo()
-{
-    if (counter &lt;= 10)
-        return;
-    // it works!</code></pre></div>
+ <div class="source">
+  <pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Some JavaScript</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">counter</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="c1">// it works!</span>
+</pre></div>
+
+</div>
 
 <p>And this:</p>
 
@@ -161,12 +165,16 @@ function foo()
 <p>Yields this:</p>
 
 <div class="brush: racket">
- <pre><code>#lang racket
-;; Finds Racket sources in all subdirs
-(for ([path (in-directory)])
-  (when (regexp-match? #rx"[.]rkt$" path)
-    (printf "source file: ~a\n" path)))
-(symbol-&gt;string 'foo)</code></pre></div>
+ <div class="source">
+  <pre><span></span><span class="kn">#lang </span><span class="nn">racket</span>
+<span class="c1">;; Finds Racket sources in all subdirs</span>
+<span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="n">path</span> <span class="p">(</span><span class="nb">in-directory</span><span class="p">)])</span>
+  <span class="p">(</span><span class="k">when</span> <span class="p">(</span><span class="nb">regexp-match?</span> <span class="sr">#rx"[.]rkt$"</span> <span class="n">path</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">printf</span> <span class="s2">"source file: ~a</span><span class="se">\n</span><span class="s2">"</span> <span class="n">path</span><span class="p">)))</span>
+<span class="p">(</span><span class="nb">symbol-&gt;string</span> <span class="o">&#39;</span><span class="ss">foo</span><span class="p">)</span>
+</pre></div>
+
+</div>
 
 <p>Notice that, for Racket, symbols with unambiguous documentation (provided by one library, or provided by several where one is <code>racket</code> or <code>racket/base</code>) are links to that documentation.</p>
 
@@ -189,18 +197,30 @@ function foo()
 <p>And here in fenced code block, lang = <code>racket</code>:</p>
 
 <div class="brush: racket">
- <pre><code>(λ () #t)</code></pre></div>
+ <div class="source">
+  <pre><span></span><span class="p">(</span><span class="k">λ</span> <span class="p">()</span> <span class="no">#t</span><span class="p">)</span>
+</pre></div>
+
+</div>
 
 <p>And here in fenced code block, lang = <code>scheme</code>:</p>
 
 <div class="brush: scheme">
- <pre><code>(λ () #t)</code></pre></div>
+ <div class="source">
+  <pre><span></span><span class="p">(</span><span class="nf">λ</span> <span class="p">()</span> <span class="no">#t</span><span class="p">)</span>
+</pre></div>
+
+</div>
 
 <p>Here&rsquo;s a simple <code>for</code> macro, written in <a href="http://docs.racket-lang.org/reference/stx-patterns.html">Racket</a>:</p>
 
 <div class="brush: racket">
- <pre><code>(define-syntax-rule (for (x e1) e2)
-  (for-each (λ (x) e2) e1))</code></pre></div>
+ <div class="source">
+  <pre><span></span><span class="p">(</span><span class="k">define-syntax-rule</span> <span class="p">(</span><span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="n">e1</span><span class="p">)</span> <span class="n">e2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">for-each</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">e2</span><span class="p">)</span> <span class="n">e1</span><span class="p">))</span>
+</pre></div>
+
+</div>
 
 <p>The end.</p>
 
