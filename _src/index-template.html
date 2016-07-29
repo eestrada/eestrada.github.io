@@ -2,8 +2,8 @@
   <header>
     <h2><a href='@|uri-path|'>@|title|</a></h2>
     <p class='date-and-tags'>@|date|
-      @(if (equal? tags "") "" (format " :: ~a" authors))
-      @(if (equal? tags "") "" (format " :: ~a" tags))
+      @(if (equal? authors "") "" (format " | by ~a" authors))
+      @(if (equal? tags "") "" (format " | Tags: ~a" tags))
     </p>
   </header>
   @|content-only|

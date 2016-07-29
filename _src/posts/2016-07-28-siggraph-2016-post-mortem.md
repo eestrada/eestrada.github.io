@@ -1,34 +1,35 @@
     Title: SIGGRAPH 2016 Post Mortem
     Date: 2016-07-28T20:28:37
-    Tags: DRAFT,SIGGRAPH,MetaPipe
+    Tags: SIGGRAPH,MetaPipe
     Authors: Ethan Estrada
 
 I had the opportunity to attend SIGGRAPH this year as a representative
-of [MetaPipe](metapipe.com). For as fun as it was to meet with
+of [MetaPipe](http://metapipe.com). For as fun as it was to meet with
 representatives of various software and cloud companies, I am happy to
 be able to get my nose back to the grindstone on MetaPipe. I'm
 extremely excited about the tech we are working on for the service and
 I can't wait to get it to the point where we can start demoing it
 publicly to get everyone's feedback. We started a lot of converstaions
-at SIGGRAPH with various companies that we feel (and hope) will turn
-into more concrete agreements in the near future.
+at SIGGRAPH with various companies that we feel fairly confident will
+turn into more concrete agreements in the near future.
 
 <!-- more -->
 
-I got an "Exhibit Only" pass during the convention; we are trying to
-be scrappy, lean, and frugal so splurging on something like a "Full
-Conference" pass would definitly be overkill especially when Avere
-provided us with a code for a free "Exhibition Only" pass. Besides,
-all of the people we wanted to talk to were on the exhibit floor
-anyway. Maybe in future years we will get more complete passes to
-check out presentations to see the state of the industry, but for now
-we
+I got an "Exhibits Only" pass during the convention; we are trying to
+be as scrappy, lean, and frugal as we can be so splurging on something
+like a "Full Conference" pass would definitly be overkill especially
+when Avere provided us with a code for a free "Exhibits Only"
+pass. Besides, all of the people we wanted to talk to were on the
+exhibit floor anyway. Maybe in future years we will get more complete
+passes to check out presentations to see the state of the industry,
+but for now we are keeping it simple. Ideally we will be able to
+justify having our own booth next year!
 
-Even though SIGGRAPH has shrunk in attendence some in recent years, it
-is still very impressive in size and scope. I think this is part is
-from the decreased focus on the job fair and a greater focus on
-interconnect between vendors. SIGGRAPH seems less useful for
-individual artists looking for work.
+Even though I've heard SIGGRAPH has shrunk in attendence some in
+recent years, it is still very impressive in size and scope. I think
+this in part is from the decreased focus on the job fair and a greater
+focus on interconnect between vendors. SIGGRAPH seems less useful for
+individual artists looking for work than it used to be.
 
 The biggest focus at the convention seemed to be VR and AR. Pretty
 much every booth from software vendors featured VR workflows. The new
@@ -60,4 +61,7 @@ way?
 
 During the convention, I either asked these questions to the various
 developers on the farm manager teams, or thought of them after the
-fact due mulling over the questions I had asked.
+fact due to mulling over the questions I had asked or information
+I had learned. It isn't an easy problem to solve and one that I am sure
+will have many more years of time and effort poured into it before
+well rounded solutions come to market.
