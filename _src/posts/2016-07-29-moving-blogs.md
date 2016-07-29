@@ -1,5 +1,5 @@
     Title: Moving blogs
-    Date: 2016-07-29T14:52:18
+    Date: 2016-07-29T09:52:18-0700
     Tags: blog
     Authors: Ethan Estrada
 

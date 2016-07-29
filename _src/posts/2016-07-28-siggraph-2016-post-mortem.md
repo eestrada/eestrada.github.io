@@ -1,5 +1,5 @@
     Title: SIGGRAPH 2016 Post Mortem
-    Date: 2016-07-28T20:28:37
+    Date: 2016-07-29T14:52:18-0700
     Tags: SIGGRAPH,MetaPipe
     Authors: Ethan Estrada
 
