@@ -3,15 +3,15 @@
   <head>
 
     <meta charset="utf-8">
-    <title>Ethan Estrada</title>
-    <meta name="description" content="Ethan Estrada: Welcome to my website! Here you can find my blog posts, along with other sundry odds and ends....">
+    <title>Moving blogs</title>
+    <meta name="description" content="I am moving blogging platforms and thought I should maybe explain why....">
     <meta name="author"      content="Ethan D. Estrada">
-    <meta name="keywords"    content="">
+    <meta name="keywords"    content="blog">
     <meta name="viewport"    content="width=device-width, initial-scale=1.0">
     <link rel="icon"      href="/favicon.ico">
-    <link rel="canonical" href="http://eestrada.github.io/About.html">
+    <link rel="canonical" href="http://eestrada.github.io/blog/2016/07/29/moving-blogs/">
 
-
+    <link rel="prev" href="/blog/2016/07/29/siggraph-2016-post-mortem/">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/pygments.css">
@@ -53,7 +53,7 @@
              role="navigation">
           <ul class="nav navbar-nav">
 
-            <li class="active">
+            <li>
               <a href="/About.html">About</a>
             </li> 
             <li>
@@ -90,10 +90,77 @@
 
 
 
+          <article>
+  <header>
+    <h1>Moving blogs</h1>
+    <div class="date-and-tags">
+      <p>
 
-<h1 id="ethan-estrada">Ethan Estrada</h1>
+<time datetime="2016-07-29" pubdate="true">2016-07-29</time>
+        <br/>by <span class="tags"><a href="/tags/Ethan-Estrada.html">Ethan Estrada</a></span>
+        <br/>Tags: <span class="tags"><a href="/tags/blog.html">blog</a></span>
+      </p>
+    </div>
+  </header>
 
-<p>Welcome to my website! Here you can find my blog posts, along with other sundry odds and ends.</p>
+<p>I am moving blogging platforms and thought I should maybe explain why.</p>
+<!-- more-->
+
+<p>In the past I have been hosting my blog on Google&rsquo;s Blogger platform. This has served me pretty well over the years along with the limited number of posts I have made. However, as I have tried to expand the blog into more of a general website, it has been an uphill battle fighting against the workflow of the blogging system itself. I don&rsquo;t forsee wordpress being much different.</p>
+
+<p>Besides, one of my reasons for moving to my current setup was simplicity and control. I am using a static site generator now (ala Jekyll). The reasons for this being that:</p>
+
+<ol>
+ <li>I now directly control my own content</li>
+ <li>I don&rsquo;t need to set up a wordpress server or anything of the sort</li>
+ <li>There should never be downtime since the site is statically hosted  on Github or S3 or whereever</li>
+ <li>Inline with number 1, I can version control my content (with  something simple like git)</li>
+ <li>I can write my posts in MarkDown</li>
+ <li>I can embed source code styling instead of reasching out to  JavaScript libraries to do it dynamically at run time</li></ol>
+
+<p>I like all these reasons. It also means I can theme the site however I like using simple HTML templates. I can also add whatever types of pages I want since in the end it is just static HTML.</p>
+
+<p>Really, there are lots of reasons to use a static site generator. I am currently using <a href="https://github.com/greghendershott/frog">frog</a>, the <strong>fr</strong>zen bl*<em>og</em>* generator, written in a somewhat lesser known language called Racket (a dialect of Lisp descended from Scheme). I like the language I want to support its increased usage and the best way to do that is to use projects that use it.</p>
+
+<p>I plan to port over my old blog posts once I get a chance, although that may prove to be a bit of a chore. I&rsquo;ll probably end up avoiding it for a super long time.</p>
+  <footer>
+    <script type="text/javascript">
+      !function(d,s,id){
+          var js,fjs=d.getElementsByTagName(s)[0];
+          if(!d.getElementById(id)){
+              js=d.createElement(s);
+              js.id=id;
+              js.src="//platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js,fjs);
+          }
+      }(document,"script","twitter-wjs");
+    </script>
+    <a href="https://twitter.com/share"
+       class="twitter-share-button"
+       data-url="http://eestrada.github.io/blog/2016/07/29/moving-blogs/"
+       data-dnt="true">
+      "Tweet"</a>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <g:plusone size="medium" href="http://eestrada.github.io/blog/2016/07/29/moving-blogs/"></g:plusone>
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      (function() {
+          var dsq = document.createElement('script');
+          dsq.type = 'text/javascript';
+          dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <div id="disqus_thread"></div>
+    <ul class="pager">
+    <li class="previous">
+      <a href="/blog/2016/07/29/siggraph-2016-post-mortem/">&larr; <em>SIGGRAPH 2016 Post Mortem</em></a>
+    </li>
+
+    </ul>
+  </footer>
+</article>
         </div>
       </div>
       <footer>
