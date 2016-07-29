@@ -1,2 +1,2 @@
-http://eestrada.github.io/blog/2012/01/01/a-2012-blog-post/
+http://eestrada.github.io/blog/2016/07/28/siggraph-2016-post-mortem/
 http://eestrada.github.io/About.html

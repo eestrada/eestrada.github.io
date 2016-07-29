@@ -4,17 +4,13 @@
   <title>My Awesome Blog: My Awesome Blog</title>
   <description>My Awesome Blog: My Awesome Blog</description>
   <link>http://eestrada.github.io/blog/index.html</link>
-  <lastBuildDate>Sun, 01 Jan 2012 07:00:00 UT</lastBuildDate>
-  <pubDate>Sun, 01 Jan 2012 07:00:00 UT</pubDate>
+  <lastBuildDate>Fri, 29 Jul 2016 02:28:37 UT</lastBuildDate>
+  <pubDate>Fri, 29 Jul 2016 02:28:37 UT</pubDate>
   <ttl>1800</ttl>
   <item>
-   <title>A 2012 blog post</title>
-   <link>http://eestrada.github.io/blog/2012/01/01/a-2012-blog-post/?utm_source=all&amp;utm_medium=RSS</link>
-   <guid>urn:http-eestrada-github-io:-blog-2012-01-01-a-2012-blog-post</guid>
-   <pubDate>Sun, 01 Jan 2012 07:00:00 UT</pubDate>
+   <title>SIGGRAPH 2016 Post Mortem</title>
+   <link>http://eestrada.github.io/blog/2016/07/28/siggraph-2016-post-mortem/?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-eestrada-github-io:-blog-2016-07-28-siggraph-2016-post-mortem</guid>
+   <pubDate>Fri, 29 Jul 2016 02:28:37 UT</pubDate>
    <description>&lt;html&gt;
-&lt;p&gt;Here is an example blog post.&lt;/p&gt;
-
-&lt;p&gt;Everything after this paragraph &amp;ldquo;after the break&amp;rdquo;. On index pages and Atom feeds, it will become &amp;ldquo;Continue reading&amp;hellip;&amp;rdquo;, if you configure them to include only the summary &amp;ldquo;blurb&amp;rdquo; before the break.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;some code&lt;/code&gt;&lt;/pre&gt;&lt;a href="http://eestrada.github.io/blog/2012/01/01/a-2012-blog-post/?utm_source=all&amp;amp;utm_medium=RSS"&gt;&lt;em&gt;More&amp;hellip;&lt;/em&gt;&lt;/a&gt;&lt;/html&gt;</description></item></channel></rss>
+&lt;p&gt;I had the opportunity to attend SIGGRAPH this year as a representative of &lt;a href="http://metapipe.com"&gt;MetaPipe&lt;/a&gt;. For as fun as it was to meet with representatives of various software and cloud companies, I am happy to be able to get my nose back to the grindstone on MetaPipe. I&amp;rsquo;m extremely excited about the tech we are working on for the service and I can&amp;rsquo;t wait to get it to the point where we can start demoing it publicly to get everyone&amp;rsquo;s feedback. We started a lot of converstaions at SIGGRAPH with various companies that we feel fairly confident will turn into more concrete agreements in the near future.&lt;/p&gt;&lt;a href="http://eestrada.github.io/blog/2016/07/28/siggraph-2016-post-mortem/?utm_source=all&amp;amp;utm_medium=RSS"&gt;&lt;em&gt;More&amp;hellip;&lt;/em&gt;&lt;/a&gt;&lt;/html&gt;</description></item></channel></rss>
