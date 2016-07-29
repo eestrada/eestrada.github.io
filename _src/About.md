@@ -1,3 +1,4 @@
-# About page
+# Ethan Estrada
 
-Your about page, here.
+Welcome to my website! Here you can find my blog posts, along with
+other sundry odds and ends.
