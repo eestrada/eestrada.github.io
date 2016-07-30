@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
- <title type="text">My Awesome Blog: Posts tagged 'SIGGRAPH'</title>
+ <title type="text">Ethan Estrada: Posts tagged 'SIGGRAPH'</title>
  <link rel="self" href="http://eestrada.github.io/feeds/SIGGRAPH.atom.xml" />
  <link href="http://eestrada.github.io/tags/SIGGRAPH.html" />
  <id>urn:http-eestrada-github-io:-tags-SIGGRAPH-html</id>

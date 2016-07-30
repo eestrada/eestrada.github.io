@@ -7,7 +7,7 @@ scheme/host = http://eestrada.github.io
 uri-prefix = /
 
 # The title of the blog. Used when generating feeds.
-title = My Awesome Blog
+title = Ethan Estrada
 
 # The author. Used when generating feeds, and provided to
 # `page-template.html` as the template variable `@author`.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
- <title type="text">My Awesome Blog: Posts tagged 'Ethan Estrada'</title>
+ <title type="text">Ethan Estrada: Posts tagged 'Ethan Estrada'</title>
  <link rel="self" href="http://eestrada.github.io/feeds/Ethan-Estrada.atom.xml" />
  <link href="http://eestrada.github.io/tags/Ethan-Estrada.html" />
  <id>urn:http-eestrada-github-io:-tags-Ethan-Estrada-html</id>
