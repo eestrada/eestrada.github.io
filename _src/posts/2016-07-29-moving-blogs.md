@@ -33,11 +33,12 @@ like using simple HTML templates. I can also add whatever types of
 pages I want since in the end it is just static HTML.
 
 Really, there are lots of reasons to use a static site generator. I am
-currently using [frog], the **fr**zen bl**og** generator, written in a
-somewhat lesser known language called Racket (a dialect of Lisp
-descended from Scheme). I like the Lisp in general and Racket in
-specific. I want to support its increased usage and the best way to do
-that is to use projects that use it.
+currently using [frog], the <strong>fr</strong>ozen
+bl<strong>og</strong> generator, written in a somewhat lesser known
+language called Racket (a dialect of Lisp descended from Scheme). I
+like the Lisp in general and Racket in specific. I want to support its
+increased usage and the best way to do that is to use projects that
+use it.
 
 I plan to port over my old blog posts once I get a chance, although
 that may prove to be a bit of a chore.  I'll probably end up avoiding

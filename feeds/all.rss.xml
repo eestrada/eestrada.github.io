@@ -50,6 +50,6 @@
 
 &lt;p&gt;I like all these reasons. It also means I can theme the site however I like using simple HTML templates. I can also add whatever types of pages I want since in the end it is just static HTML.&lt;/p&gt;
 
-&lt;p&gt;Really, there are lots of reasons to use a static site generator. I am currently using &lt;a href="https://github.com/greghendershott/frog"&gt;frog&lt;/a&gt;, the &lt;strong&gt;fr&lt;/strong&gt;zen bl*&lt;em&gt;og&lt;/em&gt;* generator, written in a somewhat lesser known language called Racket (a dialect of Lisp descended from Scheme). I like the Lisp in general and Racket in specific. I want to support its increased usage and the best way to do that is to use projects that use it.&lt;/p&gt;
+&lt;p&gt;Really, there are lots of reasons to use a static site generator. I am currently using &lt;a href="https://github.com/greghendershott/frog"&gt;frog&lt;/a&gt;, the &lt;strong&gt;fr&lt;/strong&gt;ozen bl&lt;strong&gt;og&lt;/strong&gt; generator, written in a somewhat lesser known language called Racket (a dialect of Lisp descended from Scheme). I like the Lisp in general and Racket in specific. I want to support its increased usage and the best way to do that is to use projects that use it.&lt;/p&gt;
 
 &lt;p&gt;I plan to port over my old blog posts once I get a chance, although that may prove to be a bit of a chore. I&amp;rsquo;ll probably end up avoiding it for a super long time.&lt;/p&gt;&lt;/html&gt;</description></item></channel></rss>
