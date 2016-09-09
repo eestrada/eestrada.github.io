@@ -3,19 +3,29 @@
   <head>
 
     <meta charset="utf-8">
-    <title>SIGGRAPH 2016 Post Mortem</title>
-    <meta name="description" content="I had the opportunity to attend SIGGRAPH this year as a representative of MetaPipe. For as fun as it was to meet with representatives of various software and cloud companies, I am happy to be able to get my nose back to the grindstone on MetaPipe. I'm ext...">
+    <title>Moving blogs</title>
+    <meta name="description" content="I am moving blogging platforms and thought I should maybe explain why....">
     <meta name="author"      content="Ethan D. Estrada">
-    <meta name="keywords"    content="SIGGRAPH, MetaPipe">
+    <meta name="keywords"    content="blog">
     <meta name="viewport"    content="width=device-width, initial-scale=1.0">
     <link rel="icon"      href="/favicon.ico">
-    <link rel="canonical" href="http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem/">
-    <link rel="next" href="/blog/2016/07/29/moving-blogs/">
+    <link rel="canonical" href="http://eestrada.github.io/blog/2016/07/29/moving-blogs.html">
+
+    <link rel="prev" href="/blog/2016/07/29/siggraph-2016-post-mortem.html">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/pygments.css">
     <link rel="stylesheet" type="text/css" href="/css/scribble.css">
+
+    <!-- Bootswatch theme -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css" integrity="sha384-RpX8okQqCyUNG7PlOYNybyJXYTtGQH+7rIKiVvg1DLg6jahLEk47VvpUyS+E2/uJ" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" integrity="sha384-G3G7OsJCbOk1USkOY4RfeX1z27YaWrZ1YuaQ5tbuawed9IoreRDpWpTkZLXQfPm3" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" integrity="sha384-HzUaiJdCTIY/RL2vDPRGdEQHHahjzwoJJzGUkYjHVzTwXFQ2QN/nVgX7tzoMW3Ov" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" integrity="sha384-C0X5qw1DlkeV0RDunhmi4cUBUkPDTvUqzElcNWm1NI2T4k8tKMZ+wRPQOhZfSJ9N" crossorigin="anonymous"> -->
+
+    <!-- Custom CSS -->
+
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <!-- Feeds -->
     <link rel="alternate" type="application/atom+xml"
@@ -35,7 +45,9 @@
   </head>
   <body>
     <!-- A standard Twitter Bootstrap nav bar -->
-    <header class="navbar navbar-default navbar-inverse"
+    <!-- <header class="navbar navbar-default navbar-inverse" -->
+    <!--         role="banner"> -->
+    <header class="navbar navbar-default navbar-static-top"
             role="banner">
       <div class="container">
         <div class="navbar-header">
@@ -47,7 +59,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/About.html" class="navbar-brand">Ethan Estrada</a>
+          <a href="/index.html" class="navbar-brand">Ethan Estrada</a>
         </div>
         <div class="collapse navbar-collapse our-nav-collapse"
              role="navigation">
@@ -92,31 +104,37 @@
 
           <article>
   <header>
-    <h1>SIGGRAPH 2016 Post Mortem</h1>
+    <h1>Moving blogs</h1>
     <div class="date-and-tags">
       <p>
 
 <time datetime="2016-07-29" pubdate="true">2016-07-29</time>
         <br/>by <span class="tags"><a href="/tags/Ethan-Estrada.html">Ethan Estrada</a></span>
-        <br/>Tags: <span class="tags"><a href="/tags/SIGGRAPH.html">SIGGRAPH</a>, <a href="/tags/MetaPipe.html">MetaPipe</a></span>
+        <br/>Tags: <span class="tags"><a href="/tags/blog.html">blog</a></span>
       </p>
     </div>
   </header>
 
-<p>I had the opportunity to attend SIGGRAPH this year as a representative of <a href="http://metapipe.com">MetaPipe</a>. For as fun as it was to meet with representatives of various software and cloud companies, I am happy to be able to get my nose back to the grindstone on MetaPipe. I&rsquo;m extremely excited about the tech we are working on for the service and I can&rsquo;t wait to get it to the point where we can start demoing it publicly to get everyone&rsquo;s feedback. We started a lot of converstaions at SIGGRAPH with various companies that we feel fairly confident will turn into more concrete agreements in the near future.</p>
+<p>I am moving blogging platforms and thought I should maybe explain why.</p>
 <!-- more-->
 
-<p>I got an &ldquo;Exhibits Only&rdquo; pass during the convention; we are trying to be as scrappy, lean, and frugal as we can be so splurging on something like a &ldquo;Full Conference&rdquo; pass would definitly be overkill especially when Avere provided us with a code for a free &ldquo;Exhibits Only&rdquo; pass. Besides, all of the people we wanted to talk to were on the exhibit floor anyway. Maybe in future years we will get more complete passes to check out presentations to see the state of the industry, but for now we are keeping it simple. Ideally we will be able to justify having our own booth next year!</p>
+<p>In the past I have been hosting my blog on Google&rsquo;s Blogger platform. This has served me pretty well over the years along with the limited number of posts I have made. However, as I have tried to expand the blog into more of a general website, it has been an uphill battle fighting against the workflow of the blogging system itself. I don&rsquo;t forsee wordpress being much different.</p>
 
-<p>Even though I&rsquo;ve heard SIGGRAPH has shrunk in attendence some in recent years, it is still very impressive in size and scope. I think this in part is from the decreased focus on the job fair and a greater focus on interconnect between vendors. SIGGRAPH seems less useful for individual artists looking for work than it used to be.</p>
+<p>Besides, one of my reasons for moving to my current setup was simplicity and control. I am using a static site generator now (ala Jekyll). The reasons for this being that:</p>
 
-<p>The biggest focus at the convention seemed to be VR and AR. Pretty much every booth from software vendors featured VR workflows. The new VR camera from Houdini, CaraVR addon for Nuke from The Foundry, the (not yet publicly available) VR toolset for Mocha from Imagineer systems, and more from other companies as well.</p>
+<ol>
+ <li>I now directly control my own content</li>
+ <li>I don&rsquo;t need to set up a wordpress server or anything of the sort</li>
+ <li>There should never be downtime since the site is statically hosted  on Github or S3 or whereever</li>
+ <li>Inline with number 1, I can version control my content (with  something simple like git)</li>
+ <li>I can write my posts in MarkDown</li>
+ <li>I can embed source code styling instead of reaching out to  JavaScript libraries to do it dynamically at run time</li></ol>
 
-<p>Not surprisingly, cloud was also a big focus (which was a big attraction to us). Many softwares packages such as deadline from Thinkbox software and Tractor from Pixar are starting to have more and more cloud based features, such as extremely granular billing for various software packages (from Thinkbox) and intelligent autoscaling features (from Tractor, and if I remember correctly, Thinkbox was working on similar stuff as well).</p>
+<p>I like all these reasons. It also means I can theme the site however I like using simple HTML templates. I can also add whatever types of pages I want since in the end it is just static HTML.</p>
 
-<p>Autoscaling is an interesting problem in and of itself; scale too quickly and users will rack up charges for compute they didn&rsquo;t really use efficiently. Scale too slowly and what should only take a few minutes could end up taking hours. Some workloads are heavy per frame and some are light. When do you scale up? How automagical can you make it for the user so that they have fewer knobs to deal with? Can you base it off of the basic priority parameter that most render schedulers already have, or do you need a different mechanism for it? Perhaps something like the expected average render time per frame (or task)? What about distributed simulations that are parallel, but need to be in lockstep? They should probably all spin up at the same time, but how do you signal this to the scheduler in a relatively turnkey way?</p>
+<p>Really, there are lots of reasons to use a static site generator. I am currently using <a href="https://github.com/greghendershott/frog">frog</a>, the <strong>fr</strong>zen bl*<em>og</em>* generator, written in a somewhat lesser known language called Racket (a dialect of Lisp descended from Scheme). I like the Lisp in general and Racket in specific. I want to support its increased usage and the best way to do that is to use projects that use it.</p>
 
-<p>During the convention, I either asked these questions to the various developers on the farm manager teams, or thought of them after the fact due to mulling over the questions I had asked or information I had learned. It isn&rsquo;t an easy problem to solve and one that I am sure will have many more years of time and effort poured into it before well rounded solutions come to market.</p>
+<p>I plan to port over my old blog posts once I get a chance, although that may prove to be a bit of a chore. I&rsquo;ll probably end up avoiding it for a super long time.</p>
   <footer>
     <script type="text/javascript">
       !function(d,s,id){
@@ -131,11 +149,11 @@
     </script>
     <a href="https://twitter.com/share"
        class="twitter-share-button"
-       data-url="http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem/"
+       data-url="http://eestrada.github.io/blog/2016/07/29/moving-blogs.html"
        data-dnt="true">
       "Tweet"</a>
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-    <g:plusone size="medium" href="http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem/"></g:plusone>
+    <g:plusone size="medium" href="http://eestrada.github.io/blog/2016/07/29/moving-blogs.html"></g:plusone>
     <script type="text/javascript">
       var disqus_shortname = 'shortname';
       (function() {
@@ -148,10 +166,10 @@
     </script>
     <div id="disqus_thread"></div>
     <ul class="pager">
-
-    <li class="next">
-      <a href="/blog/2016/07/29/moving-blogs/"><em>Moving blogs</em> &rarr;</a>
+    <li class="previous">
+      <a href="/blog/2016/07/29/siggraph-2016-post-mortem.html">&larr; <em>SIGGRAPH 2016 Post Mortem</em></a>
     </li>
+
     </ul>
   </footer>
 </article>
@@ -179,12 +197,12 @@
         <p>Site generated
         by <a href="https://github.com/greghendershott/frog" target="_blank">Frog</a>,
         the <strong>fr</strong>ozen bl<strong>og</strong> tool.</p>
-        <p>Using <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a>.</p>
+        <p>Built using <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a>.</p>
         <p><em>Copyright &copy; 2016 Ethan D. Estrada. All rights reserved</em>.</p>
       </footer>
     </div>
     <!-- </body> JS -->
-    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -1,3 +1,3 @@
-http://eestrada.github.io/blog/2016/07/29/moving-blogs/
-http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem/
+http://eestrada.github.io/blog/2016/07/29/moving-blogs.html
+http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem.html
 http://eestrada.github.io/About.html
