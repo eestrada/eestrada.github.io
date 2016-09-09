@@ -43,7 +43,7 @@ index-full? = false
 
 # Should feed items contain full posts -- more than just the portion
 # above "the jump" <!-- more --> marker (if any)?
-feed-full? = false
+feed-full? = true
 
 # How many posts per page for index pages?
 posts-per-page = 10
