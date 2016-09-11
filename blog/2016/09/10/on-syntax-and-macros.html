@@ -3,14 +3,14 @@
   <head>
 
     <meta charset="utf-8">
-    <title>Posts tagged 'SIGGRAPH'</title>
-    <meta name="description" content="Posts tagged 'SIGGRAPH'">
+    <title>On Syntax and Macros</title>
+    <meta name="description" content="From what I have read, it seems that most people have an ultimate Zen moment with Lisp that makes the universe seem to fall into order (or, so says Eric S. Raymond). My journey with Lisp so far hasn't been like that. Instead, it has been a number of small...">
     <meta name="author"      content="Ethan D. Estrada">
-    <meta name="keywords"    content="SIGGRAPH">
+    <meta name="keywords"    content="Lisp, CGI">
     <meta name="viewport"    content="width=device-width, initial-scale=1.0">
     <link rel="icon"      href="/favicon.ico">
-    <link rel="canonical" href="http://eestrada.github.io/tags/SIGGRAPH.html">
-
+    <link rel="canonical" href="http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html">
+    <link rel="next" href="/blog/2016/07/29/siggraph-2016-post-mortem.html">
 
 
     <!-- CSS -->
@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <!-- Feeds -->
     <link rel="alternate" type="application/atom+xml"
-          href="/feeds/SIGGRAPH.atom.xml" title="Atom Feed">
+          href="/feeds/all.atom.xml" title="Atom Feed">
     <link rel="alternate" type="application/rss+xml"
-          href="/feeds/SIGGRAPH.rss.xml" title="RSS Feed">
+          href="/feeds/all.rss.xml" title="RSS Feed">
     <!-- JS -->
     <script type="text/javascript">
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -90,8 +90,8 @@
 <li><a href="/tags/SIGGRAPH.html">SIGGRAPH</a></li>
               </ul>
             </li>
-            <li><a href="/feeds/SIGGRAPH.atom.xml">Atom</a></li>
-            <li><a href="/feeds/SIGGRAPH.rss.xml">RSS</a></li>
+            <li><a href="/feeds/all.atom.xml">Atom</a></li>
+            <li><a href="/feeds/all.rss.xml">RSS</a></li>
           </ul>
         </div>
       </div>
@@ -104,21 +104,70 @@
 
 
 
-          <h1>Posts tagged <em>SIGGRAPH</em></h1>
+
 
           <article>
   <header>
-    <h2><a href='/blog/2016/07/29/siggraph-2016-post-mortem.html'>SIGGRAPH 2016 Post Mortem</a></h2>
-    <p class='date-and-tags'>
-<time datetime="2016-07-29" pubdate="true">2016-07-29</time>
-       | by <span class="tags"><a href="/tags/Ethan-Estrada.html">Ethan Estrada</a></span>
-       | Tags: <span class="tags"><a href="/tags/SIGGRAPH.html">SIGGRAPH</a>, <a href="/tags/CGI.html">CGI</a>, <a href="/tags/MetaPipe.html">MetaPipe</a></span>
-    </p>
+    <h1>On Syntax and Macros</h1>
+    <div class="date-and-tags">
+      <p>
+
+<time datetime="2016-09-10" pubdate="true">2016-09-10</time>
+        <br/>by <span class="tags"><a href="/tags/Ethan-Estrada.html">Ethan Estrada</a></span>
+        <br/>Tags: <span class="tags"><a href="/tags/Lisp.html">Lisp</a>, <a href="/tags/CGI.html">CGI</a></span>
+      </p>
+    </div>
   </header>
 
-<p>I had the opportunity to attend SIGGRAPH this year as a representative of <a href="http://metapipe.com">MetaPipe</a>. For as fun as it was to meet with representatives of various software and cloud companies, I am happy to be able to get my nose back to the grindstone on MetaPipe. I&rsquo;m extremely excited about the tech we are working on for the service and I can&rsquo;t wait to get it to the point where we can start demoing it publicly to get everyone&rsquo;s feedback. We started a lot of converstaions at SIGGRAPH with various companies that we feel fairly confident will turn into more concrete agreements in the near future.</p>
+<p>From what I have read, it seems that most people have an ultimate Zen moment with Lisp that makes the universe seem to fall into order (or, <a href="http://www.catb.org/~esr/faqs/hacker-howto.html#skills1">so says Eric S. Raymond</a>). My journey with Lisp so far hasn&rsquo;t been like that. Instead, it has been a number of smaller &ldquo;Aha!&rdquo; moments. In fact, I just had one today. Maybe my big Zen moment will come later. I guess I&rsquo;ll just need to keep learning and see where the Lisp journey takes me.</p>
+<!-- more-->
+
+<p>Getting back to the &ldquo;Aha!&rdquo; moment, I was reading <a href="http://all-things-andy-gavin.com/2011/03/12/making-crash-bandicoot-gool-part-9/">an article by Andrew Gavin about how he used Lisp in creating games for Naughty Dog</a>. In the article he says that "&hellip;C provides series of convenient macros for flow control, arithmetic operations, memory reference, function calling, and structure access." My first reaction was &ldquo;No, Andy. You&rsquo;ve got it all wrong. Those aren&rsquo;t macros, they are part of the syntax&hellip;&rdquo;</p>
+
+<blockquote>
+ <p>Syntax, in any language, is just a bunch of macros you didn&rsquo;t need to write.</p></blockquote>
+
+<p>Then I paused, thought for a minute, and made a realization: if macros are syntax, is the inverse also true? Is syntax just macros? Yes, yes it is. Syntax, in any language, is just a bunch of macros you didn&rsquo;t need to write. Why? Because all languages are later compiled to something else.</p>
+
+<p>Compilation is a fancy way of saying you transform one language into another, much like macros transform one piece of syntax into another piece of syntax. Not <em>much</em> like; it&rsquo;s <strong><em>exactly</em></strong> like that. Transforming Lisp to Lisp is not all that different from transforming C to assembly, or Python to bytecode. That is what Andrew ultimately does with his custom Lisp dialect, GOOL: compile Lisp into R3000 assembly code.</p>
+
+<p>So, thanks Andy. Your twenty year old article taught me something fundemental about Lisp and computer science. And the Lisp journey continues.</p>
   <footer>
-    <a href='/blog/2016/07/29/siggraph-2016-post-mortem.html'>&hellip; more &hellip;</a>
+    <script type="text/javascript">
+      !function(d,s,id){
+          var js,fjs=d.getElementsByTagName(s)[0];
+          if(!d.getElementById(id)){
+              js=d.createElement(s);
+              js.id=id;
+              js.src="//platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js,fjs);
+          }
+      }(document,"script","twitter-wjs");
+    </script>
+    <a href="https://twitter.com/share"
+       class="twitter-share-button"
+       data-url="http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html"
+       data-dnt="true">
+      "Tweet"</a>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <g:plusone size="medium" href="http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html"></g:plusone>
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      (function() {
+          var dsq = document.createElement('script');
+          dsq.type = 'text/javascript';
+          dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <div id="disqus_thread"></div>
+    <ul class="pager">
+
+    <li class="next">
+      <a href="/blog/2016/07/29/siggraph-2016-post-mortem.html"><em>SIGGRAPH 2016 Post Mortem</em> &rarr;</a>
+    </li>
+    </ul>
   </footer>
 </article>
         </div>

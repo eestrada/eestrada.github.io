@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
- <title type="text">Ethan Estrada: Ethan Estrada</title>
- <link rel="self" href="http://eestrada.github.io/feeds/all.atom.xml" />
- <link href="http://eestrada.github.io/blog/index.html" />
- <id>urn:http-eestrada-github-io:-blog-index-html</id>
+ <title type="text">Ethan Estrada: Posts tagged 'CGI'</title>
+ <link rel="self" href="http://eestrada.github.io/feeds/CGI.atom.xml" />
+ <link href="http://eestrada.github.io/tags/CGI.html" />
+ <id>urn:http-eestrada-github-io:-tags-CGI-html</id>
  <updated>2016-09-11T05:11:20Z</updated>
  <entry>
   <title type="text">On Syntax and Macros</title>
-  <link rel="alternate" href="http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html?utm_source=all&amp;utm_medium=Atom" />
+  <link rel="alternate" href="http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html?utm_source=CGI&amp;utm_medium=Atom" />
   <id>urn:http-eestrada-github-io:-blog-2016-09-10-on-syntax-and-macros-html</id>
   <published>2016-09-11T05:11:20Z</published>
   <updated>2016-09-11T05:11:20Z</updated>
@@ -29,7 +29,7 @@
 &lt;p&gt;So, thanks Andy. Your twenty year old article taught me something fundemental about Lisp and computer science. And the Lisp journey continues.&lt;/p&gt;&lt;/html&gt;</content></entry>
  <entry>
   <title type="text">SIGGRAPH 2016 Post Mortem</title>
-  <link rel="alternate" href="http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem.html?utm_source=all&amp;utm_medium=Atom" />
+  <link rel="alternate" href="http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem.html?utm_source=CGI&amp;utm_medium=Atom" />
   <id>urn:http-eestrada-github-io:-blog-2016-07-29-siggraph-2016-post-mortem-html</id>
   <published>2016-07-29T20:52:18Z</published>
   <updated>2016-07-29T20:52:18Z</updated>
@@ -49,33 +49,4 @@
 
 &lt;p&gt;Autoscaling is an interesting problem in and of itself; scale too quickly and users will rack up charges for compute they didn&amp;rsquo;t really use efficiently. Scale too slowly and what should only take a few minutes could end up taking hours. Some workloads are heavy per frame and some are light. When do you scale up? How automagical can you make it for the user so that they have fewer knobs to deal with? Can you base it off of the basic priority parameter that most render schedulers already have, or do you need a different mechanism for it? Perhaps something like the expected average render time per frame (or task)? What about distributed simulations that are parallel, but need to be in lockstep? They should probably all spin up at the same time, but how do you signal this to the scheduler in a relatively turnkey way?&lt;/p&gt;
 
-&lt;p&gt;During the convention, I either asked these questions to the various developers on the farm manager teams, or thought of them after the fact due to mulling over the questions I had asked or information I had learned. It isn&amp;rsquo;t an easy problem to solve and one that I am sure will have many more years of time and effort poured into it before well rounded solutions come to market.&lt;/p&gt;&lt;/html&gt;</content></entry>
- <entry>
-  <title type="text">Moving blogs</title>
-  <link rel="alternate" href="http://eestrada.github.io/blog/2016/07/29/moving-blogs.html?utm_source=all&amp;utm_medium=Atom" />
-  <id>urn:http-eestrada-github-io:-blog-2016-07-29-moving-blogs-html</id>
-  <published>2016-07-29T15:52:18Z</published>
-  <updated>2016-07-29T15:52:18Z</updated>
-  <author>
-   <name>Ethan D. Estrada</name></author>
-  <content type="html">&lt;html&gt;
-&lt;p&gt;I am moving blogging platforms and thought I should maybe explain why.&lt;/p&gt;
-&lt;!-- more--&gt;
-
-&lt;p&gt;In the past I have been hosting my blog on Google&amp;rsquo;s Blogger platform. This has served me pretty well over the years along with the limited number of posts I have made. However, as I have tried to expand the blog into more of a general website, it has been an uphill battle fighting against the workflow of the blogging system itself. I don&amp;rsquo;t forsee wordpress being much different.&lt;/p&gt;
-
-&lt;p&gt;Besides, one of my reasons for moving to my current setup was simplicity and control. I am using a static site generator now (ala Jekyll). The reasons for this being that:&lt;/p&gt;
-
-&lt;ol&gt;
- &lt;li&gt;I now directly control my own content&lt;/li&gt;
- &lt;li&gt;I don&amp;rsquo;t need to set up a wordpress server or anything of the sort&lt;/li&gt;
- &lt;li&gt;There should never be downtime since the site is statically hosted  on Github or S3 or whereever&lt;/li&gt;
- &lt;li&gt;Inline with number 1, I can version control my content (with  something simple like git)&lt;/li&gt;
- &lt;li&gt;I can write my posts in MarkDown&lt;/li&gt;
- &lt;li&gt;I can embed source code styling instead of reaching out to  JavaScript libraries to do it dynamically at run time&lt;/li&gt;&lt;/ol&gt;
-
-&lt;p&gt;I like all these reasons. It also means I can theme the site however I like using simple HTML templates. I can also add whatever types of pages I want since in the end it is just static HTML.&lt;/p&gt;
-
-&lt;p&gt;Really, there are lots of reasons to use a static site generator. I am currently using &lt;a href="https://github.com/greghendershott/frog"&gt;frog&lt;/a&gt;, the &lt;strong&gt;fr&lt;/strong&gt;ozen bl&lt;strong&gt;og&lt;/strong&gt; generator, written in a somewhat lesser known language called Racket (a dialect of Lisp descended from Scheme). I like the Lisp in general and Racket in specific. I want to support its increased usage and the best way to do that is to use projects that use it.&lt;/p&gt;
-
-&lt;p&gt;I plan to port over my old blog posts once I get a chance, although that may prove to be a bit of a chore. I&amp;rsquo;ll probably end up avoiding it for a super long time.&lt;/p&gt;&lt;/html&gt;</content></entry></feed>
+&lt;p&gt;During the convention, I either asked these questions to the various developers on the farm manager teams, or thought of them after the fact due to mulling over the questions I had asked or information I had learned. It isn&amp;rsquo;t an easy problem to solve and one that I am sure will have many more years of time and effort poured into it before well rounded solutions come to market.&lt;/p&gt;&lt;/html&gt;</content></entry></feed>
