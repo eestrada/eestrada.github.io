@@ -1,6 +1,6 @@
     Title: SIGGRAPH 2016 Post Mortem
     Date: 2016-07-29T14:52:18-0700
-    Tags: SIGGRAPH,MetaPipe
+    Tags: SIGGRAPH, CGI, MetaPipe
     Authors: Ethan Estrada
 
 I had the opportunity to attend SIGGRAPH this year as a representative
