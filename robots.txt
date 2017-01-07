@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /feeds/
+Disallow: /tags/
+Sitemap: http://www.misterfidget.com/sitemap.txt
