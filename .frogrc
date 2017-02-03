@@ -1,5 +1,5 @@
 # Required: Should NOT end in trailing slash.
-scheme/host = http://eestrada.github.io
+scheme/host = http://www.misterfidget.com
 
 # A path prepended to URIs, including those specified here in .frogrc
 # such as `permalink` and `posts-index-uri`. Defaults to `/`. This is
