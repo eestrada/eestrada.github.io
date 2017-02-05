@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
  <title type="text">Ethan Estrada: Posts tagged 'blog'</title>
- <link rel="self" href="http://eestrada.github.io/feeds/blog.atom.xml" />
- <link href="http://eestrada.github.io/tags/blog.html" />
- <id>urn:http-eestrada-github-io:-tags-blog-html</id>
+ <link rel="self" href="http://www.misterfidget.com/feeds/blog.atom.xml" />
+ <link href="http://www.misterfidget.com/tags/blog.html" />
+ <id>urn:http-www-misterfidget-com:-tags-blog-html</id>
  <updated>2016-07-29T15:52:18Z</updated>
  <entry>
   <title type="text">Moving blogs</title>
-  <link rel="alternate" href="http://eestrada.github.io/blog/2016/07/29/moving-blogs.html?utm_source=blog&amp;utm_medium=Atom" />
-  <id>urn:http-eestrada-github-io:-blog-2016-07-29-moving-blogs-html</id>
+  <link rel="alternate" href="http://www.misterfidget.com/blog/2016/07/29/moving-blogs.html?utm_source=blog&amp;utm_medium=Atom" />
+  <id>urn:http-www-misterfidget-com:-blog-2016-07-29-moving-blogs-html</id>
   <published>2016-07-29T15:52:18Z</published>
   <updated>2016-07-29T15:52:18Z</updated>
   <author>

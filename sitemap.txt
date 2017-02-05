@@ -1,4 +1,4 @@
-http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html
-http://eestrada.github.io/blog/2016/07/29/moving-blogs.html
-http://eestrada.github.io/blog/2016/07/29/siggraph-2016-post-mortem.html
-http://eestrada.github.io/About.html
+http://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html
+http://www.misterfidget.com/blog/2016/07/29/moving-blogs.html
+http://www.misterfidget.com/blog/2016/07/29/siggraph-2016-post-mortem.html
+http://www.misterfidget.com/About.html

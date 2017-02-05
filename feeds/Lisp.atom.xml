@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
  <title type="text">Ethan Estrada: Posts tagged 'Lisp'</title>
- <link rel="self" href="http://eestrada.github.io/feeds/Lisp.atom.xml" />
- <link href="http://eestrada.github.io/tags/Lisp.html" />
- <id>urn:http-eestrada-github-io:-tags-Lisp-html</id>
+ <link rel="self" href="http://www.misterfidget.com/feeds/Lisp.atom.xml" />
+ <link href="http://www.misterfidget.com/tags/Lisp.html" />
+ <id>urn:http-www-misterfidget-com:-tags-Lisp-html</id>
  <updated>2016-09-11T05:11:20Z</updated>
  <entry>
   <title type="text">On Syntax and Macros</title>
-  <link rel="alternate" href="http://eestrada.github.io/blog/2016/09/10/on-syntax-and-macros.html?utm_source=Lisp&amp;utm_medium=Atom" />
-  <id>urn:http-eestrada-github-io:-blog-2016-09-10-on-syntax-and-macros-html</id>
+  <link rel="alternate" href="http://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html?utm_source=Lisp&amp;utm_medium=Atom" />
+  <id>urn:http-www-misterfidget-com:-blog-2016-09-10-on-syntax-and-macros-html</id>
   <published>2016-09-11T05:11:20Z</published>
   <updated>2016-09-11T05:11:20Z</updated>
   <author>
