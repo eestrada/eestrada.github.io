@@ -1,0 +1,71 @@
+# A .YAML file is used to export DNS records to a
+# domain managed by Google Cloud. The format is
+# exclusive to Google Cloud DNS.
+
+---
+kind: dns#resourceRecordSet
+name: 'misterfidget.com.'
+rrdatas:
+- '"v=spf1 include:mailgun.org ~all"'
+- '"keybase-site-verification=nxDZFGyYQbwa6adLGTNQf9itfXg5oeIhXKQErsrlnM8"'
+ttl: 3600
+type: TXT
+---
+kind: dns#resourceRecordSet
+name: 'emailytics.misterfidget.com.'
+rrdatas:
+- 'mailgun.org.'
+ttl: 3600
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: 'krs._domainkey.misterfidget.com.'
+rrdatas:
+- '"k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDvy07hStX5dagz9sjuWXpsIypps1gQYerdZNKv6I3uJ4VkERYv+m6+nvgamhjOtcAT4xRHTtrBv7la3PzsOAhPrwhgKoobBw7vG6kBtSXsOtLkcwrjtxoPgPuKm+7inDBxD07i54N0r/PlSSFolJ3BCy7kRn9U7xuhq+SuVMxfDwIDAQAB"'
+ttl: 3600
+type: TXT
+---
+kind: dns#resourceRecordSet
+name: 'www.misterfidget.com.'
+rrdatas:
+- 'eestrada.github.io.'
+ttl: 3600
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: 'misterfidget.com.'
+rrdatas:
+- '5 gmr-smtp-in.l.google.com.'
+- '10 alt1.gmr-smtp-in.l.google.com.'
+- '20 alt2.gmr-smtp-in.l.google.com.'
+- '30 alt3.gmr-smtp-in.l.google.com.'
+- '40 alt4.gmr-smtp-in.l.google.com.'
+ttl: 3600
+type: MX
+---
+kind: dns#resourceRecordSet
+name: 'misterfidget.com.'
+rrdatas:
+- '216.239.32.21'
+- '216.239.34.21'
+- '216.239.36.21'
+- '216.239.38.21'
+ttl: 3600
+type: A
+---
+kind: dns#resourceRecordSet
+name: 'misterfidget.com.'
+rrdatas:
+- '2001:4860:4802:32::15'
+- '2001:4860:4802:34::15'
+- '2001:4860:4802:36::15'
+- '2001:4860:4802:38::15'
+ttl: 3600
+type: AAAA
+---
+kind: dns#resourceRecordSet
+name: 'sync.misterfidget.com.'
+rrdatas:
+- '0.0.0.0'
+ttl: 60
+type: A
