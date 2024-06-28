@@ -1,0 +1,4 @@
+baseURL = 'https://www.misterfidget.com/'
+languageCode = 'en-us'
+title = 'Ethan Estrada'
+theme = 'ananke'
