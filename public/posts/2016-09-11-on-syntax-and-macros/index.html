@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>On Syntax and Macros | Ethan Estrada</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="From what I have read, it seems that most people have an ultimate Zen
+moment with Lisp that makes the universe seem to fall into order (or,
+so says Eric S. Raymond). My
+journey with Lisp so far hasn&rsquo;t been like that. Instead, it has been a
+number of smaller &ldquo;Aha!&rdquo; moments. In fact, I just had one today. Maybe
+my big Zen moment will come later. I guess I&rsquo;ll just need to keep
+learning and see where the Lisp journey takes me.">
+    <meta name="generator" content="Hugo 0.134.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://www.misterfidget.com/posts/2016-09-11-on-syntax-and-macros/">
+    
+
+    <meta property="og:url" content="https://www.misterfidget.com/posts/2016-09-11-on-syntax-and-macros/">
+  <meta property="og:site_name" content="Ethan Estrada">
+  <meta property="og:title" content="On Syntax and Macros">
+  <meta property="og:description" content="From what I have read, it seems that most people have an ultimate Zen moment with Lisp that makes the universe seem to fall into order (or, so says Eric S. Raymond). My journey with Lisp so far hasn’t been like that. Instead, it has been a number of smaller “Aha!” moments. In fact, I just had one today. Maybe my big Zen moment will come later. I guess I’ll just need to keep learning and see where the Lisp journey takes me.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2016-09-10T23:11:20-07:00">
+    <meta property="article:modified_time" content="2016-09-10T23:11:20-07:00">
+    <meta property="article:tag" content="Lisp">
+    <meta property="article:tag" content="CGI">
+
+  <meta itemprop="name" content="On Syntax and Macros">
+  <meta itemprop="description" content="From what I have read, it seems that most people have an ultimate Zen moment with Lisp that makes the universe seem to fall into order (or, so says Eric S. Raymond). My journey with Lisp so far hasn’t been like that. Instead, it has been a number of smaller “Aha!” moments. In fact, I just had one today. Maybe my big Zen moment will come later. I guess I’ll just need to keep learning and see where the Lisp journey takes me.">
+  <meta itemprop="datePublished" content="2016-09-10T23:11:20-07:00">
+  <meta itemprop="dateModified" content="2016-09-10T23:11:20-07:00">
+  <meta itemprop="wordCount" content="311">
+  <meta itemprop="keywords" content="Lisp,CGI">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="On Syntax and Macros">
+  <meta name="twitter:description" content="From what I have read, it seems that most people have an ultimate Zen moment with Lisp that makes the universe seem to fall into order (or, so says Eric S. Raymond). My journey with Lisp so far hasn’t been like that. Instead, it has been a number of smaller “Aha!” moments. In fact, I just had one today. Maybe my big Zen moment will come later. I guess I’ll just need to keep learning and see where the Lisp journey takes me.">
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Ethan Estrada
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">On Syntax and Macros</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2016-09-10T23:11:20-07:00">September 10, 2016</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>From what I have read, it seems that most people have an ultimate Zen
+moment with Lisp that makes the universe seem to fall into order (or,
+<a href="http://www.catb.org/~esr/faqs/hacker-howto.html#skills1">so says Eric S. Raymond</a>). My
+journey with Lisp so far hasn&rsquo;t been like that. Instead, it has been a
+number of smaller &ldquo;Aha!&rdquo; moments. In fact, I just had one today. Maybe
+my big Zen moment will come later. I guess I&rsquo;ll just need to keep
+learning and see where the Lisp journey takes me.</p>
+<!-- raw HTML omitted -->
+<p>Getting back to the &ldquo;Aha!&rdquo; moment, I was reading
+<a href="http://all-things-andy-gavin.com/2011/03/12/making-crash-bandicoot-gool-part-9/">an article by Andrew Gavin about how he used Lisp in creating games for Naughty Dog</a>. In
+the article he says that &ldquo;&hellip;C provides series of convenient macros
+for flow control, arithmetic operations, memory reference, function
+calling, and structure access.&rdquo;  My first reaction was &ldquo;No,
+Andy. You&rsquo;ve got it all wrong. Those aren&rsquo;t macros, they are part of
+the syntax&hellip;&rdquo;</p>
+<blockquote>
+<p>Syntax, in any language, is just a bunch of macros you didn&rsquo;t need
+to write.</p>
+</blockquote>
+<p>Then I paused, thought for a minute, and made a realization: if macros
+are syntax, is the inverse also true? Is syntax just macros? Yes, yes
+it is.  Syntax, in any language, is just a bunch of macros you didn&rsquo;t
+need to write. Why? Because all languages are later compiled to
+something else.</p>
+<p>Compilation is a fancy way of saying you transform one language into
+another, much like macros transform one piece of syntax into another
+piece of syntax. Not <em>much</em> like; it&rsquo;s <strong><em>exactly</em></strong> like
+that. Transforming Lisp to Lisp is not all that different from
+transforming C to assembly, or Python to bytecode.  That is what
+Andrew ultimately does with his custom Lisp dialect, GOOL: compile
+Lisp into R3000 assembly code.</p>
+<p>So, thanks Andy. Your twenty year old article taught me something
+fundemental about Lisp and computer science. And the Lisp journey
+continues.</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/lisp/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Lisp</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/cgi/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">CGI</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/2016-07-28-siggraph-2016-post-mortem/">SIGGRAPH 2016 Post Mortem</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.misterfidget.com/" >
+    &copy;  Ethan Estrada 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

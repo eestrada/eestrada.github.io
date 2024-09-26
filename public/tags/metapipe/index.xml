@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MetaPipe on Ethan Estrada</title>
+    <link>https://www.misterfidget.com/tags/metapipe/</link>
+    <description>Recent content in MetaPipe on Ethan Estrada</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 29 Jul 2016 14:52:18 -0700</lastBuildDate>
+    <atom:link href="https://www.misterfidget.com/tags/metapipe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SIGGRAPH 2016 Post Mortem</title>
+      <link>https://www.misterfidget.com/posts/2016-07-28-siggraph-2016-post-mortem/</link>
+      <pubDate>Fri, 29 Jul 2016 14:52:18 -0700</pubDate>
+      <guid>https://www.misterfidget.com/posts/2016-07-28-siggraph-2016-post-mortem/</guid>
+      <description>&lt;p&gt;I had the opportunity to attend SIGGRAPH this year as a representative&#xA;of &lt;a href=&#34;http://metapipe.com&#34;&gt;MetaPipe&lt;/a&gt;. For as fun as it was to meet with&#xA;representatives of various software and cloud companies, I am happy to&#xA;be able to get my nose back to the grindstone on MetaPipe. I&amp;rsquo;m&#xA;extremely excited about the tech we are working on for the service and&#xA;I can&amp;rsquo;t wait to get it to the point where we can start demoing it&#xA;publicly to get everyone&amp;rsquo;s feedback. We started a lot of converstaions&#xA;at SIGGRAPH with various companies that we feel fairly confident will&#xA;turn into more concrete agreements in the near future.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -2,14 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2024-06-28T00:03:40-05:00</lastmod>
+    <loc>https://www.misterfidget.com/</loc>
+    <lastmod>2017-02-27T16:43:40-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-06-28T00:03:40-05:00</lastmod>
+    <loc>https://www.misterfidget.com/posts/2017-02-27-hierarchy-of-needs/</loc>
+    <lastmod>2017-02-27T16:43:40-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://www.misterfidget.com/tags/planning/</loc>
+    <lastmod>2017-02-27T16:43:40-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://www.misterfidget.com/posts/</loc>
+    <lastmod>2017-02-27T16:43:40-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/self-reminders/</loc>
+    <lastmod>2017-02-27T16:43:40-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/</loc>
+    <lastmod>2017-02-27T16:43:40-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/cgi/</loc>
+    <lastmod>2016-09-10T23:11:20-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/lisp/</loc>
+    <lastmod>2016-09-10T23:11:20-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/2016-09-11-on-syntax-and-macros/</loc>
+    <lastmod>2016-09-10T23:11:20-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/metapipe/</loc>
+    <lastmod>2016-07-29T14:52:18-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/siggraph/</loc>
+    <lastmod>2016-07-29T14:52:18-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/2016-07-28-siggraph-2016-post-mortem/</loc>
+    <lastmod>2016-07-29T14:52:18-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/blog/</loc>
+    <lastmod>2016-07-29T09:52:18-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/2016-07-29-moving-blogs/</loc>
+    <lastmod>2016-07-29T09:52:18-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/2012-01-01-a-2012-blog-post/</loc>
+  </url><url>
+    <loc>https://www.misterfidget.com/categories/</loc>
   </url>
 </urlset>

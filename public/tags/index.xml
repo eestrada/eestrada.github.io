@@ -2,10 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ethan Estrada</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://www.misterfidget.com/tags/</link>
     <description>Recent content in Tags on Ethan Estrada</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Feb 2017 16:43:40 -0700</lastBuildDate>
+    <atom:link href="https://www.misterfidget.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Planning</title>
+      <link>https://www.misterfidget.com/tags/planning/</link>
+      <pubDate>Mon, 27 Feb 2017 16:43:40 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/planning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Self Reminders</title>
+      <link>https://www.misterfidget.com/tags/self-reminders/</link>
+      <pubDate>Mon, 27 Feb 2017 16:43:40 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/self-reminders/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CGI</title>
+      <link>https://www.misterfidget.com/tags/cgi/</link>
+      <pubDate>Sat, 10 Sep 2016 23:11:20 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/cgi/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lisp</title>
+      <link>https://www.misterfidget.com/tags/lisp/</link>
+      <pubDate>Sat, 10 Sep 2016 23:11:20 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/lisp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MetaPipe</title>
+      <link>https://www.misterfidget.com/tags/metapipe/</link>
+      <pubDate>Fri, 29 Jul 2016 14:52:18 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/metapipe/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SIGGRAPH</title>
+      <link>https://www.misterfidget.com/tags/siggraph/</link>
+      <pubDate>Fri, 29 Jul 2016 14:52:18 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/siggraph/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Blog</title>
+      <link>https://www.misterfidget.com/tags/blog/</link>
+      <pubDate>Fri, 29 Jul 2016 09:52:18 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/blog/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
