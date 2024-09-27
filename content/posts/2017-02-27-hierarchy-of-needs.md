@@ -1,10 +1,11 @@
-+++
-title = 'Hierarchy of Needs'
-date = 2017-02-27T16:43:40-07:00
-Tags = ['Planning', 'Self Reminders']
-Authors = 'Ethan Estrada'
-draft = false
-+++
+---
+title: Hierarchy of Needs
+date: 2017-02-27T16:43:40-07:00
+Tags: [Planning, Self Reminders]
+Authors: Ethan Estrada
+draft: false
+url: /blog/2017/02/27/hierarchy-of-needs.html
+---
 
 If you couldn't tell, the title of this post is a nod to
 ["Mazlow's hierarchy of needs"](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs),

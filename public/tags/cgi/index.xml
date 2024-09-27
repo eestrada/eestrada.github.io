@@ -10,16 +10,16 @@
     <atom:link href="https://www.misterfidget.com/tags/cgi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>On Syntax and Macros</title>
-      <link>https://www.misterfidget.com/posts/2016-09-11-on-syntax-and-macros/</link>
+      <link>https://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html</link>
       <pubDate>Sat, 10 Sep 2016 23:11:20 -0700</pubDate>
-      <guid>https://www.misterfidget.com/posts/2016-09-11-on-syntax-and-macros/</guid>
+      <guid>https://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html</guid>
       <description>&lt;p&gt;From what I have read, it seems that most people have an ultimate Zen&#xA;moment with Lisp that makes the universe seem to fall into order (or,&#xA;&lt;a href=&#34;http://www.catb.org/~esr/faqs/hacker-howto.html#skills1&#34;&gt;so says Eric S. Raymond&lt;/a&gt;). My&#xA;journey with Lisp so far hasn&amp;rsquo;t been like that. Instead, it has been a&#xA;number of smaller &amp;ldquo;Aha!&amp;rdquo; moments. In fact, I just had one today. Maybe&#xA;my big Zen moment will come later. I guess I&amp;rsquo;ll just need to keep&#xA;learning and see where the Lisp journey takes me.&lt;/p&gt;</description>
     </item>
     <item>
       <title>SIGGRAPH 2016 Post Mortem</title>
-      <link>https://www.misterfidget.com/posts/2016-07-28-siggraph-2016-post-mortem/</link>
+      <link>https://www.misterfidget.com/blog/2016/07/29/siggraph-2016-post-mortem.html</link>
       <pubDate>Fri, 29 Jul 2016 14:52:18 -0700</pubDate>
-      <guid>https://www.misterfidget.com/posts/2016-07-28-siggraph-2016-post-mortem/</guid>
+      <guid>https://www.misterfidget.com/blog/2016/07/29/siggraph-2016-post-mortem.html</guid>
       <description>&lt;p&gt;I had the opportunity to attend SIGGRAPH this year as a representative&#xA;of &lt;a href=&#34;http://metapipe.com&#34;&gt;MetaPipe&lt;/a&gt;. For as fun as it was to meet with&#xA;representatives of various software and cloud companies, I am happy to&#xA;be able to get my nose back to the grindstone on MetaPipe. I&amp;rsquo;m&#xA;extremely excited about the tech we are working on for the service and&#xA;I can&amp;rsquo;t wait to get it to the point where we can start demoing it&#xA;publicly to get everyone&amp;rsquo;s feedback. We started a lot of converstaions&#xA;at SIGGRAPH with various companies that we feel fairly confident will&#xA;turn into more concrete agreements in the near future.&lt;/p&gt;</description>
     </item>
   </channel>

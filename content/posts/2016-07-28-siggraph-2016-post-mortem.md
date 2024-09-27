@@ -1,10 +1,11 @@
-+++
-title = 'SIGGRAPH 2016 Post Mortem'
-date = 2016-07-29T14:52:18-07:00
-Tags = ['SIGGRAPH', 'CGI', 'MetaPipe']
-Authors = 'Ethan Estrada'
-draft = false
-+++
+---
+title: SIGGRAPH 2016 Post Mortem
+date: 2016-07-29T14:52:18-07:00
+Tags: [SIGGRAPH, CGI, MetaPipe]
+Authors: Ethan Estrada
+draft: false
+url: /blog/2016/07/29/siggraph-2016-post-mortem.html
+---
 
 I had the opportunity to attend SIGGRAPH this year as a representative
 of [MetaPipe](http://metapipe.com). For as fun as it was to meet with
