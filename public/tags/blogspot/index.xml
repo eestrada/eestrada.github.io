@@ -1,41 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Ethan Estrada</title>
-    <link>https://www.misterfidget.com/posts/</link>
-    <description>Recent content in Posts on Ethan Estrada</description>
+    <title>Blogspot on Ethan Estrada</title>
+    <link>https://www.misterfidget.com/tags/blogspot/</link>
+    <description>Recent content in Blogspot on Ethan Estrada</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Feb 2017 16:43:40 -0700</lastBuildDate>
-    <atom:link href="https://www.misterfidget.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hierarchy of Needs</title>
-      <link>https://www.misterfidget.com/blog/2017/02/27/hierarchy-of-needs.html</link>
-      <pubDate>Mon, 27 Feb 2017 16:43:40 -0700</pubDate>
-      <guid>https://www.misterfidget.com/blog/2017/02/27/hierarchy-of-needs.html</guid>
-      <description>&lt;p&gt;If you couldn&amp;rsquo;t tell, the title of this post is a nod to&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs&#34;&gt;&amp;ldquo;Mazlow&amp;rsquo;s hierarchy of needs&amp;rdquo;&lt;/a&gt;,&#xA;a psychological theory about how we prioritize things as humans. This&#xA;post isn&amp;rsquo;t about that theory whatsoever.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;This particular hierarchy of needs has to do with prioritizing tasks&#xA;to accomplish a goal. I am not the master goal setter in the world. I&#xA;don&amp;rsquo;t claim to be some sort of planning guru. Far from it. But I have&#xA;had a thought about a simple way to deal with task lists. It has all&#xA;been inspired by conversation with my friend and colleague&#xA;&lt;a href=&#34;http://metapipe.com/team/&#34;&gt;AJ&lt;/a&gt; and&#xA;&lt;a href=&#34;http://blog.trello.com/why-your-to-do-list-is-going-nowhere&#34;&gt;an article I read on Trello&amp;rsquo;s blog&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>On Syntax and Macros</title>
-      <link>https://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html</link>
-      <pubDate>Sat, 10 Sep 2016 23:11:20 -0700</pubDate>
-      <guid>https://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html</guid>
-      <description>&lt;p&gt;From what I have read, it seems that most people have an ultimate Zen&#xA;moment with Lisp that makes the universe seem to fall into order (or,&#xA;&lt;a href=&#34;http://www.catb.org/~esr/faqs/hacker-howto.html#skills1&#34;&gt;so says Eric S. Raymond&lt;/a&gt;). My&#xA;journey with Lisp so far hasn&amp;rsquo;t been like that. Instead, it has been a&#xA;number of smaller &amp;ldquo;Aha!&amp;rdquo; moments. In fact, I just had one today. Maybe&#xA;my big Zen moment will come later. I guess I&amp;rsquo;ll just need to keep&#xA;learning and see where the Lisp journey takes me.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>SIGGRAPH 2016 Post Mortem</title>
-      <link>https://www.misterfidget.com/blog/2016/07/29/siggraph-2016-post-mortem.html</link>
-      <pubDate>Fri, 29 Jul 2016 14:52:18 -0700</pubDate>
-      <guid>https://www.misterfidget.com/blog/2016/07/29/siggraph-2016-post-mortem.html</guid>
-      <description>&lt;p&gt;I had the opportunity to attend SIGGRAPH this year as a representative&#xA;of &lt;a href=&#34;http://metapipe.com&#34;&gt;MetaPipe&lt;/a&gt;. For as fun as it was to meet with&#xA;representatives of various software and cloud companies, I am happy to&#xA;be able to get my nose back to the grindstone on MetaPipe. I&amp;rsquo;m&#xA;extremely excited about the tech we are working on for the service and&#xA;I can&amp;rsquo;t wait to get it to the point where we can start demoing it&#xA;publicly to get everyone&amp;rsquo;s feedback. We started a lot of converstaions&#xA;at SIGGRAPH with various companies that we feel fairly confident will&#xA;turn into more concrete agreements in the near future.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Moving blogs</title>
-      <link>https://www.misterfidget.com/blog/2016/07/29/moving-blogs.html</link>
-      <pubDate>Fri, 29 Jul 2016 09:52:18 -0700</pubDate>
-      <guid>https://www.misterfidget.com/blog/2016/07/29/moving-blogs.html</guid>
-      <description>&lt;p&gt;I am moving blogging platforms and thought I should maybe explain why.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;In the past I have been hosting my blog on Google&amp;rsquo;s Blogger platform.&#xA;This has served me pretty well over the years along with the limited&#xA;number of posts I have made. However, as I have tried to expand the&#xA;blog into more of a general website, it has been an uphill battle&#xA;fighting against the workflow of the blogging system itself. I don&amp;rsquo;t&#xA;forsee wordpress being much different.&lt;/p&gt;</description>
-    </item>
+    <lastBuildDate>Wed, 30 Sep 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.misterfidget.com/tags/blogspot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python wrapper for hscript</title>
       <link>https://www.misterfidget.com/posts/2015/09/30/python-wrapper-for-hscript/</link>

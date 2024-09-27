@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Python wrapper for hscript | Ethan Estrada</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Houdini has a nice little function in Python in the hou namespace called hscript.
+You can pass in a string for an hscript command.
+It passes back out a tuple with stdout and stderr strings.
+This is dandy,
+but it would be nice to call hscript commands with (in essence) Python syntax.
+So I made a little class that does just that.
+class HscriptWrapper(object):
+    commands = hou.hscript(&#39;help&#39;)[0]
+    commands = frozenset(commands.split())
+
+    def __getattr__(self, attr):
+        if attr not in self.commands:
+            raise AttributeError(&#39;No hscript command by name &#34;%s&#34;&#39; % attr)
+        # cache for future calls
+        self.__dict__[attr] = rattr = self._command_factory(attr)
+        return rattr
+
+    def _command_factory(self, attr):
+        def cmd(*args, **kwargs):
+            fmt = &#39;{cmd} {flags} {args}&#39;
+            hsargs = &#39; &#39;.join(args)
+            hsflags = []
+            for k, v in kwargs.items():
+                if isinstance(v, bool) and v is True:
+                    hsflags.append(&#39;-&#39; &#43; k)
+                else:
+                    hsflags.append(&#39;-{0} {1}&#39;.format(k, v))
+            hsflags = &#39; &#39;.join(hsflags)
+            hscmd = fmt.format(cmd=attr, flags=hsflags, args=hsargs)
+            return hou.hscript(hscmd)
+        cmd.__name__ = attr
+        cmd.__doc__ = hou.hscript(&#39;help {}&#39;.format(attr))[0]
+        return cmd
+To use it, create an instance of the HscriptWrapper class,
+then access hscript commands as attributes of the instance.
+The returned attribute is a callable function that takes positional and keyword arguments.">
+    <meta name="generator" content="Hugo 0.134.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+      <meta name="author" content = "Ethan Estrada">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://www.misterfidget.com/posts/2015/09/30/python-wrapper-for-hscript/">
+    
+
+    <meta property="og:url" content="https://www.misterfidget.com/posts/2015/09/30/python-wrapper-for-hscript/">
+  <meta property="og:site_name" content="Ethan Estrada">
+  <meta property="og:title" content="Python wrapper for hscript">
+  <meta property="og:description" content="Houdini has a nice little function in Python in the hou namespace called hscript. You can pass in a string for an hscript command. It passes back out a tuple with stdout and stderr strings. This is dandy, but it would be nice to call hscript commands with (in essence) Python syntax. So I made a little class that does just that.
+class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands = frozenset(commands.split()) def __getattr__(self, attr): if attr not in self.commands: raise AttributeError(&#39;No hscript command by name &#34;%s&#34;&#39; % attr) # cache for future calls self.__dict__[attr] = rattr = self._command_factory(attr) return rattr def _command_factory(self, attr): def cmd(*args, **kwargs): fmt = &#39;{cmd} {flags} {args}&#39; hsargs = &#39; &#39;.join(args) hsflags = [] for k, v in kwargs.items(): if isinstance(v, bool) and v is True: hsflags.append(&#39;-&#39; &#43; k) else: hsflags.append(&#39;-{0} {1}&#39;.format(k, v)) hsflags = &#39; &#39;.join(hsflags) hscmd = fmt.format(cmd=attr, flags=hsflags, args=hsargs) return hou.hscript(hscmd) cmd.__name__ = attr cmd.__doc__ = hou.hscript(&#39;help {}&#39;.format(attr))[0] return cmd To use it, create an instance of the HscriptWrapper class, then access hscript commands as attributes of the instance. The returned attribute is a callable function that takes positional and keyword arguments.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2015-09-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2015-09-30T00:00:00+00:00">
+    <meta property="article:tag" content="CGI">
+    <meta property="article:tag" content="Houdini">
+    <meta property="article:tag" content="Blogspot">
+
+  <meta itemprop="name" content="Python wrapper for hscript">
+  <meta itemprop="description" content="Houdini has a nice little function in Python in the hou namespace called hscript. You can pass in a string for an hscript command. It passes back out a tuple with stdout and stderr strings. This is dandy, but it would be nice to call hscript commands with (in essence) Python syntax. So I made a little class that does just that.
+class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands = frozenset(commands.split()) def __getattr__(self, attr): if attr not in self.commands: raise AttributeError(&#39;No hscript command by name &#34;%s&#34;&#39; % attr) # cache for future calls self.__dict__[attr] = rattr = self._command_factory(attr) return rattr def _command_factory(self, attr): def cmd(*args, **kwargs): fmt = &#39;{cmd} {flags} {args}&#39; hsargs = &#39; &#39;.join(args) hsflags = [] for k, v in kwargs.items(): if isinstance(v, bool) and v is True: hsflags.append(&#39;-&#39; &#43; k) else: hsflags.append(&#39;-{0} {1}&#39;.format(k, v)) hsflags = &#39; &#39;.join(hsflags) hscmd = fmt.format(cmd=attr, flags=hsflags, args=hsargs) return hou.hscript(hscmd) cmd.__name__ = attr cmd.__doc__ = hou.hscript(&#39;help {}&#39;.format(attr))[0] return cmd To use it, create an instance of the HscriptWrapper class, then access hscript commands as attributes of the instance. The returned attribute is a callable function that takes positional and keyword arguments.">
+  <meta itemprop="datePublished" content="2015-09-30T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2015-09-30T00:00:00+00:00">
+  <meta itemprop="wordCount" content="403">
+  <meta itemprop="keywords" content="CGI,Houdini,Blogspot">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Python wrapper for hscript">
+  <meta name="twitter:description" content="Houdini has a nice little function in Python in the hou namespace called hscript. You can pass in a string for an hscript command. It passes back out a tuple with stdout and stderr strings. This is dandy, but it would be nice to call hscript commands with (in essence) Python syntax. So I made a little class that does just that.
+class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands = frozenset(commands.split()) def __getattr__(self, attr): if attr not in self.commands: raise AttributeError(&#39;No hscript command by name &#34;%s&#34;&#39; % attr) # cache for future calls self.__dict__[attr] = rattr = self._command_factory(attr) return rattr def _command_factory(self, attr): def cmd(*args, **kwargs): fmt = &#39;{cmd} {flags} {args}&#39; hsargs = &#39; &#39;.join(args) hsflags = [] for k, v in kwargs.items(): if isinstance(v, bool) and v is True: hsflags.append(&#39;-&#39; &#43; k) else: hsflags.append(&#39;-{0} {1}&#39;.format(k, v)) hsflags = &#39; &#39;.join(hsflags) hscmd = fmt.format(cmd=attr, flags=hsflags, args=hsargs) return hou.hscript(hscmd) cmd.__name__ = attr cmd.__doc__ = hou.hscript(&#39;help {}&#39;.format(attr))[0] return cmd To use it, create an instance of the HscriptWrapper class, then access hscript commands as attributes of the instance. The returned attribute is a callable function that takes positional and keyword arguments.">
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Ethan Estrada
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Python wrapper for hscript</h1>
+      
+      <p class="tracked">
+        By <strong>Ethan Estrada</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-09-30T00:00:00Z">September 30, 2015</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>Houdini has a nice little function in Python in the <code>hou</code> namespace called <code>hscript</code>.
+You can pass in a string for an hscript command.
+It passes back out a tuple with stdout and stderr strings.
+This is dandy,
+but it would be nice to call hscript commands with (in essence) Python syntax.
+So I made a little class that does just that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HscriptWrapper</span>(object):
+</span></span><span style="display:flex;"><span>    commands <span style="color:#f92672">=</span> hou<span style="color:#f92672">.</span>hscript(<span style="color:#e6db74">&#39;help&#39;</span>)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    commands <span style="color:#f92672">=</span> frozenset(commands<span style="color:#f92672">.</span>split())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __getattr__(self, attr):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> attr <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>commands:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">AttributeError</span>(<span style="color:#e6db74">&#39;No hscript command by name &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;&#39;</span> <span style="color:#f92672">%</span> attr)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># cache for future calls</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>__dict__[attr] <span style="color:#f92672">=</span> rattr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_command_factory(attr)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> rattr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_command_factory</span>(self, attr):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cmd</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>            fmt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{cmd}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{flags}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{args}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>            hsargs <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(args)
+</span></span><span style="display:flex;"><span>            hsflags <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> kwargs<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> isinstance(v, bool) <span style="color:#f92672">and</span> v <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>                    hsflags<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">+</span> k)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    hsflags<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;-</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{1}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(k, v))
+</span></span><span style="display:flex;"><span>            hsflags <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(hsflags)
+</span></span><span style="display:flex;"><span>            hscmd <span style="color:#f92672">=</span> fmt<span style="color:#f92672">.</span>format(cmd<span style="color:#f92672">=</span>attr, flags<span style="color:#f92672">=</span>hsflags, args<span style="color:#f92672">=</span>hsargs)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> hou<span style="color:#f92672">.</span>hscript(hscmd)
+</span></span><span style="display:flex;"><span>        cmd<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">=</span> attr
+</span></span><span style="display:flex;"><span>        cmd<span style="color:#f92672">.</span>__doc__ <span style="color:#f92672">=</span> hou<span style="color:#f92672">.</span>hscript(<span style="color:#e6db74">&#39;help </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(attr))[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cmd
+</span></span></code></pre></div><p>To use it, create an instance of the HscriptWrapper class,
+then access hscript commands as attributes of the instance.
+The returned attribute is a callable function that takes positional and keyword arguments.</p>
+<p>This Python snippet:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hswrap <span style="color:#f92672">=</span> HscriptWrapper()
+</span></span><span style="display:flex;"><span>hswrap<span style="color:#f92672">.</span>opfind(<span style="color:#e6db74">&#39;cam1&#39;</span>, p<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/&#39;</span>)
+</span></span></code></pre></div><p>Is equivalent to this hscript command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>opfind -p / cam1
+</span></span></code></pre></div><p>Any positional arguments are passed through as positional arguments to hscript.
+Keyword arguments are passed through as option flags with an argument.
+If the value of a keyword argument is a boolean,
+then the flag doesn&rsquo;t get created with an argument
+and only gets created if the value is &lsquo;True&rsquo;.
+Thus, it is safe to write <code>hscmd(f=False)</code> and the <code>f</code> flag will <strong>not</strong> be included,
+whereas <code>hscmd(f=True)</code> will include the flag with no trailing argument.</p>
+<p>More complex hscript voodoo won&rsquo;t work with this setup,
+but for simply calling an hscript command that has no python equivalent
+and getting its output, this does the trick nicely.</p>
+<p>It doesn&rsquo;t do any safe escaping of arguments yet.
+For instance, if you have a file path with a space in it,
+this will be detected as two arguments
+instead of one argument with an embedded space.
+That is next on the list.</p>
+<p>The above code is placed in the public domain and is provided as is,
+without express or implied warranty of any kind, to the extent allowable by law.
+Use it however you like.
+There is no requirement to attribute the code to me
+(although any mention would be appreciated).</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/cgi/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">CGI</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/houdini/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Houdini</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/blogspot/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Blogspot</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.misterfidget.com/" >
+    &copy;  Ethan Estrada 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
