@@ -1,10 +1,10 @@
 ---
 title: Moving blogs
 date: 2016-07-29T09:52:18-07:00
+Author: Ethan Estrada
+aliases: [/blog/2016/07/29/moving-blogs.html]
 Tags: [blog]
-Authors: Ethan Estrada
 draft: false
-url: /blog/2016/07/29/moving-blogs.html
 ---
 
 I am moving blogging platforms and thought I should maybe explain why.

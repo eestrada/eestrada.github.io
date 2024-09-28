@@ -1,9 +1,9 @@
 ---
 title: Python wrapper for hscript
-date: 2015-09-30
-<!-- lastmod: 2024-09-26T23:04:00-05:00 -->
-Tags: [CGI, Houdini, Blogspot]
+date: 2015-09-30T02:18:00-06:00
 Author: Ethan Estrada
+aliases: [/2015/09/python-wrapper-for-hscript.html]
+Tags: [CGI, Houdini, Blogspot]
 draft: false
 ---
 

@@ -1,10 +1,10 @@
 ---
 title: On Syntax and Macros
 date: 2016-09-10T23:11:20-07:00
+Author: Ethan Estrada
+aliases: [/blog/2016/09/10/on-syntax-and-macros.html]
 Tags: [Lisp, CGI]
-Authors: Ethan Estrada
 draft: false
-url: /blog/2016/09/10/on-syntax-and-macros.html
 ---
 
 From what I have read, it seems that most people have an ultimate Zen
