@@ -60,15 +60,22 @@
     <item>
       <title>Blogspot</title>
       <link>https://www.misterfidget.com/tags/blogspot/</link>
-      <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 30 Sep 2015 02:18:00 -0600</pubDate>
       <guid>https://www.misterfidget.com/tags/blogspot/</guid>
       <description></description>
     </item>
     <item>
       <title>Houdini</title>
       <link>https://www.misterfidget.com/tags/houdini/</link>
-      <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 30 Sep 2015 02:18:00 -0600</pubDate>
       <guid>https://www.misterfidget.com/tags/houdini/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unix</title>
+      <link>https://www.misterfidget.com/tags/unix/</link>
+      <pubDate>Thu, 03 Jan 2013 12:48:00 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/unix/</guid>
       <description></description>
     </item>
   </channel>

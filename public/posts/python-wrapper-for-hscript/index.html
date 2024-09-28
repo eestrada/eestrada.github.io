@@ -68,10 +68,10 @@ The returned attribute is a callable function that takes positional and keyword 
     
 
     
-      <link rel="canonical" href="https://www.misterfidget.com/posts/2015/09/30/python-wrapper-for-hscript/">
+      <link rel="canonical" href="https://www.misterfidget.com/posts/python-wrapper-for-hscript/">
     
 
-    <meta property="og:url" content="https://www.misterfidget.com/posts/2015/09/30/python-wrapper-for-hscript/">
+    <meta property="og:url" content="https://www.misterfidget.com/posts/python-wrapper-for-hscript/">
   <meta property="og:site_name" content="Ethan Estrada">
   <meta property="og:title" content="Python wrapper for hscript">
   <meta property="og:description" content="Houdini has a nice little function in Python in the hou namespace called hscript. You can pass in a string for an hscript command. It passes back out a tuple with stdout and stderr strings. This is dandy, but it would be nice to call hscript commands with (in essence) Python syntax. So I made a little class that does just that.
@@ -79,8 +79,8 @@ class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2015-09-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2015-09-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2015-09-30T02:18:00-06:00">
+    <meta property="article:modified_time" content="2015-09-30T02:18:00-06:00">
     <meta property="article:tag" content="CGI">
     <meta property="article:tag" content="Houdini">
     <meta property="article:tag" content="Blogspot">
@@ -88,8 +88,8 @@ class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands
   <meta itemprop="name" content="Python wrapper for hscript">
   <meta itemprop="description" content="Houdini has a nice little function in Python in the hou namespace called hscript. You can pass in a string for an hscript command. It passes back out a tuple with stdout and stderr strings. This is dandy, but it would be nice to call hscript commands with (in essence) Python syntax. So I made a little class that does just that.
 class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands = frozenset(commands.split()) def __getattr__(self, attr): if attr not in self.commands: raise AttributeError(&#39;No hscript command by name &#34;%s&#34;&#39; % attr) # cache for future calls self.__dict__[attr] = rattr = self._command_factory(attr) return rattr def _command_factory(self, attr): def cmd(*args, **kwargs): fmt = &#39;{cmd} {flags} {args}&#39; hsargs = &#39; &#39;.join(args) hsflags = [] for k, v in kwargs.items(): if isinstance(v, bool) and v is True: hsflags.append(&#39;-&#39; &#43; k) else: hsflags.append(&#39;-{0} {1}&#39;.format(k, v)) hsflags = &#39; &#39;.join(hsflags) hscmd = fmt.format(cmd=attr, flags=hsflags, args=hsargs) return hou.hscript(hscmd) cmd.__name__ = attr cmd.__doc__ = hou.hscript(&#39;help {}&#39;.format(attr))[0] return cmd To use it, create an instance of the HscriptWrapper class, then access hscript commands as attributes of the instance. The returned attribute is a callable function that takes positional and keyword arguments.">
-  <meta itemprop="datePublished" content="2015-09-30T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2015-09-30T00:00:00+00:00">
+  <meta itemprop="datePublished" content="2015-09-30T02:18:00-06:00">
+  <meta itemprop="dateModified" content="2015-09-30T02:18:00-06:00">
   <meta itemprop="wordCount" content="403">
   <meta itemprop="keywords" content="CGI,Houdini,Blogspot">
   <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@ class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands
       
       
       
-      <time class="f6 mv4 dib tracked" datetime="2015-09-30T00:00:00Z">September 30, 2015</time>
+      <time class="f6 mv4 dib tracked" datetime="2015-09-30T02:18:00-06:00">September 30, 2015</time>
       
 
       
@@ -258,6 +258,25 @@ There is no requirement to attribute the code to me
 
 
 
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/houdini-rigging/">Houdini Rigging</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/interesting-video-and-explanation-of-cg/">Interesting video and an explanation of CG animation</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/creating-iso-from-cddvd-on-nix/">Creating an ISO image from a CD/DVD on Unix</a>
+        </li>
+	    
+    </ul>
+</div>
 
 </aside>
 

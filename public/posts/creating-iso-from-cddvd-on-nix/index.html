@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Creating an ISO image from a CD/DVD on Unix | Ethan Estrada</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Hey, it has been a while since I last posted anything.
+I apologize to some of you since this post is going to be rather techie/geekie.
+It is more as a reminder to myself about how to do this than anything else.
+Earlier today, I was furiously trying to find a utility on Linux
+to take a CD/DVD
+and create an ISO image from it.
+I was coming up dry and was feeling a bit frustrated
+until I stumbled onto this website.
+Once I read it I felt like a complete moron.
+Why did I feel so stupid?
+One of the great things about Linux,
+BSD,
+Mac OS X
+and pretty much every other OS
+descended from Unix
+is that everything is a file.
+Literally everything.
+And I had forgotten
+that disc drives (including optical drives)
+fall well within the category of &ldquo;everything&rdquo;.">
+    <meta name="generator" content="Hugo 0.134.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+      <meta name="author" content = "Ethan Estrada">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://www.misterfidget.com/posts/creating-iso-from-cddvd-on-nix/">
+    
+
+    <meta property="og:url" content="https://www.misterfidget.com/posts/creating-iso-from-cddvd-on-nix/">
+  <meta property="og:site_name" content="Ethan Estrada">
+  <meta property="og:title" content="Creating an ISO image from a CD/DVD on Unix">
+  <meta property="og:description" content="Hey, it has been a while since I last posted anything. I apologize to some of you since this post is going to be rather techie/geekie. It is more as a reminder to myself about how to do this than anything else.
+Earlier today, I was furiously trying to find a utility on Linux to take a CD/DVD and create an ISO image from it. I was coming up dry and was feeling a bit frustrated until I stumbled onto this website. Once I read it I felt like a complete moron. Why did I feel so stupid? One of the great things about Linux, BSD, Mac OS X and pretty much every other OS descended from Unix is that everything is a file. Literally everything. And I had forgotten that disc drives (including optical drives) fall well within the category of “everything”.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2013-01-03T12:48:00-07:00">
+    <meta property="article:modified_time" content="2013-01-03T12:48:00-07:00">
+    <meta property="article:tag" content="Unix">
+    <meta property="article:tag" content="Blogspot">
+
+  <meta itemprop="name" content="Creating an ISO image from a CD/DVD on Unix">
+  <meta itemprop="description" content="Hey, it has been a while since I last posted anything. I apologize to some of you since this post is going to be rather techie/geekie. It is more as a reminder to myself about how to do this than anything else.
+Earlier today, I was furiously trying to find a utility on Linux to take a CD/DVD and create an ISO image from it. I was coming up dry and was feeling a bit frustrated until I stumbled onto this website. Once I read it I felt like a complete moron. Why did I feel so stupid? One of the great things about Linux, BSD, Mac OS X and pretty much every other OS descended from Unix is that everything is a file. Literally everything. And I had forgotten that disc drives (including optical drives) fall well within the category of “everything”.">
+  <meta itemprop="datePublished" content="2013-01-03T12:48:00-07:00">
+  <meta itemprop="dateModified" content="2013-01-03T12:48:00-07:00">
+  <meta itemprop="wordCount" content="182">
+  <meta itemprop="keywords" content="Unix,Blogspot">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creating an ISO image from a CD/DVD on Unix">
+  <meta name="twitter:description" content="Hey, it has been a while since I last posted anything. I apologize to some of you since this post is going to be rather techie/geekie. It is more as a reminder to myself about how to do this than anything else.
+Earlier today, I was furiously trying to find a utility on Linux to take a CD/DVD and create an ISO image from it. I was coming up dry and was feeling a bit frustrated until I stumbled onto this website. Once I read it I felt like a complete moron. Why did I feel so stupid? One of the great things about Linux, BSD, Mac OS X and pretty much every other OS descended from Unix is that everything is a file. Literally everything. And I had forgotten that disc drives (including optical drives) fall well within the category of “everything”.">
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Ethan Estrada
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Creating an ISO image from a CD/DVD on Unix</h1>
+      
+      <p class="tracked">
+        By <strong>Ethan Estrada</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2013-01-03T12:48:00-07:00">January 3, 2013</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>Hey, it has been a while since I last posted anything.
+I apologize to some of you since this post is going to be rather techie/geekie.
+It is more as a reminder to myself about how to do this than anything else.</p>
+<p>Earlier today, I was furiously trying to find a utility on <a href="http://en.wikipedia.org/wiki/Linux">Linux</a>
+to take a CD/DVD
+and create an <a href="http://en.wikipedia.org/wiki/Iso_image">ISO image</a> from it.
+I was coming up dry and was feeling a bit frustrated
+until I stumbled onto <a href="http://www.tech-recipes.com/rx/2769/ubuntu_how_to_create_iso_image_from_cd_dvd/">this website</a>.
+Once I read it I felt like a complete moron.
+Why did I feel so stupid?
+One of the great things about <a href="http://en.wikipedia.org/wiki/Linux">Linux</a>,
+<a href="http://en.wikipedia.org/wiki/BSD">BSD</a>,
+<a href="http://en.wikipedia.org/wiki/Mac_OS_X">Mac OS X</a>
+and pretty much every other <a href="http://en.wikipedia.org/wiki/Operating_system">OS</a>
+descended from <a href="http://en.wikipedia.org/wiki/Unix-like">Unix</a>
+is that <a href="https://en.wikipedia.org/wiki/Everything_is_a_file">everything is a file</a>.
+Literally everything.
+And I had forgotten
+that disc drives (including <a href="http://en.wikipedia.org/wiki/Optical_drive">optical drives</a>)
+fall well within the category of &ldquo;everything&rdquo;.</p>
+<p>Thus the way to create an ISO image from a CD/DVD
+is as simple as running the following from the <a href="http://en.wikipedia.org/wiki/Terminal_emulator">terminal</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat /dev/cdrom &gt; /home/user/path/to/image.iso
+</span></span></code></pre></div><p>That&rsquo;s it.
+Simply <a href="http://en.wikipedia.org/wiki/Redirection_(computing)">redirect</a>
+the output of CD/DVD device into a file.
+Easy, right?</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/unix/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Unix</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/blogspot/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Blogspot</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/interesting-video-and-explanation-of-cg/">Interesting video and an explanation of CG animation</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.misterfidget.com/" >
+    &copy;  Ethan Estrada 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

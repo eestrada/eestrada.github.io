@@ -5,7 +5,7 @@
     <loc>https://www.misterfidget.com/</loc>
     <lastmod>2017-02-27T16:43:40-07:00</lastmod>
   </url><url>
-    <loc>https://www.misterfidget.com/blog/2017/02/27/hierarchy-of-needs.html</loc>
+    <loc>https://www.misterfidget.com/posts/hierarchy-of-needs/</loc>
     <lastmod>2017-02-27T16:43:40-07:00</lastmod>
   </url><url>
     <loc>https://www.misterfidget.com/tags/planning/</loc>
@@ -26,7 +26,7 @@
     <loc>https://www.misterfidget.com/tags/lisp/</loc>
     <lastmod>2016-09-10T23:11:20-07:00</lastmod>
   </url><url>
-    <loc>https://www.misterfidget.com/blog/2016/09/10/on-syntax-and-macros.html</loc>
+    <loc>https://www.misterfidget.com/posts/on-syntax-and-macros/</loc>
     <lastmod>2016-09-10T23:11:20-07:00</lastmod>
   </url><url>
     <loc>https://www.misterfidget.com/tags/metapipe/</loc>
@@ -35,23 +35,35 @@
     <loc>https://www.misterfidget.com/tags/siggraph/</loc>
     <lastmod>2016-07-29T14:52:18-07:00</lastmod>
   </url><url>
-    <loc>https://www.misterfidget.com/blog/2016/07/29/siggraph-2016-post-mortem.html</loc>
+    <loc>https://www.misterfidget.com/posts/siggraph-2016-post-mortem/</loc>
     <lastmod>2016-07-29T14:52:18-07:00</lastmod>
   </url><url>
     <loc>https://www.misterfidget.com/tags/blog/</loc>
     <lastmod>2016-07-29T09:52:18-07:00</lastmod>
   </url><url>
-    <loc>https://www.misterfidget.com/blog/2016/07/29/moving-blogs.html</loc>
+    <loc>https://www.misterfidget.com/posts/moving-blogs/</loc>
     <lastmod>2016-07-29T09:52:18-07:00</lastmod>
   </url><url>
     <loc>https://www.misterfidget.com/tags/blogspot/</loc>
-    <lastmod>2015-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2015-09-30T02:18:00-06:00</lastmod>
   </url><url>
     <loc>https://www.misterfidget.com/tags/houdini/</loc>
-    <lastmod>2015-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2015-09-30T02:18:00-06:00</lastmod>
   </url><url>
-    <loc>https://www.misterfidget.com/posts/2015/09/30/python-wrapper-for-hscript/</loc>
-    <lastmod>2015-09-30T00:00:00+00:00</lastmod>
+    <loc>https://www.misterfidget.com/posts/python-wrapper-for-hscript/</loc>
+    <lastmod>2015-09-30T02:18:00-06:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/houdini-rigging/</loc>
+    <lastmod>2013-02-14T16:32:00-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/creating-iso-from-cddvd-on-nix/</loc>
+    <lastmod>2013-01-03T12:48:00-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/tags/unix/</loc>
+    <lastmod>2013-01-03T12:48:00-07:00</lastmod>
+  </url><url>
+    <loc>https://www.misterfidget.com/posts/interesting-video-and-explanation-of-cg/</loc>
+    <lastmod>2010-09-02T06:27:00-06:00</lastmod>
   </url><url>
     <loc>https://www.misterfidget.com/categories/</loc>
   </url>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unix on Ethan Estrada</title>
+    <link>https://www.misterfidget.com/tags/unix/</link>
+    <description>Recent content in Unix on Ethan Estrada</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Jan 2013 12:48:00 -0700</lastBuildDate>
+    <atom:link href="https://www.misterfidget.com/tags/unix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating an ISO image from a CD/DVD on Unix</title>
+      <link>https://www.misterfidget.com/posts/creating-iso-from-cddvd-on-nix/</link>
+      <pubDate>Thu, 03 Jan 2013 12:48:00 -0700</pubDate>
+      <guid>https://www.misterfidget.com/posts/creating-iso-from-cddvd-on-nix/</guid>
+      <description>&lt;p&gt;Hey, it has been a while since I last posted anything.&#xA;I apologize to some of you since this post is going to be rather techie/geekie.&#xA;It is more as a reminder to myself about how to do this than anything else.&lt;/p&gt;&#xA;&lt;p&gt;Earlier today, I was furiously trying to find a utility on &lt;a href=&#34;http://en.wikipedia.org/wiki/Linux&#34;&gt;Linux&lt;/a&gt;&#xA;to take a CD/DVD&#xA;and create an &lt;a href=&#34;http://en.wikipedia.org/wiki/Iso_image&#34;&gt;ISO image&lt;/a&gt; from it.&#xA;I was coming up dry and was feeling a bit frustrated&#xA;until I stumbled onto &lt;a href=&#34;http://www.tech-recipes.com/rx/2769/ubuntu_how_to_create_iso_image_from_cd_dvd/&#34;&gt;this website&lt;/a&gt;.&#xA;Once I read it I felt like a complete moron.&#xA;Why did I feel so stupid?&#xA;One of the great things about &lt;a href=&#34;http://en.wikipedia.org/wiki/Linux&#34;&gt;Linux&lt;/a&gt;,&#xA;&lt;a href=&#34;http://en.wikipedia.org/wiki/BSD&#34;&gt;BSD&lt;/a&gt;,&#xA;&lt;a href=&#34;http://en.wikipedia.org/wiki/Mac_OS_X&#34;&gt;Mac OS X&lt;/a&gt;&#xA;and pretty much every other &lt;a href=&#34;http://en.wikipedia.org/wiki/Operating_system&#34;&gt;OS&lt;/a&gt;&#xA;descended from &lt;a href=&#34;http://en.wikipedia.org/wiki/Unix-like&#34;&gt;Unix&lt;/a&gt;&#xA;is that &lt;a href=&#34;https://en.wikipedia.org/wiki/Everything_is_a_file&#34;&gt;everything is a file&lt;/a&gt;.&#xA;Literally everything.&#xA;And I had forgotten&#xA;that disc drives (including &lt;a href=&#34;http://en.wikipedia.org/wiki/Optical_drive&#34;&gt;optical drives&lt;/a&gt;)&#xA;fall well within the category of &amp;ldquo;everything&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

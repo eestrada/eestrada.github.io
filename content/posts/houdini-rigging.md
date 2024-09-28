@@ -3,7 +3,7 @@ title: Houdini Rigging
 date: 2013-02-14T16:32:00-07:00
 Author: Ethan Estrada
 aliases: [/2013/02/houdini-rigging.html]
-tags: [CGI, Houdini]
+tags: [CGI, Houdini, Blogspot]
 draft: false
 ---
 
