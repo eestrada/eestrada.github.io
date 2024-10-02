@@ -85,5 +85,26 @@
       <guid>https://www.misterfidget.com/tags/animation/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Tablet</title>
+      <link>https://www.misterfidget.com/tags/tablet/</link>
+      <pubDate>Wed, 30 Dec 2009 10:11:00 -0700</pubDate>
+      <guid>https://www.misterfidget.com/tags/tablet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SIP</title>
+      <link>https://www.misterfidget.com/tags/sip/</link>
+      <pubDate>Wed, 26 Aug 2009 16:52:00 -0600</pubDate>
+      <guid>https://www.misterfidget.com/tags/sip/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VoIP</title>
+      <link>https://www.misterfidget.com/tags/voip/</link>
+      <pubDate>Wed, 26 Aug 2009 16:52:00 -0600</pubDate>
+      <guid>https://www.misterfidget.com/tags/voip/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

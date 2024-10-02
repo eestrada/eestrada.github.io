@@ -2,3 +2,6 @@ baseURL = 'https://www.misterfidget.com/'
 languageCode = 'en-us'
 title = 'Ethan Estrada'
 theme = 'ananke'
+
+[security.exec]
+    allow = ['^vi$', '^vim$', '^nvim$', '^(dart-)?sass(-embedded)?$', '^go$', '^git$', '^npx$', '^postcss$', '^tailwindcss$']
