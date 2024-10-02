@@ -51,3 +51,25 @@ until the comments and images are moved over.
 There are only a few posts with Comments and images,
 so it shouldn't take long once I choose to do it.
 I just need to choose to do it :) .
+
+In the transition to Hugo,
+comments are also going away.
+On Blogspot/Blogger, it used the builtin commenting system.
+On my Frog site, it used Disqus.
+Here there is nothing.
+Why? On Blogspot, as my posting frequency became infrequent and sporadic,
+the comments also began to become less and less.
+On my Frog/Disqus based site,
+I don't think I ever had a single comment.
+I can't blame people for disengaging:
+I was posting on average once per year
+and half of those post are apologies about not posting more often.
+
+Why have a comment system if it isn't used?
+I'll just keep yelling my thoughts into the void
+without a feedback mechanism.
+I'm sure if someone has something to say,
+they will find a way to contact me.
+I'll post my Twitter handle (I'm still not calling it X) somewhere on this site,
+probably;
+folks can reach out to me that way.
