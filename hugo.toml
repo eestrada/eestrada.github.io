@@ -4,7 +4,17 @@ title = 'Ethan Estrada'
 theme = 'ananke'
 
 [security.exec]
-    allow = ['^vi$', '^vim$', '^nvim$', '^(dart-)?sass(-embedded)?$', '^go$', '^git$', '^npx$', '^postcss$', '^tailwindcss$']
+allow = [
+    '^vi$',
+    '^vim$',
+    '^nvim$',
+    '^(dart-)?sass(-embedded)?$',
+    '^go$',
+    '^git$',
+    '^npx$',
+    '^postcss$',
+    '^tailwindcss$',
+]
 
 [params]
 show_reading_time = true
