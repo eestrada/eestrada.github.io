@@ -5,3 +5,30 @@ theme = 'ananke'
 
 [security.exec]
     allow = ['^vi$', '^vim$', '^nvim$', '^(dart-)?sass(-embedded)?$', '^go$', '^git$', '^npx$', '^postcss$', '^tailwindcss$']
+
+[params]
+show_reading_time = true
+
+[[params.ananke_socials]]
+name = "rss"
+url = "/index.xml"
+
+[[params.ananke_socials]]
+name = "github"
+url = "https://github.com/eestrada"
+
+[[params.ananke_socials]]
+name = "stackoverflow"
+url = "https://stackoverflow.com/users/1733321/eestrada"
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/ethan-estrada/"
+
+[[params.ananke_socials]]
+name = "twitter"
+url = "https://twitter.com/eestrada_cg"
+
+[[params.ananke_socials]]
+name = "youtube"
+url = "https://www.youtube.com/@EthanEstrada"
