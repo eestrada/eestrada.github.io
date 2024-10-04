@@ -22,13 +22,13 @@ name = "stackoverflow"
 url = "https://stackoverflow.com/users/1733321/eestrada"
 
 [[params.ananke_socials]]
-name = "linkedin"
-url = "https://www.linkedin.com/in/ethan-estrada/"
-
-[[params.ananke_socials]]
 name = "twitter"
 url = "https://twitter.com/eestrada_cg"
 
 [[params.ananke_socials]]
 name = "youtube"
 url = "https://www.youtube.com/@EthanEstrada"
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/ethan-estrada/"
