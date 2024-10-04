@@ -21,3 +21,11 @@ I will post a more thorough step by step review in the next few days
 For now, let us leave it at how amazing this little machine is:
 mind-boggling amazingness.
 Adios until next time.
+
+#### 1 comment:
+
+1. ![](//resources.blogblog.com/img/blank.gif)
+
+   [Savant Studios](//www.blogger.com/profile/00841811285895262263) [August 25, 2009 at 3:53 PM](https://rocketboytech.blogspot.com/2009/08/first-post-made-from-nokia-n810-tablet.html?showComment=1251237206476#c4110576679757343821)
+
+   This is great news: my wife and I are already using Skype on our computers, but I may well change to Gizmo once I jump on a tablet :)

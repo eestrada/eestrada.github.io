@@ -7,7 +7,8 @@ tags: [blog]
 draft: true
 ---
 
-After many years, I have (finally) ported my posts from Blogspot to my static blog.
+After many years, I have (finally) ported my posts
+from Blogspot to my static blog.
 Part of what took so many years was:
 
 1. I assumed I needed to do something fancy to port them over.
@@ -32,11 +33,13 @@ The answers to these two hold ups are:
 I haven't yet copied the still images over from the old hosting providers.
 I would prefer to host those within the static site as well.
 It isn't clear when a hosting provider will suddenly decide to stop hosting.
+
 For example, some of the old full resolution images were hosted on PicasaWeb
 (remember that old thing?).
 In typical Google fashion,
 this product was killed years ago.
 Now those full rez images are lost to the sands of time.
+
 I can avoid this sort of pain by hosting the images myself.
 If the people behind Github or S3 or whatever decide to stop hosting my static files,
 I can just push my files saved in my git repo somewhere else.
@@ -53,20 +56,22 @@ so it shouldn't take long once I choose to do it.
 I just need to choose to do it :) .
 
 In the transition to Hugo,
-comments are also going away.
-On Blogspot/Blogger, it used the builtin commenting system.
-On my Frog site, it used Disqus.
+the ability to add new comments is going away.
+On Blogspot/Blogger, my blog used the builtin commenting system.
+On my Frog site, my blog used Disqus.
 Here there is nothing.
-Why? On Blogspot, as my posting frequency became infrequent and sporadic,
+
+Why no commenting system?
+On Blogspot, as my posting frequency became infrequent and sporadic,
 the comments also began to become less and less.
 On my Frog/Disqus based site,
-I don't think I ever had a single comment.
+I never had a single comment.
 I can't blame people for disengaging:
 I was posting on average once per year
 and half of those post are apologies about not posting more often.
 
 Why have a comment system if it isn't used?
-I'll just keep yelling my thoughts into the void
+I'll just yell my thoughts into the void
 without a feedback mechanism.
 I'm sure if someone has something to say,
 they will find a way to contact me.

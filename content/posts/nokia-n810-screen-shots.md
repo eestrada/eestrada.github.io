@@ -139,3 +139,29 @@ It can be done, but it requires workarounds; ugly workarounds.
 I will post a full update on that situation soon.
 I am optimistic as to the result.
 Adios until next time.
+
+#### 4 comments:
+
+1. ![](//resources.blogblog.com/img/blank.gif)
+
+   [Derrick](//www.blogger.com/profile/03305841855571619856) [August 26, 2009 at 9:37 PM](https://rocketboytech.blogspot.com/2009/08/nokia-n810-screen-shots.html?showComment=1251344228371#c3453868601477184350)
+
+   give songbird a try for your free and opensource media syncing software: http://getsongbird.com/ I'm not sure if it supports plain USB drive syncing yet or not, but I believe they are planning on having it soon.
+
+2. ![](//resources.blogblog.com/img/blank.gif)
+
+   [Derrick](//www.blogger.com/profile/03305841855571619856) [October 3, 2009 at 11:43 PM](https://rocketboytech.blogspot.com/2009/08/nokia-n810-screen-shots.html?showComment=1254634980120#c3477761143070338915)
+
+   So How's the experiment going? I just got my google voice number and also got Gizmo working on my netbook. There's something about a 3 minute call length limit though? still workable I think. I'm not sure if its for all calls, or just outgoing.
+
+3. ![](//resources.blogblog.com/img/blank.gif)
+
+   [Ethan](//www.blogger.com/profile/02097738143094944050) [October 4, 2009 at 2:03 PM](https://rocketboytech.blogspot.com/2009/08/nokia-n810-screen-shots.html?showComment=1254686588139#c1826146619365796456)
+
+   The 3 minute limit is only a problem for calling directly out of gizmo once you have associated your google voice with gizmo on the gizmo website. However, if you use the click2call function on the google voice website and use your gizmo number as the number to call you, then there is no charge since gizmo sees it as an incoming call and not an outgoing one. Does that make sense?
+
+4. ![](//resources.blogblog.com/img/blank.gif)
+
+   [Ethan](//www.blogger.com/profile/02097738143094944050) [October 4, 2009 at 2:11 PM](https://rocketboytech.blogspot.com/2009/08/nokia-n810-screen-shots.html?showComment=1254687090773#c2022572228545844546)
+
+   I should also mention that the 3 minute call limit is not in effect when people call you on your google voice number and it rings your Gizmo number. Again, this is because gizmo sees the call as incoming and thus doesn't charge you anything. However, you do have to associate your Gizmo SIP number through the google voice service.
