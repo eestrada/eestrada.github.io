@@ -3,6 +3,14 @@ languageCode = 'en-us'
 title = 'Ethan Estrada'
 theme = 'ananke'
 
+# For some reason,
+# github only allows publishing from the repo root
+# or from a 'docs' directory.
+# So, here we are forcing publish to 'docs' even though 'public' makes a lot more sense.
+# I can't complain too much.
+# It is a free service after all.
+publishDir = 'docs'
+
 [security.exec]
 allow = [
     '^vi$',
