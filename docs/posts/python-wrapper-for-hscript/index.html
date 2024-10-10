@@ -47,14 +47,14 @@ The returned attribute is a callable function that takes positional and keyword 
     
     
     
-      <meta name="robots" content="noindex, nofollow">
+      <meta name="robots" content="index, follow">
     
     
       <meta name="author" content = "Ethan Estrada">
     
 
     
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
+<link rel="stylesheet" href="/ananke/css/main.min.8c5ed1b4122cf3ff53079cd95541d5c93d5e6383d59932b643d1a6666b1473b3.css" >
 
 
 
@@ -97,10 +97,12 @@ class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands
   <meta name="twitter:description" content="Houdini has a nice little function in Python in the hou namespace called hscript. You can pass in a string for an hscript command. It passes back out a tuple with stdout and stderr strings. This is dandy, but it would be nice to call hscript commands with (in essence) Python syntax. So I made a little class that does just that.
 class HscriptWrapper(object): commands = hou.hscript(&#39;help&#39;)[0] commands = frozenset(commands.split()) def __getattr__(self, attr): if attr not in self.commands: raise AttributeError(&#39;No hscript command by name &#34;%s&#34;&#39; % attr) # cache for future calls self.__dict__[attr] = rattr = self._command_factory(attr) return rattr def _command_factory(self, attr): def cmd(*args, **kwargs): fmt = &#39;{cmd} {flags} {args}&#39; hsargs = &#39; &#39;.join(args) hsflags = [] for k, v in kwargs.items(): if isinstance(v, bool) and v is True: hsflags.append(&#39;-&#39; &#43; k) else: hsflags.append(&#39;-{0} {1}&#39;.format(k, v)) hsflags = &#39; &#39;.join(hsflags) hscmd = fmt.format(cmd=attr, flags=hsflags, args=hsargs) return hou.hscript(hscmd) cmd.__name__ = attr cmd.__doc__ = hou.hscript(&#39;help {}&#39;.format(attr))[0] return cmd To use it, create an instance of the HscriptWrapper class, then access hscript commands as attributes of the instance. The returned attribute is a callable function that takes positional and keyword arguments.">
 
+      
+    
 	
   </head>
 
-  <body class="ma0 avenir bg-near-white">
+  <body class="ma0 avenir bg-near-white production">
 
     
    
