@@ -1,1 +1,2 @@
 (A) 2024-09-26 Transfer old posts from Blogspot using a Markdown converter https://codebeautify.org/html-to-markdown https://rocketboytech.blogspot.com/
+(C) 2024-10-09 Transfer old photos in old posts from Blogspot and host them statically in git repo https://rocketboytech.blogspot.com/
