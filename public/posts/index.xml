@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Ethan Estrada</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Feb 2017 16:43:40 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 09 Oct 2024 22:37:00 -0500</lastBuildDate>
     <atom:link href="https://www.misterfidget.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blogspot Migration</title>
+      <link>https://www.misterfidget.com/posts/blogspot-migration/</link>
+      <pubDate>Wed, 09 Oct 2024 22:37:00 -0500</pubDate>
+      <guid>https://www.misterfidget.com/posts/blogspot-migration/</guid>
+      <description>&lt;p&gt;After many years, I have (finally) ported my posts&#xA;from Blogspot to my static blog.&#xA;Part of what took so many years was:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;I assumed I needed to do something fancy to port them over.&lt;/li&gt;&#xA;&lt;li&gt;My previous static blog engine (&lt;a href=&#34;https://github.com/greghendershott/frog&#34;&gt;Frog&lt;/a&gt;)&#xA;had a limited feature set,&#xA;which meant that redirects of paths and whatnot&#xA;was an exercise left to the user (i.e. me)&#xA;and I never felt it justified the time investment to get create a workaround.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;The answers to these two hold ups are:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Hierarchy of Needs</title>
       <link>https://www.misterfidget.com/posts/hierarchy-of-needs/</link>
