@@ -1,3 +1,5 @@
+# vim: set filetype=yaml:
+
 # A .YAML file is used to export DNS records to a
 # domain managed by Google Cloud. The format is
 # exclusive to Google Cloud DNS.
