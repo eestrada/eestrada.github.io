@@ -1,0 +1,7 @@
+Host,Type,Priority,Data
+@,MX,5,gmr-smtp-in.l.google.com
+@,MX,10,alt1.gmr-smtp-in.l.google.com
+@,MX,20,alt2.gmr-smtp-in.l.google.com
+@,MX,30,alt3.gmr-smtp-in.l.google.com
+@,MX,40,alt4.gmr-smtp-in.l.google.com
+cpg4okmxjfis,CNAME,—,gv-2mra2czch3e423.dv.googlehosted.com

@@ -1,0 +1,16 @@
+Host,Type,Priority,Data
+@,A,—,216.239.32.21
+@,A,—,216.239.34.21
+@,A,—,216.239.36.21
+@,A,—,216.239.38.21
+@,AAAA,—,2001:4860:4802:36:0:0:0:15
+@,AAAA,—,2001:4860:4802:38:0:0:0:15
+@,AAAA,—,2001:4860:4802:32:0:0:0:15
+@,AAAA,—,2001:4860:4802:34:0:0:0:15
+@,TXT,—,keybase-site-verification=nxDZFGyYQbwa6adLGTNQf9itfXg5oeIhXKQErsrlnM8
+krs._domainkey,TXT,—,k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDvy07hStX5dagz9sjuWXpsIypps1gQYerdZNKv6I3uJ4VkERYv+m6+nvgamhjOtcAT4xRHTtrBv7la3PzsOAhPrwhgKoobBw7vG6kBtSXsOtLkcwrjtxoPgPuKm+7inDBxD07i54N0r/PlSSFolJ3BCy7kRn9U7xuhq+SuVMxfDwIDAQAB
+emailytics,CNAME,—,mailgun.org
+sync,A,—,0.0.0.0
+verify25063,CNAME,—,mailgun.org
+www,CNAME,—,eestrada.github.io
+@,TXT,—,v=spf1 include:mailgun.org ~all
