@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Ethan Estrada</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Oct 2024 22:37:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 30 Mar 2025 22:22:31 -0500</lastBuildDate>
     <atom:link href="https://www.misterfidget.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ruby Fibers and the Psyllium Gem</title>
+      <link>https://www.misterfidget.com/posts/psyllium-gem/</link>
+      <pubDate>Sun, 30 Mar 2025 22:22:31 -0500</pubDate>
+      <guid>https://www.misterfidget.com/posts/psyllium-gem/</guid>
+      <description>&lt;p&gt;So, I created a new Ruby Gem. I had an itch, and nothing else already existed&#xA;to scratch it. Details in the rest of this post.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m finding that in my free time I&amp;rsquo;m spending more of my time working with Ruby&#xA;as my language of choice. Maybe this is a bit dated; you could perhaps argue&#xA;that Ruby already &amp;ldquo;peaked&amp;rdquo; and now we should all move onto the hottest new&#xA;thing now that friendlier statically typed languages have come out like Golang,&#xA;Rust, and Zig.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Blogspot Migration</title>
       <link>https://www.misterfidget.com/posts/blogspot-migration/</link>
@@ -20,7 +27,7 @@
       <link>https://www.misterfidget.com/posts/hierarchy-of-needs/</link>
       <pubDate>Mon, 27 Feb 2017 16:43:40 -0700</pubDate>
       <guid>https://www.misterfidget.com/posts/hierarchy-of-needs/</guid>
-      <description>&lt;p&gt;If you couldn&amp;rsquo;t tell, the title of this post is a nod to&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs&#34;&gt;&amp;ldquo;Mazlow&amp;rsquo;s hierarchy of needs&amp;rdquo;&lt;/a&gt;,&#xA;a psychological theory about how we prioritize things as humans. This&#xA;post isn&amp;rsquo;t about that theory whatsoever.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;This particular hierarchy of needs has to do with prioritizing tasks&#xA;to accomplish a goal. I am not the master goal setter in the world. I&#xA;don&amp;rsquo;t claim to be some sort of planning guru. Far from it. But I have&#xA;had a thought about a simple way to deal with task lists. It has all&#xA;been inspired by conversation with my friend and colleague&#xA;&lt;a href=&#34;http://metapipe.com/team/&#34;&gt;AJ&lt;/a&gt; and&#xA;&lt;a href=&#34;http://blog.trello.com/why-your-to-do-list-is-going-nowhere&#34;&gt;an article I read on Trello&amp;rsquo;s blog&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;If you couldn&amp;rsquo;t tell, the title of this post is a nod to&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs&#34;&gt;&amp;ldquo;Mazlow&amp;rsquo;s hierarchy of needs&amp;rdquo;&lt;/a&gt;,&#xA;a psychological theory about how we prioritize things as humans. This&#xA;post isn&amp;rsquo;t about that theory whatsoever.&lt;/p&gt;&#xA;&lt;p&gt;This particular hierarchy of needs has to do with prioritizing tasks&#xA;to accomplish a goal. I am not the master goal setter in the world. I&#xA;don&amp;rsquo;t claim to be some sort of planning guru. Far from it. But I have&#xA;had a thought about a simple way to deal with task lists. It has all&#xA;been inspired by conversation with my friend and colleague&#xA;&lt;a href=&#34;http://metapipe.com/team/&#34;&gt;AJ&lt;/a&gt; and&#xA;&lt;a href=&#34;http://blog.trello.com/why-your-to-do-list-is-going-nowhere&#34;&gt;an article I read on Trello&amp;rsquo;s blog&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>On Syntax and Macros</title>
@@ -41,7 +48,7 @@
       <link>https://www.misterfidget.com/posts/moving-blogs/</link>
       <pubDate>Fri, 29 Jul 2016 09:52:18 -0700</pubDate>
       <guid>https://www.misterfidget.com/posts/moving-blogs/</guid>
-      <description>&lt;p&gt;I am moving blogging platforms and thought I should maybe explain why.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;In the past I have been hosting my blog on Google&amp;rsquo;s Blogger platform.&#xA;This has served me pretty well over the years along with the limited&#xA;number of posts I have made. However, as I have tried to expand the&#xA;blog into more of a general website, it has been an uphill battle&#xA;fighting against the workflow of the blogging system itself. I don&amp;rsquo;t&#xA;forsee wordpress being much different.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I am moving blogging platforms and thought I should maybe explain why.&lt;/p&gt;&#xA;&lt;p&gt;In the past I have been hosting my blog on Google&amp;rsquo;s Blogger platform.&#xA;This has served me pretty well over the years along with the limited&#xA;number of posts I have made. However, as I have tried to expand the&#xA;blog into more of a general website, it has been an uphill battle&#xA;fighting against the workflow of the blogging system itself. I don&amp;rsquo;t&#xA;forsee wordpress being much different.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Python wrapper for hscript</title>
@@ -76,7 +83,7 @@
       <link>https://www.misterfidget.com/posts/interesting-video-and-explanation-of-cg/</link>
       <pubDate>Thu, 02 Sep 2010 06:27:00 -0600</pubDate>
       <guid>https://www.misterfidget.com/posts/interesting-video-and-explanation-of-cg/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;Hi y&amp;rsquo;all.&#xA;I found this video (UPDATE: previously linked video was an old flash player embed&#xA;and no longer exists)&#xA;and it got me to thinking about special effects and how we perceive them.&#xA;Even though everyone in the studio audience had undoubtedly seen blockbuster films with eye fooling special effects,&#xA;they went wild for this performance of a rather simple concept.&#xA;Don&amp;rsquo;t misunderstand me;&#xA;what they are doing is extremely difficult.&#xA;However,&#xA;something is often more impressive to us when we can understand the effort put into it.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi y&amp;rsquo;all.&#xA;I found this video (UPDATE: previously linked video was an old flash player embed&#xA;and no longer exists)&#xA;and it got me to thinking about special effects and how we perceive them.&#xA;Even though everyone in the studio audience had undoubtedly seen blockbuster films with eye fooling special effects,&#xA;they went wild for this performance of a rather simple concept.&#xA;Don&amp;rsquo;t misunderstand me;&#xA;what they are doing is extremely difficult.&#xA;However,&#xA;something is often more impressive to us when we can understand the effort put into it.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Sorry Everyone</title>
@@ -104,7 +111,7 @@
       <link>https://www.misterfidget.com/posts/welcome-welcome/</link>
       <pubDate>Thu, 04 Mar 2010 16:45:00 -0700</pubDate>
       <guid>https://www.misterfidget.com/posts/welcome-welcome/</guid>
-      <description>&lt;p&gt;Hey everyone, welcome to the new blog.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;Stuff will be posted! Comments will be made! Reality television announcers will be parodied!&lt;/em&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;But really, feel free to follow, comment and discuss.&#xA;I&amp;rsquo;ll soon post an animation project I have been working on (once it is completed).&#xA;Be aware that it is my first attempt at traditional hand drawn animation&#xA;so it will look pretty amateur.&lt;/p&gt;&#xA;&lt;p&gt;Best wishes and talk to you all soon.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hey everyone, welcome to the new blog.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;Stuff will be posted! Comments will be made! Reality television announcers will be parodied!&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;But really, feel free to follow, comment and discuss.&#xA;I&amp;rsquo;ll soon post an animation project I have been working on (once it is completed).&#xA;Be aware that it is my first attempt at traditional hand drawn animation&#xA;so it will look pretty amateur.&lt;/p&gt;&#xA;&lt;p&gt;Best wishes and talk to you all soon.&lt;/p&gt;</description>
     </item>
     <item>
       <title>We come from the land of the ice and snow...</title>

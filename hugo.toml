@@ -3,6 +3,9 @@ languageCode = 'en-us'
 title = 'Ethan Estrada'
 theme = 'ananke'
 
+# The Raw HTML should always be under my direct control.
+ignoreLogs = ['warning-goldmark-raw-html']
+
 # For some reason,
 # github only allows publishing from the repo root
 # or from a 'docs' directory.
