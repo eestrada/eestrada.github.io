@@ -1,6 +1,7 @@
 ---
 title: 'Ruby Fibers and the Psyllium Gem'
 date: '2025-03-30T22:22:31-05:00'
+lastmod: '2025-03-31T17:33:07-05:00'
 Author: Ethan Estrada
 aliases: []
 tags: [code, ruby]
@@ -26,7 +27,7 @@ use, Ruby is still hard to beat.
 And if you are running on a server, it isn't hard to horizontally scale servers
 to deal with demand. Computer time is cheap, programmer time is expensive. For
 the most part it is fine to just throw more computers at a problem like
-horizontally scaling a web service. Thus, any performance defeciencies in Ruby
+horizontally scaling a web service. Thus, any performance deficiencies in Ruby
 are simple to overcome.
 
 However, it is nice when you can have the best of both worlds. Ruby's Fiber
@@ -49,10 +50,10 @@ not CPU bound.
 
 However, it has been hard to use Fibers in the same way that native Threads can
 be used: fire off a thread (or several) and then join the thread object and
-retrieve the final result (or exception). This is usful if you need to reach
+retrieve the final result (or exception). This is useful if you need to reach
 out to several external resources, for example. By reaching out to them
 concurrently you can significantly decrease your response time, since most of
-that time will be spent waiting on socker IO anyway. Thus, start multiple
+that time will be spent waiting on socket IO anyway. Thus, start multiple
 requests simultaneously with Threads and they can all wait for their payloads
 at the same time.
 
@@ -60,15 +61,15 @@ I made a new gem to make this easier with Fibers: [the Psyllium
 gem](https://rubygems.org/gems/psyllium). It adds `start`, `join`, `value`, and
 a few other methods to the Fiber class so that it behaves more like the Thread
 class. So now you can have the convenience of the Thread class interface, while
-benefitting from the reduced memory usage of the Fiber class.
+benefiting from the reduced memory usage of the Fiber class.
 
 By my calculation, using Threads to concurrently do IO calculations takes at
 least 76 times more memory than using Fibers. That means that if you
 simultaneously retrieve 1000 external IO constrained resources with Fibers it
-will take around 13mb of memory. However, using Threads to do the same would
-cost around 1000mb, nearly a gibibyte of memory. This assumes that your
-platform _only_ allocates 1mb of stack memory per native system Thread;
-depending on the configuration of your system this can be greater than 1mb. To
+will take around 13 MB of memory. However, using Threads to do the same would
+cost around 1000 MB, nearly a gibibyte of memory. This assumes that your
+platform _only_ allocates 1 MB of stack memory per native system Thread;
+depending on the configuration of your system this can be greater than 1 MB. To
 be fair, stack memory per thread could instead be configured to be lower, but
 that is ill advised since it is easy to create a stack overflow when stack
 memory is so low.
@@ -132,7 +133,7 @@ to ensure no Fibers become "starved" and wait forever before they get a chance
 to run again.
 
 Even with these caveats, Fibers, especially Psyllium enhanced ones, are worth
-exploring if you have a usecase that is heavily IO bound as opposed to CPU
+exploring if you have a use case that is heavily IO bound as opposed to CPU
 bound. With some care, you can vastly increase your throughput while managing
 to keep memory usage down, just by switching from Threads to Psyllium enhanced
 Fibers, and (if your use case is a web server) using a Fiber based web server

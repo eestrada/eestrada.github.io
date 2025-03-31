@@ -50,7 +50,7 @@ I’m finding that in my free time I’m spending more of my time working with R
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-03-30T22:22:31-05:00">
-    <meta property="article:modified_time" content="2025-03-30T22:22:31-05:00">
+    <meta property="article:modified_time" content="2025-03-31T17:33:07-05:00">
     <meta property="article:tag" content="Code">
     <meta property="article:tag" content="Ruby">
 
@@ -58,8 +58,8 @@ I’m finding that in my free time I’m spending more of my time working with R
   <meta itemprop="description" content="So, I created a new Ruby Gem. I had an itch, and nothing else already existed to scratch it. Details in the rest of this post.
 I’m finding that in my free time I’m spending more of my time working with Ruby as my language of choice. Maybe this is a bit dated; you could perhaps argue that Ruby already “peaked” and now we should all move onto the hottest new thing now that friendlier statically typed languages have come out like Golang, Rust, and Zig.">
   <meta itemprop="datePublished" content="2025-03-30T22:22:31-05:00">
-  <meta itemprop="dateModified" content="2025-03-30T22:22:31-05:00">
-  <meta itemprop="wordCount" content="1185">
+  <meta itemprop="dateModified" content="2025-03-31T17:33:07-05:00">
+  <meta itemprop="wordCount" content="1190">
   <meta itemprop="keywords" content="Code,Ruby">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ruby Fibers and the Psyllium Gem">
@@ -122,7 +122,7 @@ I’m finding that in my free time I’m spending more of my time working with R
       
       
         <span class="f6 mv4 dib tracked"> - 6 minutes read </span>
-        <span class="f6 mv4 dib tracked"> - 1185 words </span>
+        <span class="f6 mv4 dib tracked"> - 1190 words </span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>So, I created a new Ruby Gem. I had an itch, and nothing else already existed
@@ -140,7 +140,7 @@ use, Ruby is still hard to beat.</p>
 <p>And if you are running on a server, it isn&rsquo;t hard to horizontally scale servers
 to deal with demand. Computer time is cheap, programmer time is expensive. For
 the most part it is fine to just throw more computers at a problem like
-horizontally scaling a web service. Thus, any performance defeciencies in Ruby
+horizontally scaling a web service. Thus, any performance deficiencies in Ruby
 are simple to overcome.</p>
 <p>However, it is nice when you can have the best of both worlds. Ruby&rsquo;s Fiber
 scheduler holds much promise in this way. It allows lightweight concurrency
@@ -159,24 +159,24 @@ web service to scale to much higher levels, assuming that the work loads are
 not CPU bound.</p>
 <p>However, it has been hard to use Fibers in the same way that native Threads can
 be used: fire off a thread (or several) and then join the thread object and
-retrieve the final result (or exception). This is usful if you need to reach
+retrieve the final result (or exception). This is useful if you need to reach
 out to several external resources, for example. By reaching out to them
 concurrently you can significantly decrease your response time, since most of
-that time will be spent waiting on socker IO anyway. Thus, start multiple
+that time will be spent waiting on socket IO anyway. Thus, start multiple
 requests simultaneously with Threads and they can all wait for their payloads
 at the same time.</p>
 <p>I made a new gem to make this easier with Fibers: <a href="https://rubygems.org/gems/psyllium">the Psyllium
 gem</a>. It adds <code>start</code>, <code>join</code>, <code>value</code>, and
 a few other methods to the Fiber class so that it behaves more like the Thread
 class. So now you can have the convenience of the Thread class interface, while
-benefitting from the reduced memory usage of the Fiber class.</p>
+benefiting from the reduced memory usage of the Fiber class.</p>
 <p>By my calculation, using Threads to concurrently do IO calculations takes at
 least 76 times more memory than using Fibers. That means that if you
 simultaneously retrieve 1000 external IO constrained resources with Fibers it
-will take around 13mb of memory. However, using Threads to do the same would
-cost around 1000mb, nearly a gibibyte of memory. This assumes that your
-platform <em>only</em> allocates 1mb of stack memory per native system Thread;
-depending on the configuration of your system this can be greater than 1mb. To
+will take around 13 MB of memory. However, using Threads to do the same would
+cost around 1000 MB, nearly a gibibyte of memory. This assumes that your
+platform <em>only</em> allocates 1 MB of stack memory per native system Thread;
+depending on the configuration of your system this can be greater than 1 MB. To
 be fair, stack memory per thread could instead be configured to be lower, but
 that is ill advised since it is easy to create a stack overflow when stack
 memory is so low.</p>
@@ -231,7 +231,7 @@ block given to the Fiber does. Even then it is dependent on the Fiber scheduler
 to ensure no Fibers become &ldquo;starved&rdquo; and wait forever before they get a chance
 to run again.</p>
 <p>Even with these caveats, Fibers, especially Psyllium enhanced ones, are worth
-exploring if you have a usecase that is heavily IO bound as opposed to CPU
+exploring if you have a use case that is heavily IO bound as opposed to CPU
 bound. With some care, you can vastly increase your throughput while managing
 to keep memory usage down, just by switching from Threads to Psyllium enhanced
 Fibers, and (if your use case is a web server) using a Fiber based web server
