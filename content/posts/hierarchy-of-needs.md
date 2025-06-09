@@ -1,6 +1,6 @@
 ---
 title: Hierarchy of Needs
-date: 2017-02-27T16:43:40-07:00
+date: '2017-02-27T16:43:40-07:00'
 Author: Ethan Estrada
 aliases: [/blog/2017/02/27/hierarchy-of-needs.html]
 Tags: [Planning, Self Reminders]
