@@ -25,7 +25,9 @@ BUILD_FILES = INPUT_FILES.pathmap("%{^#{INPUT_DIR},#{BUILD_DIR}}X/index.html")
 OUTPUT_FILES = INPUT_FILES.pathmap("%{^#{INPUT_DIR},#{OUTPUT_DIR}}X/index.html")
 STATIC_FILES = FileList["#{STATIC_DIR}/*"]
 STATIC_OUTPUT_FILES = STATIC_FILES.pathmap("%{^#{STATIC_DIR},#{OUTPUT_DIR}}p")
-RSS_FILE = "#{OUTPUT_DIR}/index.xml".freeze
+SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
+RSS_FILENAME = 'index.xml'
+RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 
 CLEAN << BUILD_DIR
@@ -54,23 +56,23 @@ OUTPUT_FILES.each do |e|
     require 'tilt/kramdown'
     require 'front_matter_parser'
 
-    p t.name
-    p src
+    p "#{src} -> #{t.name}"
 
+    # TODO: use layout file and Tilt to wrap content.
     parsed = FrontMatterParser::Parser.parse_file(src)
     rendered_html = Kramdown::Document.new(parsed.content).to_html
     File.write(t.name, rendered_html)
   end
 end
 
-file RSS_FILE => OUTPUT_FILES do |t|
+file RSS_FILE_PATH => OUTPUT_FILES do |t|
   require 'rss'
   require 'front_matter_parser'
 
   rendered_rss = RSS::Maker.make('atom') do |maker|
     maker.channel.author = MAIN_SITE_AUTHOR
     maker.channel.updated = Time.now.to_s
-    maker.channel.about = "#{BASE_URL}/index.xml"
+    maker.channel.about = "#{BASE_URL}/#{RSS_FILENAME}"
     maker.channel.title = SITE_TITLE
 
     INPUT_FILES.each do |e|
@@ -86,32 +88,33 @@ file RSS_FILE => OUTPUT_FILES do |t|
     end
   end
 
-  p t.name
-  puts rendered_rss
-  p t.name
+  # p t.name
+  # p rendered_rss
+  # p t.name
+
+  p "-> #{t.name}"
   File.write(t.name, rendered_rss)
 end
 
-desc 'Copy static files'
-multitask copy_static: STATIC_OUTPUT_FILES
+# TODO: add task to build tag outputs
 
-desc 'build output files'
-multitask multi_build: OUTPUT_FILES
-
-desc 'Create RSS/Atom feed'
-task generate_rss: OUTPUT_DIR do
+# TODO: add task to generate main index.html
+file SITE_INDEX => (OUTPUT_FILES + STATIC_OUTPUT_FILES) do |t|
+  p "-> #{t.name}"
 end
 
-desc 'build site'
-multitask build_site: [:multi_build, :copy_static, RSS_FILE]
+multitask multi_file_gen: (OUTPUT_FILES + STATIC_OUTPUT_FILES)
+
+desc 'Build site'
+task build_site: [:multi_file_gen, SITE_INDEX, RSS_FILE_PATH]
 
 desc 'Clobber and then build site'
 task rebuild: [:clobber, :build_site] # rubocop:disable Style/SymbolArray
+
+desc 'Build site'
+task default: [:build_site]
 
 desc 'Install dependencies via bundler'
 task :install_deps do
   sh 'bundle install'
 end
-
-desc 'build site'
-task default: [:build_site]
