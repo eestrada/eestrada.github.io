@@ -18,28 +18,44 @@ INPUT_DIR = 'content'
 STATIC_DIR = 'static'
 
 # For intermediate build files.
-BUILD_DIR = 'build'
+CACHE_DIR = 'cache'
 
 # Where final output goes.
 OUTPUT_DIR = 'docs'
 
+# Inputs
 INPUT_POST_FILES = FileList["#{INPUT_DIR}/posts/**/*.md"]
-BUILD_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR},#{BUILD_DIR}}X/index.html")
-OUTPUT_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR},#{OUTPUT_DIR}}X/index.html")
-STATIC_FILES = FileList["#{STATIC_DIR}/*"]
-STATIC_OUTPUT_FILES = STATIC_FILES.pathmap("%{^#{STATIC_DIR},#{OUTPUT_DIR}}p")
+INPUT_NON_POST_FILES = FileList["#{INPUT_DIR}/non_posts/**/*.md"]
+INPUT_STATIC_FILES = FileList["#{STATIC_DIR}/*"]
+
+# Intermediate files
+CACHE_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR},#{CACHE_DIR}}X/index.html")
+
+# FIXME: this doesn't strip off the `non_posts` prefix from the path.
+CACHE_NON_POST_FILES = INPUT_NON_POST_FILES.pathmap("%{^#{INPUT_DIR},#{CACHE_DIR}}X/index.html")
+
+CACHE_TAG_FILES = FileList["#{CACHE_DIR}/tags/*.txt"]
+
+# Final output files
+OUTPUT_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR},#{OUTPUT_DIR}}X/index.html")
+OUTPUT_STATIC_FILES = INPUT_STATIC_FILES.pathmap("%{^#{STATIC_DIR},#{OUTPUT_DIR}}p")
 SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
 RSS_FILENAME = 'index.xml'
 RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 
-CLEAN << BUILD_DIR
+CLEAN << CACHE_DIR
 CLOBBER << OUTPUT_DIR
 
-directory BUILD_DIR
+# since tag files are appended to, potentially in parallel, during the caching
+# phase, a mutex is needed to ensure files are not simultaneously modified,
+# which could corrupt data.
+_tag_lock = Thread::Mutex.new
+
+directory CACHE_DIR
 directory OUTPUT_DIR
 
-STATIC_OUTPUT_FILES.each do |e|
+OUTPUT_STATIC_FILES.each do |e|
   src = e.pathmap("%{^#{OUTPUT_DIR},#{STATIC_DIR}}p")
   dirp = e.pathmap('%d')
   directory dirp
@@ -49,7 +65,7 @@ STATIC_OUTPUT_FILES.each do |e|
   end
 end
 
-OUTPUT_FILES.each do |e|
+OUTPUT_POST_FILES.each do |e|
   src = e.pathmap("%{^#{OUTPUT_DIR},#{INPUT_DIR}}d.md")
   dirp = e.pathmap('%d')
   directory dirp
@@ -68,10 +84,10 @@ OUTPUT_FILES.each do |e|
   end
 end
 
-rule %r{^#{BUILD_DIR}/tags/.*\\.txt$} => [proc { |tn| tn.pathmap("%{^#{BUILD_DIR}}X/index.html") }] do |t|
+rule %r{^#{CACHE_DIR}/tags/.*\\.txt$} => [proc { |tn| tn.pathmap("%{^#{CACHE_DIR}}X/index.html") }] do |t|
 end
 
-file RSS_FILE_PATH => OUTPUT_FILES do |t|
+file RSS_FILE_PATH => OUTPUT_POST_FILES do |t|
   require 'rss'
   require 'front_matter_parser'
 
@@ -105,20 +121,20 @@ end
 # TODO: add task to build tag outputs
 
 # TODO: add task to generate main index.html
-file SITE_INDEX => (OUTPUT_FILES + STATIC_OUTPUT_FILES) do |t|
+file SITE_INDEX => (OUTPUT_POST_FILES + OUTPUT_STATIC_FILES) do |t|
   p "-> #{t.name}"
   # How to append to a file in Ruby: https://stackoverflow.com/a/71481898
   File.write(t.name, "Another line!\n", mode: 'a+')
 end
 
-desc 'Cache site'
-task cache: []
+desc 'Compile site parts'
+task compile: []
 
 desc 'Build site'
-task build_site: [SITE_INDEX, RSS_FILE_PATH]
+task build: [SITE_INDEX, RSS_FILE_PATH]
 
 desc 'Build site'
-task default: [:build_site]
+task default: [:build]
 
 desc 'Install dependencies via bundler'
 task :install_deps do
