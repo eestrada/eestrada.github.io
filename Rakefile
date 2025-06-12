@@ -23,9 +23,9 @@ BUILD_DIR = 'build'
 # Where final output goes.
 OUTPUT_DIR = 'docs'
 
-INPUT_FILES = FileList["#{INPUT_DIR}/**/*.md"]
-BUILD_FILES = INPUT_FILES.pathmap("%{^#{INPUT_DIR},#{BUILD_DIR}}X/index.html")
-OUTPUT_FILES = INPUT_FILES.pathmap("%{^#{INPUT_DIR},#{OUTPUT_DIR}}X/index.html")
+INPUT_POST_FILES = FileList["#{INPUT_DIR}/posts/**/*.md"]
+BUILD_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR},#{BUILD_DIR}}X/index.html")
+OUTPUT_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR},#{OUTPUT_DIR}}X/index.html")
 STATIC_FILES = FileList["#{STATIC_DIR}/*"]
 STATIC_OUTPUT_FILES = STATIC_FILES.pathmap("%{^#{STATIC_DIR},#{OUTPUT_DIR}}p")
 SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
@@ -35,6 +35,29 @@ SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 
 CLEAN << BUILD_DIR
 CLOBBER << OUTPUT_DIR
+
+# Task that runs prerequisites sequentially, in order, no matter what
+# parallelism settings are. This sequential nature does NOT extend to ancestor
+# prerequisites.
+#
+# FIXME: add better error checking on arguments
+def sequential_task(hash, &block)
+  raise "First argument must be a hash #{hash}" unless hash.is_a?(Hash)
+  raise "Hash does not have a size of 1 #{hash.size}" unless hash.size == 1
+
+  task_name, prereqs = hash.first
+  raise "prereqs is not an Array #{prereqs}" unless prereqs.is_a?(Array)
+
+  Rake::Task.define_task(task_name) do |task_obj|
+
+    # Run each prerequisite in order.
+    prereqs.each do |preq_name|
+      Rake::Task[preq_name].invoke
+    end
+
+    block&.call(task_obj)
+  end
+end
 
 directory BUILD_DIR
 directory OUTPUT_DIR
@@ -81,7 +104,7 @@ file RSS_FILE_PATH => OUTPUT_FILES do |t|
     maker.channel.about = "#{BASE_URL}/#{RSS_FILENAME}"
     maker.channel.title = SITE_TITLE
 
-    INPUT_FILES.each do |e|
+    INPUT_POST_FILES.each do |e|
       parsed = FrontMatterParser::Parser.parse_file(e)
       front_matter = parsed.front_matter
       maker.items.new_item do |item|
@@ -120,11 +143,7 @@ desc 'Build site'
 task build_site: [:multi_file_gen, SITE_INDEX, RSS_FILE_PATH]
 
 desc 'Clobber and then build site'
-task :rebuild  do
-  # Ensure these two commands run sequentially and never in parallel.
-  Rake::Task[:clobber].invoke
-  Rake::Task[:build_site].invoke
-end
+sequential_task rebuild: [:clobber, :build_site] # rubocop:disable Style/SymbolArray
 
 desc 'Build site'
 task default: [:build_site]
