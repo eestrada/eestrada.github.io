@@ -2,6 +2,9 @@
 
 require 'rake/clean'
 
+# Just always multitask, because why not?
+Rake.application.options.always_multitask = true
+
 # Change these constants to pull from elsewhere
 
 BASE_URL = 'https://www.misterfidget.com'
@@ -65,6 +68,9 @@ OUTPUT_FILES.each do |e|
   end
 end
 
+rule %r{^#{BUILD_DIR}/tags/.*\\.txt$} => [proc { |tn| tn.pathmap("%{^#{BUILD_DIR}}X/index.html") }] do |t|
+end
+
 file RSS_FILE_PATH => OUTPUT_FILES do |t|
   require 'rss'
   require 'front_matter_parser'
@@ -101,15 +107,24 @@ end
 # TODO: add task to generate main index.html
 file SITE_INDEX => (OUTPUT_FILES + STATIC_OUTPUT_FILES) do |t|
   p "-> #{t.name}"
+  # How to append to a file in Ruby: https://stackoverflow.com/a/71481898
+  File.write(t.name, "Another line!\n", mode: 'a+')
 end
 
-multitask multi_file_gen: (OUTPUT_FILES + STATIC_OUTPUT_FILES)
+task multi_file_gen: (OUTPUT_FILES + STATIC_OUTPUT_FILES)
+
+desc 'Cache site'
+task cache: []
 
 desc 'Build site'
 task build_site: [:multi_file_gen, SITE_INDEX, RSS_FILE_PATH]
 
 desc 'Clobber and then build site'
-task rebuild: [:clobber, :build_site] # rubocop:disable Style/SymbolArray
+task :rebuild  do
+  # Ensure these two commands run sequentially and never in parallel.
+  Rake::Task[:clobber].invoke
+  Rake::Task[:build_site].invoke
+end
 
 desc 'Build site'
 task default: [:build_site]
