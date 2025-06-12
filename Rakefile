@@ -36,29 +36,6 @@ SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 CLEAN << BUILD_DIR
 CLOBBER << OUTPUT_DIR
 
-# Task that runs prerequisites sequentially, in order, no matter what
-# parallelism settings are. This sequential nature does NOT extend to ancestor
-# prerequisites.
-#
-# FIXME: add better error checking on arguments
-def sequential_task(hash, &block)
-  raise "First argument must be a hash #{hash}" unless hash.is_a?(Hash)
-  raise "Hash does not have a size of 1 #{hash.size}" unless hash.size == 1
-
-  task_name, prereqs = hash.first
-  raise "prereqs is not an Array #{prereqs}" unless prereqs.is_a?(Array)
-
-  Rake::Task.define_task(task_name) do |task_obj|
-
-    # Run each prerequisite in order.
-    prereqs.each do |preq_name|
-      Rake::Task[preq_name].invoke
-    end
-
-    block&.call(task_obj)
-  end
-end
-
 directory BUILD_DIR
 directory OUTPUT_DIR
 
@@ -141,9 +118,6 @@ task cache: []
 
 desc 'Build site'
 task build_site: [:multi_file_gen, SITE_INDEX, RSS_FILE_PATH]
-
-desc 'Clobber and then build site'
-sequential_task rebuild: [:clobber, :build_site] # rubocop:disable Style/SymbolArray
 
 desc 'Build site'
 task default: [:build_site]
