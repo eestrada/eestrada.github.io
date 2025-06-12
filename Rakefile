@@ -111,13 +111,11 @@ file SITE_INDEX => (OUTPUT_FILES + STATIC_OUTPUT_FILES) do |t|
   File.write(t.name, "Another line!\n", mode: 'a+')
 end
 
-task multi_file_gen: (OUTPUT_FILES + STATIC_OUTPUT_FILES)
-
 desc 'Cache site'
 task cache: []
 
 desc 'Build site'
-task build_site: [:multi_file_gen, SITE_INDEX, RSS_FILE_PATH]
+task build_site: [SITE_INDEX, RSS_FILE_PATH]
 
 desc 'Build site'
 task default: [:build_site]
@@ -125,4 +123,9 @@ task default: [:build_site]
 desc 'Install dependencies via bundler'
 task :install_deps do
   sh 'bundle install'
+end
+
+desc 'Preview site'
+task :preview do
+  ruby '-run', '-e', 'httpd', OUTPUT_DIR, '-p5000'
 end

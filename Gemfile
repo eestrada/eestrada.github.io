@@ -20,6 +20,9 @@ gem 'erubi'
 # For generating RSS and/or Atom feeds
 gem 'rss'
 
+# For simple previewing of static site locally
+gem 'webrick'
+
 group 'development' do
   gem 'ruby-lsp'
   gem 'solargraph'
