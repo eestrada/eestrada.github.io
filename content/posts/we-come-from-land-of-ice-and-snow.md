@@ -3,7 +3,7 @@ title: We come from the land of the ice and snow...
 date: '2009-12-30T10:11:00-07:00'
 Author: Ethan Estrada
 aliases: [/2009/12/we-come-from-land-of-ice-and-snow.html]
-tags: [Blogspot, Tablet]
+tags: ['Blogspot', 'Tablet']
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: Because you need to know...
 date: '2010-10-05T00:31:00-06:00'
 Author: Ethan Estrada
 aliases: [/2010/10/because-you-need-to-know.html]
-tags: [Blogspot]
+tags: ['Blogspot']
 draft: false
 ---
 

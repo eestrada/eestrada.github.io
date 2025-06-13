@@ -3,7 +3,7 @@ title: SIGGRAPH 2016 Post Mortem
 date: '2016-07-29T14:52:18-07:00'
 Author: Ethan Estrada
 aliases: [/blog/2016/07/29/siggraph-2016-post-mortem.html]
-Tags: [SIGGRAPH, CGI, MetaPipe]
+tags: ['SIGGRAPH', 'CGI', 'MetaPipe']
 draft: false
 ---
 

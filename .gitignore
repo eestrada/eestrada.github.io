@@ -17,3 +17,6 @@ _venv/
 
 # Hugo
 /.hugo_build.lock
+
+# New personally created build system
+/cache/

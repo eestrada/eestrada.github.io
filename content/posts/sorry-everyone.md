@@ -3,7 +3,7 @@ title: Sorry Everyone
 date: '2010-05-17T12:44:00-06:00'
 Author: Ethan Estrada
 aliases: [/2010/05/sorry-everyone.html]
-tags: [Blogspot]
+tags: ['Blogspot']
 draft: false
 ---
 

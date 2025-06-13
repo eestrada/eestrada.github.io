@@ -3,7 +3,7 @@ title: Interesting video and an explanation of CG animation
 date: '2010-09-02T06:27:00-06:00'
 Author: Ethan Estrada
 aliases: [/2010/09/interesting-video-and-explanation-of-cg.html]
-tags: [CGI, Blogspot]
+tags: ['CGI', 'Blogspot']
 draft: false
 ---
 

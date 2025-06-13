@@ -3,7 +3,7 @@ title: President Obama Picks His Favorites for the 2010 NCAA Basketball Tourname
 date: '2010-03-19T10:46:00-06:00'
 Author: Ethan Estrada
 aliases: [/2010/03/president-obama-picks-his-favorites-for.html]
-tags: [Blogspot]
+tags: ['Blogspot']
 draft: false
 ---
 
