@@ -39,6 +39,7 @@ CACHE_RSS_FILE = "#{CACHE_DIR}/rss_feed.jsonl".freeze
 OUTPUT_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{OUTPUT_DIR}/}X/index.html")
 OUTPUT_NON_POST_FILES = CACHE_NON_POST_FILES.pathmap("%{^##{CACHE_DIR}/non_posts/,#{OUTPUT_DIR}/}X.html")
 OUTPUT_STATIC_FILES = INPUT_STATIC_FILES.pathmap("%{^#{STATIC_DIR}/,#{OUTPUT_DIR}/}p")
+OUTPUT_TAG_FILES = FileList["#{OUTPUT_DIR}/tags/**/index.xml"]
 SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
 RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
@@ -64,11 +65,17 @@ directory "#{CACHE_DIR}/tags"
   directory fpath.pathmap('%d')
 end
 
+OUTPUT_STATIC_FILES.each do |fpath|
+  file fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"), fpath.pathmap('%d')] do |t|
+    cp t.source, t.name
+  end
+end
+
 # From input Markdown to cached HTML and tags
 rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
        proc { |tn| tn.pathmap("%{^#{CACHE_DIR}/,#{INPUT_DIR}/}X.md") },
        proc { |tn| tn.pathmap('%d') }
-]) do |t|
+     ]) do |t|
   require 'json'
   require 'tilt/erb'
   require 'tilt/kramdown'
@@ -103,6 +110,9 @@ def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSi
   require 'json'
   require 'front_matter_parser'
 
+  fdir = to_write.pathmap('%d')
+  Rake::Task[fdir].invoke
+
   rendered_rss = RSS::Maker.make('atom') do |maker|
     maker.channel.author = MAIN_SITE_AUTHOR
     maker.channel.updated = Time.now.to_s
@@ -127,6 +137,15 @@ def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSi
   File.write(to_write, rendered_rss)
 end
 
+rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
+       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
+       proc { |tn| tn.pathmap('%d') },
+       CACHE_RSS_FILE
+     ]) do |t|
+  url_path = t.name.pathmap("%{^#{OUTPUT_DIR}/,}p")
+  make_rss(t.source, t.name, url_path, tag_lock)
+end
+
 file RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
   make_rss(t.source, t.name, RSS_FILENAME, rss_lock)
 end
@@ -138,8 +157,18 @@ file CACHE_RSS_FILE => CACHE_POST_FILES
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
+task _build_internal: [SITE_INDEX, RSS_FILE_PATH]
+
 desc 'Build site'
-task build: [SITE_INDEX, RSS_FILE_PATH]
+task :build do
+  # These must run sequentially, so they are run explicitly.
+  Rake::Task[:compile].invoke
+  Rake::Task[:_build_internal].invoke
+
+  CACHE_TAG_FILES.pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X/index.xml").each do |fpath|
+    Rake::Task[fpath].invoke
+  end
+end
 
 desc 'Build site'
 task default: [:build]
