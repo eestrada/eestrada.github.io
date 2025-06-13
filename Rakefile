@@ -83,7 +83,7 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
   entry_hash = { 'name': t.name, 'front_matter': parsed.front_matter }
   entry = "#{JSON.dump(entry_hash)}\n"
   rss_lock.synchronize do
-    File.write(CACHE_RSS_FILE, "#{entry}\n", mode: 'a')
+    File.write(CACHE_RSS_FILE, entry, mode: 'a')
   end
 
   parsed.front_matter.fetch('tags', []).each do |tag|
@@ -93,23 +93,24 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
     p "#{t.name} >> #{tag_file}"
     Rake::Task[tag_dir].invoke
     tag_lock.synchronize do
-      File.write(tag_file, "#{entry}\n", mode: 'a')
+      File.write(tag_file, entry, mode: 'a')
     end
   end
 end
 
-file RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
+def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
   require 'rss'
+  require 'json'
   require 'front_matter_parser'
 
   rendered_rss = RSS::Maker.make('atom') do |maker|
     maker.channel.author = MAIN_SITE_AUTHOR
     maker.channel.updated = Time.now.to_s
-    maker.channel.about = "#{BASE_URL}/#{RSS_FILENAME}"
+    maker.channel.about = "#{BASE_URL}/#{url_path}"
     maker.channel.title = SITE_TITLE
 
-    file_guts = rss_lock.synchronize { File.read(t.source) }
-    file_guts.each_line.map { |l| JSON.load(l) }.each do |jblob|
+    file_guts = mutex.synchronize { File.read(to_read) }
+    file_guts.each_line.map { |l| JSON.parse(l) }.each do |jblob|
       fpath = jblob['name']
       front_matter = jblob['front_matter']
       maker.items.new_item do |item|
@@ -122,8 +123,12 @@ file RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
     end
   end
 
-  p "#{t.source} -> #{t.name}"
-  File.write(t.name, rendered_rss)
+  p "#{to_read} -> #{to_write}"
+  File.write(to_write, rendered_rss)
+end
+
+file RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
+  make_rss(t.source, t.name, RSS_FILENAME, rss_lock)
 end
 
 file SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES)
