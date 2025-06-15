@@ -40,9 +40,9 @@ OUTPUT_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{OUTPUT_DIR}/}X/
 OUTPUT_NON_POST_FILES = CACHE_NON_POST_FILES.pathmap("%{^##{CACHE_DIR}/non_posts/,#{OUTPUT_DIR}/}X.html")
 OUTPUT_STATIC_FILES = INPUT_STATIC_FILES.pathmap("%{^#{STATIC_DIR}/,#{OUTPUT_DIR}/}p")
 OUTPUT_TAG_FILES = FileList["#{OUTPUT_DIR}/tags/**/index.xml"]
-SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
-RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
-SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
+OUTPUT_SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
+OUTPUT_RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
+OUTPUT_SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 
 CLEAN << CACHE_DIR
 CLOBBER << OUTPUT_DIR
@@ -146,18 +146,18 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
   make_rss(t.source, t.name, url_path, tag_lock)
 end
 
-file RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
+file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
   make_rss(t.source, t.name, RSS_FILENAME, rss_lock)
 end
 
-file SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES)
+file OUTPUT_SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES)
 
 file CACHE_RSS_FILE => CACHE_POST_FILES
 
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
-task _build_internal: [SITE_INDEX, RSS_FILE_PATH]
+task _build_internal: [OUTPUT_SITE_INDEX, OUTPUT_RSS_FILE_PATH]
 
 desc 'Build site'
 task :build do
