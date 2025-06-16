@@ -33,7 +33,7 @@ INPUT_STATIC_FILES = FileList["#{STATIC_DIR}/*"]
 # Intermediate files
 CACHE_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{CACHE_DIR}/}X.html")
 CACHE_NON_POST_FILES = INPUT_NON_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{CACHE_DIR}/}X.html")
-CACHE_TAG_FILES_GLOB = "#{CACHE_DIR}/tags/*.jsonl".freeze
+CACHE_TAG_FILES_GLOB = "#{CACHE_DIR}/tags/**/index.jsonl".freeze
 CACHE_RSS_FILE = "#{CACHE_DIR}/rss_feed.jsonl".freeze
 
 # Final output files
@@ -68,8 +68,10 @@ directory "#{OUTPUT_DIR}/tags"
   directory fpath.pathmap('%d')
 end
 
+# We list these explicitly instead of using a rule because the static output
+# runs the risk of matching everything.
 OUTPUT_STATIC_FILES.each do |fpath|
-  file fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"), fpath.pathmap('%d')] do |t|
+  file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"), fpath.pathmap('%d')]) do |t|
     cp t.source, t.name
   end
 end
@@ -98,10 +100,15 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
 
   parsed.front_matter.fetch('tags', []).each do |tag|
     conformed_tag = tag.downcase.gsub(' ', '-')
-    tag_dir = "#{CACHE_DIR}/tags"
-    tag_file = "#{tag_dir}/#{conformed_tag}.jsonl"
-    p "#{t.name} >> #{tag_file}"
+    tag_dir = "#{CACHE_DIR}/tags/#{conformed_tag}"
+    tag_file = "#{tag_dir}/index.jsonl"
+
+    # Ensure the directories for tags get created.
+    directory tag_dir
+    directory tag_dir.pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}p")
     Rake::Task[tag_dir].invoke
+
+    p "#{t.name} >> #{tag_file}"
     tag_lock.synchronize do
       File.write(tag_file, entry, mode: 'a')
     end
@@ -113,9 +120,6 @@ def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSi
   require 'json'
   require 'front_matter_parser'
 
-  fdir = to_write.pathmap('%d')
-  Rake::Task[fdir].invoke
-
   rendered_rss = RSS::Maker.make('atom') do |maker|
     maker.channel.author = MAIN_SITE_AUTHOR
     maker.channel.updated = Time.now.to_s
@@ -123,7 +127,9 @@ def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSi
     maker.channel.title = SITE_TITLE
 
     file_guts = mutex.synchronize { File.read(to_read) }
-    file_guts.each_line.map { |l| JSON.parse(l) }.each do |jblob|
+    blobs = file_guts.each_line.map { |l| JSON.parse(l) }
+    blobs_sorted = (blobs.sort_by { |e| e.dig('front_matter', 'date') }).reverse
+    blobs_sorted.each do |jblob|
       fpath = jblob['name']
       front_matter = jblob['front_matter']
       maker.items.new_item do |item|
@@ -140,7 +146,8 @@ def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSi
   File.write(to_write, rendered_rss)
 end
 
-rule(%r{^#{OUTPUT_DIR}/tags/.*\.xml$} => [
+# TODO: make a rule like this to generate HTML index files for tags.
+rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") }
      ]) do |t|
   url_path = t.name.pathmap("%{^#{OUTPUT_DIR}/,}p")
