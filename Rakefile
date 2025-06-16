@@ -39,7 +39,8 @@ CACHE_RSS_FILE = "#{CACHE_DIR}/rss_feed.jsonl".freeze
 OUTPUT_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{OUTPUT_DIR}/}X/index.html")
 OUTPUT_NON_POST_FILES = CACHE_NON_POST_FILES.pathmap("%{^##{CACHE_DIR}/non_posts/,#{OUTPUT_DIR}/}X.html")
 OUTPUT_STATIC_FILES = INPUT_STATIC_FILES.pathmap("%{^#{STATIC_DIR}/,#{OUTPUT_DIR}/}p")
-OUTPUT_TAG_FILES = FileList["#{OUTPUT_DIR}/tags/**/index.xml"]
+OUTPUT_TAG_FEEDS = FileList["#{OUTPUT_DIR}/tags/*.xml"]
+OUTPUT_TAG_PAGES = FileList["#{OUTPUT_DIR}/tags/*.html"]
 OUTPUT_SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
 OUTPUT_RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 OUTPUT_SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
@@ -54,6 +55,7 @@ tag_lock = Thread::Mutex.new
 rss_lock = Thread::Mutex.new
 
 directory "#{CACHE_DIR}/tags"
+directory "#{OUTPUT_DIR}}/tags"
 
 (
   CACHE_POST_FILES +
@@ -137,13 +139,24 @@ def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSi
   File.write(to_write, rendered_rss)
 end
 
-rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
-       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
-       proc { |tn| tn.pathmap('%d') },
-       CACHE_RSS_FILE
+rule(%r{^#{OUTPUT_DIR}/tags/.*\.xml$} => [
+       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") }
      ]) do |t|
   url_path = t.name.pathmap("%{^#{OUTPUT_DIR}/,}p")
   make_rss(t.source, t.name, url_path, tag_lock)
+end
+
+rule(_gen_tag_feeds: proc { CACHE_TAG_FILES.pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") }) do |t|
+  # p "Did #{t.name} get called?"
+  # p "What are the prereqs? #{t.prerequisites}"
+  # p "What are the sources? #{t.sources}"
+end
+
+# These are generated as a side effect of generating the main RSS file
+rule(%r{^#{OUTPUT_DIR}/tags/.*\.jsonl$} => [CACHE_RSS_FILE]) do |t|
+  p "Did #{t.name} get called?"
+  p "What are the prereqs? #{t.prerequisites}"
+  p "What are the sources? #{t.sources}"
 end
 
 file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
@@ -161,13 +174,10 @@ task _build_internal: [OUTPUT_SITE_INDEX, OUTPUT_RSS_FILE_PATH]
 
 desc 'Build site'
 task :build do
-  # These must run sequentially, so they are run explicitly.
+  # These must run sequentially, so they are run explicitly within a task.
   Rake::Task[:compile].invoke
   Rake::Task[:_build_internal].invoke
-
-  CACHE_TAG_FILES.pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X/index.xml").each do |fpath|
-    Rake::Task[fpath].invoke
-  end
+  Rake::Task[:_gen_tag_feeds].invoke
 end
 
 desc 'Build site'
