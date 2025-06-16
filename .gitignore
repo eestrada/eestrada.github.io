@@ -20,3 +20,4 @@ _venv/
 
 # New personally created build system
 /cache/
+/www/

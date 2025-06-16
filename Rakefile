@@ -22,7 +22,8 @@ STATIC_DIR = 'static'
 CACHE_DIR = 'cache'
 
 # Where final output goes.
-OUTPUT_DIR = 'docs'
+# OUTPUT_DIR = 'docs'
+OUTPUT_DIR = 'www'
 
 # Inputs
 INPUT_POST_FILES = FileList["#{INPUT_DIR}/posts/**/*.md"]
@@ -32,7 +33,7 @@ INPUT_STATIC_FILES = FileList["#{STATIC_DIR}/*"]
 # Intermediate files
 CACHE_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{CACHE_DIR}/}X.html")
 CACHE_NON_POST_FILES = INPUT_NON_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{CACHE_DIR}/}X.html")
-CACHE_TAG_FILES = FileList["#{CACHE_DIR}/tags/*.jsonl"]
+CACHE_TAG_FILES_GLOB = "#{CACHE_DIR}/tags/*.jsonl".freeze
 CACHE_RSS_FILE = "#{CACHE_DIR}/rss_feed.jsonl".freeze
 
 # Final output files
@@ -55,7 +56,7 @@ tag_lock = Thread::Mutex.new
 rss_lock = Thread::Mutex.new
 
 directory "#{CACHE_DIR}/tags"
-directory "#{OUTPUT_DIR}}/tags"
+directory "#{OUTPUT_DIR}/tags"
 
 (
   CACHE_POST_FILES +
@@ -146,7 +147,7 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*\.xml$} => [
   make_rss(t.source, t.name, url_path, tag_lock)
 end
 
-rule(_gen_tag_feeds: proc { CACHE_TAG_FILES.pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") }) do |t|
+rule(_gen_tag_feeds: proc { FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") }) do |t|
   # p "Did #{t.name} get called?"
   # p "What are the prereqs? #{t.prerequisites}"
   # p "What are the sources? #{t.sources}"
@@ -191,6 +192,13 @@ end
 
 desc 'Preview site'
 task :preview do
+  require 'launchy'
+
+  Thread.start do
+    sleep(2)
+    Launchy.open('http://0.0.0.0:5000')
+  end
+
   # https://x.com/tenderlove/status/351554818579505152
   ruby '-run', '-e', 'httpd', OUTPUT_DIR, '-p5000'
 end
