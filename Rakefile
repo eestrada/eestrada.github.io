@@ -57,8 +57,9 @@ CLOBBER << OUTPUT_DIR
 # since tag files are appended to, potentially in parallel, during the caching
 # phase, a mutex is needed to ensure files are not simultaneously modified,
 # which could corrupt data.
-tag_lock = Thread::Mutex.new
-rss_lock = Thread::Mutex.new
+#
+# Use one big lock for all file operations for simplicity of implementation.
+FILE_LOCK = Thread::Mutex.new
 
 directory "#{CACHE_DIR}/tags"
 directory "#{OUTPUT_DIR}/tags"
@@ -104,7 +105,7 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
 
   entry_hash = { 'name': t.name, 'front_matter': parsed.front_matter }
   entry = "#{JSON.dump(entry_hash)}\n"
-  rss_lock.synchronize do
+  FILE_LOCK.synchronize do
     File.write(CACHE_RSS_FILE, entry, mode: 'a')
   end
 
@@ -119,20 +120,20 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
     Rake::Task[tag_dir].invoke
 
     p "#{t.name} >> #{tag_file}"
-    tag_lock.synchronize do
+    FILE_LOCK.synchronize do
       File.write(tag_file, entry, mode: 'a')
     end
   end
 end
 
-def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+def make_rss(to_read, to_write, url_path) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
   rendered_rss = RSS::Maker.make('atom') do |maker|
     maker.channel.author = MAIN_SITE_AUTHOR
     maker.channel.updated = Time.now.to_s
     maker.channel.about = "#{BASE_URL}/#{url_path}"
     maker.channel.title = SITE_TITLE
 
-    file_guts = mutex.synchronize { File.read(to_read) }
+    file_guts = FILE_LOCK.synchronize { File.read(to_read) }
     blobs = file_guts.each_line.map { |l| JSON.parse(l) }
     blobs_sorted = (blobs.sort_by { |e| e.dig('front_matter', 'date') }).reverse
     blobs_sorted.each do |jblob|
@@ -158,7 +159,7 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
        proc { |tn| tn.pathmap('%d') }
      ]) do |t|
   url_path = t.name.pathmap("%{^#{OUTPUT_DIR}/,}p")
-  make_rss(t.source, t.name, url_path, tag_lock)
+  make_rss(t.source, t.name, url_path)
 end
 
 rule(_gen_tag_feeds: proc { FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") }) do |t|
@@ -175,7 +176,7 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.jsonl$} => [CACHE_RSS_FILE]) do |t|
 end
 
 file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
-  make_rss(t.source, t.name, RSS_FILENAME, rss_lock)
+  make_rss(t.source, t.name, RSS_FILENAME)
 end
 
 file OUTPUT_SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES)
