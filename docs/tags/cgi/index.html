@@ -7,7 +7,7 @@
     <title>Ethan Estrada</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.145.0">
+    <meta name="generator" content="Hugo 0.147.8">
     
     
     
@@ -16,7 +16,7 @@
     
 
     
-<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+<link rel="stylesheet" href="/ananke/css/main.min.8d048772ae72ab11245a0e296d1f2a36d3e3dd376c6c867394d6cc659c68fc37.css" >
 
 
 
@@ -167,7 +167,7 @@ So I made a little class that does just that.</p>
 </span></span><span style="display:flex;"><span>    commands <span style="color:#f92672">=</span> hou<span style="color:#f92672">.</span>hscript(<span style="color:#e6db74">&#39;help&#39;</span>)[<span style="color:#ae81ff">0</span>]
 </span></span><span style="display:flex;"><span>    commands <span style="color:#f92672">=</span> frozenset(commands<span style="color:#f92672">.</span>split())
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __getattr__(self, attr):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__getattr__</span>(self, attr):
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> attr <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>commands:
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">AttributeError</span>(<span style="color:#e6db74">&#39;No hscript command by name &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;&#39;</span> <span style="color:#f92672">%</span> attr)
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># cache for future calls</span>
