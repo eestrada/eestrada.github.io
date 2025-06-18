@@ -154,7 +154,19 @@ def make_rss(to_read, to_write, url_path) # rubocop:disable Metrics/AbcSize,Metr
   File.write(to_write, rendered_rss)
 end
 
-# TODO: make a rule like this to generate HTML index files for tags.
+rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.html$} => [
+       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
+       proc { |tn| tn.pathmap('%d') }
+     ]) do |t|
+  # p "Did #{t.name} get called?"
+  # p "What are the prereqs? #{t.prerequisites}"
+  # p "What are the sources? #{t.sources}"
+
+  # TODO: create HTML index page for tag.
+  sh 'touch', t.name
+  p "#{t.source} -> #{t.name}"
+end
+
 rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
        proc { |tn| tn.pathmap('%d') }
@@ -163,24 +175,35 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
   make_rss(t.source, t.name, url_path)
 end
 
-rule(_gen_tag_feeds: proc { FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") }) do |t|
-  # p "Did #{t.name} get called?"
+# Prerequisites can only be dynamically generated if they are part of a `rule`.
+#
+# In this case, they are delayed and called as part of a `proc`.
+# Thus, the dynamically generated tag files
+# must be determined *after* the tag caches are generated, not before.
+rule(_gen_tag_outputs: proc {
+  FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") +
+  FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.html")
+}) do |t|
+  # p 'Tag outputs generated.'
   # p "What are the prereqs? #{t.prerequisites}"
   # p "What are the sources? #{t.sources}"
 end
 
+# FIXME: jsonl tag files trigger multiple times.
+# There must be something incorrect about how the file timestamps are generated.
+
 # These are generated as a side effect of generating the main RSS file
-rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.jsonl$} => [CACHE_RSS_FILE]) do |t|
-  p "Did #{t.name} get called?"
-  p "What are the prereqs? #{t.prerequisites}"
-  p "What are the sources? #{t.sources}"
+rule(%r{^#{CACHE_DIR}/tags/.*/index\.jsonl$} => [CACHE_RSS_FILE]) do |t|
+  # p "Did #{t.name} get called?"
+  # p "What are the prereqs? #{t.prerequisites}"
+  # p "What are the sources? #{t.sources}"
 end
 
 file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE, OUTPUT_RSS_FILE_PATH.pathmap('%d')] do |t|
   make_rss(t.source, t.name, RSS_FILENAME)
 end
 
-file OUTPUT_SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES)
+file OUTPUT_SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + CACHE_POST_FILES + FileList[CACHE_RSS_FILE])
 
 file CACHE_RSS_FILE => CACHE_POST_FILES
 
@@ -190,11 +213,11 @@ task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE
 task _build_internal: [OUTPUT_SITE_INDEX, OUTPUT_RSS_FILE_PATH]
 
 desc 'Build site'
-task :build do
-  # These must run sequentially, so they are run explicitly within a task.
-  Rake::Task[:compile].invoke
+task build: [:compile] do
+  # This must run sequentially (i.e. never in parallel) after the :compile task,
+  # so it is run explicitly within the task.
   Rake::Task[:_build_internal].invoke
-  Rake::Task[:_gen_tag_feeds].invoke
+  Rake::Task[:_gen_tag_outputs].invoke
 end
 
 desc 'Build site'
