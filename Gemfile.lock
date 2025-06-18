@@ -1,9 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
     backport (1.2.0)
     benchmark (0.4.1)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     diff-lcs (1.6.2)
     erubi (1.13.1)
     front_matter_parser (1.0.1)
@@ -14,6 +18,10 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     language_server-protocol (3.17.0.5)
+    launchy (3.1.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+      logger (~> 1.6)
     lint_roller (1.1.0)
     logger (1.7.0)
     nokogiri (1.18.8-aarch64-linux-gnu)
@@ -39,6 +47,7 @@ GEM
       ast (~> 2.4.1)
       racc
     prism (1.4.0)
+    public_suffix (6.0.2)
     racc (1.8.1)
     rainbow (3.1.1)
     rbs (3.9.4)
@@ -114,6 +123,8 @@ DEPENDENCIES
   erubi
   front_matter_parser (~> 1.0, >= 1.0.1)
   kramdown
+  kramdown-parser-gfm
+  launchy
   rouge
   rss
   ruby-lsp

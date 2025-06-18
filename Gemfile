@@ -8,10 +8,13 @@ gem 'front_matter_parser', '~> 1.0', '>= 1.0.1'
 # For rendering markdown to html
 gem 'kramdown'
 
+# For parsing github flavored markdown
+gem 'kramdown-parser-gfm'
+
 # For coloring code blocks in Markdown renders
 gem 'rouge'
 
-# For embedding articles into a layout
+# For embedding content into layout templates
 gem 'tilt'
 
 # For faster ERB style templates in Tilt
@@ -23,6 +26,10 @@ gem 'rss'
 # For simple previewing of static site locally
 gem 'webrick'
 
+# For launching previews in browser
+gem 'launchy'
+
+# Only used when modifying the rake file itself.
 group 'development' do
   gem 'ruby-lsp'
   gem 'solargraph'

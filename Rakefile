@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require 'rake/clean'
+require 'bundler/setup'
+
+Bundler.require(:default)
+
+require 'json'
 
 # Just always multitask, because why not?
 Rake.application.options.always_multitask = true
@@ -69,7 +74,7 @@ directory "#{OUTPUT_DIR}/tags"
 end
 
 # We list these explicitly instead of using a rule because the static output
-# runs the risk of matching everything.
+# runs the risk of matching everything with a rule/glob/regexp.
 OUTPUT_STATIC_FILES.each do |fpath|
   file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"), fpath.pathmap('%d')]) do |t|
     cp t.source, t.name
@@ -81,15 +86,20 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
        proc { |tn| tn.pathmap("%{^#{CACHE_DIR}/,#{INPUT_DIR}/}X.md") },
        proc { |tn| tn.pathmap('%d') }
      ]) do |t|
-  require 'json'
-  require 'tilt/erb'
-  require 'tilt/kramdown'
-  require 'front_matter_parser'
-
   p "#{t.source} -> #{t.name}"
 
   parsed = FrontMatterParser::Parser.parse_file(t.source)
-  rendered_html = Kramdown::Document.new(parsed.content).to_html
+  kd_opts = {
+    # GFM options
+    input: 'GFM',
+    hard_wrap: false,
+    gfm_quirks: [],
+
+    # Highlighting options
+    syntax_highlighter: 'rouge',
+    syntax_highlighter_opts: { guess_lang: false }
+  }
+  rendered_html = Kramdown::Document.new(parsed.content, kd_opts).to_html
   File.write(t.name, rendered_html)
 
   entry_hash = { 'name': t.name, 'front_matter': parsed.front_matter }
@@ -116,10 +126,6 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
 end
 
 def make_rss(to_read, to_write, url_path, mutex) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-  require 'rss'
-  require 'json'
-  require 'front_matter_parser'
-
   rendered_rss = RSS::Maker.make('atom') do |maker|
     maker.channel.author = MAIN_SITE_AUTHOR
     maker.channel.updated = Time.now.to_s
@@ -148,7 +154,8 @@ end
 
 # TODO: make a rule like this to generate HTML index files for tags.
 rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
-       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") }
+       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
+       proc { |tn| tn.pathmap('%d') }
      ]) do |t|
   url_path = t.name.pathmap("%{^#{OUTPUT_DIR}/,}p")
   make_rss(t.source, t.name, url_path, tag_lock)
@@ -161,7 +168,7 @@ rule(_gen_tag_feeds: proc { FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_D
 end
 
 # These are generated as a side effect of generating the main RSS file
-rule(%r{^#{OUTPUT_DIR}/tags/.*\.jsonl$} => [CACHE_RSS_FILE]) do |t|
+rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.jsonl$} => [CACHE_RSS_FILE]) do |t|
   p "Did #{t.name} get called?"
   p "What are the prereqs? #{t.prerequisites}"
   p "What are the sources? #{t.sources}"
@@ -199,8 +206,6 @@ end
 
 desc 'Preview site'
 task :preview do
-  require 'launchy'
-
   Thread.start do
     sleep(2)
     Launchy.open('http://0.0.0.0:5000')
