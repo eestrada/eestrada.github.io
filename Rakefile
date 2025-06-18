@@ -61,6 +61,17 @@ CLOBBER << OUTPUT_DIR
 # Use one big lock for all file operations for simplicity of implementation.
 FILE_LOCK = Thread::Mutex.new
 
+KRAMDOWN_OPTS = {
+  # Github Flavored Markdown options
+  input: 'GFM',
+  hard_wrap: false,
+  gfm_quirks: [],
+
+  # Highlighting options
+  syntax_highlighter: 'rouge',
+  syntax_highlighter_opts: { guess_lang: false, default_lang: 'plaintext' }
+}
+
 directory "#{CACHE_DIR}/tags"
 directory "#{OUTPUT_DIR}/tags"
 
@@ -90,17 +101,7 @@ rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
   p "#{t.source} -> #{t.name}"
 
   parsed = FrontMatterParser::Parser.parse_file(t.source)
-  kd_opts = {
-    # GFM options
-    input: 'GFM',
-    hard_wrap: false,
-    gfm_quirks: [],
-
-    # Highlighting options
-    syntax_highlighter: 'rouge',
-    syntax_highlighter_opts: { guess_lang: false }
-  }
-  rendered_html = Kramdown::Document.new(parsed.content, kd_opts).to_html
+  rendered_html = Kramdown::Document.new(parsed.content, KRAMDOWN_OPTS).to_html
   File.write(t.name, rendered_html)
 
   entry_hash = { 'name': t.name, 'front_matter': parsed.front_matter }
@@ -175,7 +176,7 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.jsonl$} => [CACHE_RSS_FILE]) do |t|
   p "What are the sources? #{t.sources}"
 end
 
-file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE] do |t|
+file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE, OUTPUT_RSS_FILE_PATH.pathmap('%d')] do |t|
   make_rss(t.source, t.name, RSS_FILENAME)
 end
 
@@ -199,11 +200,11 @@ end
 desc 'Build site'
 task default: [:build]
 
-# Convenience tasks
-desc 'Install dependencies via bundler'
-task :install_deps do
-  sh 'bundle install'
-end
+# # Convenience tasks
+# desc 'Install dependencies via bundler'
+# task :install_deps do
+#   sh 'bundle install'
+# end
 
 desc 'Preview site'
 task :preview do
