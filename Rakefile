@@ -43,13 +43,15 @@ CACHE_RSS_FILE = "#{CACHE_DIR}/rss_feed.jsonl".freeze
 
 # Final output files
 OUTPUT_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{OUTPUT_DIR}/}X/index.html")
-OUTPUT_NON_POST_FILES = CACHE_NON_POST_FILES.pathmap("%{^##{CACHE_DIR}/non_posts/,#{OUTPUT_DIR}/}X.html")
+OUTPUT_NON_POST_FILES = CACHE_NON_POST_FILES.pathmap("%{^#{CACHE_DIR}/non_posts/,#{OUTPUT_DIR}/}X.html")
 OUTPUT_STATIC_FILES = INPUT_STATIC_FILES.pathmap("%{^#{STATIC_DIR}/,#{OUTPUT_DIR}/}p")
 OUTPUT_TAG_FEEDS = FileList["#{OUTPUT_DIR}/tags/*.xml"]
 OUTPUT_TAG_PAGES = FileList["#{OUTPUT_DIR}/tags/*.html"]
 OUTPUT_SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
 OUTPUT_RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 OUTPUT_SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
+
+OUTPUT_NON_POST_FILES.push(OUTPUT_SITE_INDEX) unless OUTPUT_NON_POST_FILES.include?(OUTPUT_SITE_INDEX)
 
 CLEAN << CACHE_DIR
 CLOBBER << OUTPUT_DIR
@@ -93,7 +95,19 @@ OUTPUT_STATIC_FILES.each do |fpath|
   end
 end
 
-# From input Markdown to cached HTML and tags
+# Non-Posts: From input Markdown to cached HTML
+rule(%r{^#{CACHE_DIR}/non_posts/.*\.html$} => [
+       proc { |tn| tn.pathmap("%{^#{CACHE_DIR}/,#{INPUT_DIR}/}X.md") },
+       proc { |tn| tn.pathmap('%d') }
+     ]) do |t|
+  p "#{t.source} -> #{t.name}"
+
+  parsed = FrontMatterParser::Parser.parse_file(t.source)
+  rendered_html = Kramdown::Document.new(parsed.content, KRAMDOWN_OPTS).to_html
+  File.write(t.name, rendered_html)
+end
+
+# Posts: From input Markdown to cached HTML and tags
 rule(%r{^#{CACHE_DIR}/posts/.*\.html$} => [
        proc { |tn| tn.pathmap("%{^#{CACHE_DIR}/,#{INPUT_DIR}/}X.md") },
        proc { |tn| tn.pathmap('%d') }
@@ -154,6 +168,7 @@ def make_rss(to_read, to_write, url_path) # rubocop:disable Metrics/AbcSize,Metr
   File.write(to_write, rendered_rss)
 end
 
+# Build tag HTML indexes.
 rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.html$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
        proc { |tn| tn.pathmap('%d') }
@@ -167,6 +182,7 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.html$} => [
   p "#{t.source} -> #{t.name}"
 end
 
+# Build tag XML Atom/RSS indexes.
 rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
        proc { |tn| tn.pathmap('%d') }
@@ -203,14 +219,12 @@ file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE, OUTPUT_RSS_FILE_PATH.pathmap('%d')
   make_rss(t.source, t.name, RSS_FILENAME)
 end
 
-file OUTPUT_SITE_INDEX => (OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + CACHE_POST_FILES + FileList[CACHE_RSS_FILE])
-
 file CACHE_RSS_FILE => CACHE_POST_FILES
 
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
-task _build_internal: [OUTPUT_SITE_INDEX, OUTPUT_RSS_FILE_PATH]
+task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH])
 
 desc 'Build site'
 task build: [:compile] do
