@@ -95,6 +95,14 @@ OUTPUT_STATIC_FILES.each do |fpath|
   end
 end
 
+# We list these explicitly instead of using a rule because the non-post output
+# runs the risk of matching everything with a rule/glob/regexp.
+OUTPUT_NON_POST_FILES.each do |fpath|
+  file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p"), fpath.pathmap('%d')]) do |t|
+    cp t.source, t.name
+  end
+end
+
 # Non-Posts: From input Markdown to cached HTML
 rule(%r{^#{CACHE_DIR}/non_posts/.*\.html$} => [
        proc { |tn| tn.pathmap("%{^#{CACHE_DIR}/,#{INPUT_DIR}/}X.md") },
@@ -166,6 +174,20 @@ def make_rss(to_read, to_write, url_path) # rubocop:disable Metrics/AbcSize,Metr
 
   p "#{to_read} -> #{to_write}"
   File.write(to_write, rendered_rss)
+end
+
+# Build post HTML output.
+rule(%r{^#{OUTPUT_DIR}/posts/.*/index\.html$} => [
+       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}d.html") },
+       proc { |tn| tn.pathmap('%d') }
+     ]) do |t|
+  # p "Did #{t.name} get called?"
+  # p "What are the prereqs? #{t.prerequisites}"
+  # p "What are the sources? #{t.sources}"
+
+  # TODO: create HTML index page for post.
+  sh 'touch', t.name
+  p "#{t.source} -> #{t.name}"
 end
 
 # Build tag HTML indexes.
