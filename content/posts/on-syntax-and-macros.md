@@ -1,7 +1,7 @@
 ---
 title: On Syntax and Macros
 date: '2016-09-10T23:11:20-07:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/blog/2016/09/10/on-syntax-and-macros.html]
 tags: ['Lisp', 'CGI']
 draft: false

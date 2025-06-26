@@ -1,7 +1,7 @@
 ---
 title: First post made from Nokia N810 Tablet
 date: '2009-08-25T02:53:00-06:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/2009/08/first-post-made-from-nokia-n810-tablet.html]
 tags: ['Blogspot', 'Tablet', 'SIP', 'VoIP']
 draft: false

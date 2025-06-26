@@ -1,7 +1,7 @@
 ---
 title: Creating an ISO image from a CD/DVD on Unix
 date: '2013-01-03T12:48:00-07:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/2013/01/creating-iso-from-cddvd-on-nix.html]
 tags: ['Unix', 'Blogspot']
 draft: false

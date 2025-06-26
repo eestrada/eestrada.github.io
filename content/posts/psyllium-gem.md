@@ -2,7 +2,7 @@
 title: 'Ruby Fibers and the Psyllium Gem'
 date: '2025-03-30T22:22:31-05:00'
 lastmod: '2025-03-31T17:33:07-05:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: []
 tags: ['code', 'ruby']
 draft: false

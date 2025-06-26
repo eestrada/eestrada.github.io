@@ -1,7 +1,7 @@
 ---
 title: Welcome Welcome
 date: '2010-03-04T16:45:00-07:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/2010/03/welcome-welcome.html]
 tags: ['Blogspot']
 draft: false

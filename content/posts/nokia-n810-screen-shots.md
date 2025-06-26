@@ -1,7 +1,7 @@
 ---
 title: Nokia N810 Screen Shots
 date: '2009-08-26T16:52:00-06:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/2009/08/nokia-n810-screen-shots.html]
 tags: ['Blogspot', 'Tablet', 'SIP', 'VoIP']
 draft: false

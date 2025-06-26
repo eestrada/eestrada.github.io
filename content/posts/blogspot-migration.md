@@ -1,7 +1,7 @@
 ---
 title: Blogspot Migration
 date: '2024-10-09T22:37:00-05:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: []
 tags: ['blog']
 draft: false

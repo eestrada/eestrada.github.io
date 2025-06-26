@@ -1,7 +1,7 @@
 ---
 title: The Experiment Begins
 date: '2009-08-21T10:46:00-06:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/2009/08/experiment-begins.html]
 tags: ['Blogspot', 'Tablet', 'SIP', 'VoIP']
 draft: false

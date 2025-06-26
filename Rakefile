@@ -170,7 +170,7 @@ def make_rss(to_read, to_write, url_path) # rubocop:disable Metrics/AbcSize,Metr
       fpath = jblob['name']
       front_matter = jblob['front_matter']
       maker.items.new_item do |item|
-        item.author = front_matter['Author']
+        item.author = front_matter['author']
         item.link = "#{BASE_URL}/#{fpath.pathmap("%{#{CACHE_DIR}/,}X/")}"
         item.title = front_matter['title']
         item.date = front_matter['date']
@@ -186,6 +186,7 @@ end
 # Build post HTML output.
 rule(%r{^#{OUTPUT_DIR}/posts/.*/index\.html$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}d.html") },
+       proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{INPUT_DIR}/}d.md") },
        proc { |tn| tn.pathmap('%d') }
      ]) do |t|
   # p "Did #{t.name} get called?"
@@ -195,8 +196,10 @@ rule(%r{^#{OUTPUT_DIR}/posts/.*/index\.html$} => [
   # TODO: create HTML index page for post.
   p "#{t.source} -> #{t.name}"
 
+  parsed = FrontMatterParser::Parser.parse_file(t.sources[1])
+
   outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
-  html = outer.render(binding, title: nil) do
+  html = outer.render(binding, parsed.front_matter) do
     File.read(t.source)
   end
 

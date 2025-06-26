@@ -1,7 +1,7 @@
 ---
 title: Bouncing Ball
 date: '2010-03-08T01:46:00-07:00'
-Author: Ethan Estrada
+author: Ethan Estrada
 aliases: [/2010/03/bouncing-ball.html]
 tags: ['Animation', 'Blogspot']
 draft: false
