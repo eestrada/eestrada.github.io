@@ -17,6 +17,9 @@ MAIN_SITE_AUTHOR = 'Ethan Estrada'
 SITE_TITLE = 'Ethan Estrada'
 RSS_FILENAME = 'index.xml'
 
+# Where templates live
+TEMPLATE_DIR = 'templates'
+
 # Where the markdown files live.
 INPUT_DIR = 'content'
 
@@ -33,7 +36,9 @@ OUTPUT_DIR = 'www'
 # Inputs
 INPUT_POST_FILES = FileList["#{INPUT_DIR}/posts/**/*.md"]
 INPUT_NON_POST_FILES = FileList["#{INPUT_DIR}/non_posts/**/*.md"]
-INPUT_STATIC_FILES = FileList["#{STATIC_DIR}/*"]
+INPUT_STATIC_FILES = FileList["#{STATIC_DIR}/**/*"]
+
+p INPUT_STATIC_FILES
 
 # Intermediate files
 CACHE_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{CACHE_DIR}/}X.html")
@@ -90,6 +95,8 @@ end
 # We list these explicitly instead of using a rule because the static output
 # runs the risk of matching everything with a rule/glob/regexp.
 OUTPUT_STATIC_FILES.each do |fpath|
+  next if File.directory?(fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"))
+
   file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"), fpath.pathmap('%d')]) do |t|
     cp t.source, t.name
   end
@@ -186,8 +193,14 @@ rule(%r{^#{OUTPUT_DIR}/posts/.*/index\.html$} => [
   # p "What are the sources? #{t.sources}"
 
   # TODO: create HTML index page for post.
-  sh 'touch', t.name
   p "#{t.source} -> #{t.name}"
+
+  outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
+  html = outer.render(binding, title: nil) do
+    File.read(t.source)
+  end
+
+  File.write(t.name, html)
 end
 
 # Build tag HTML indexes.
