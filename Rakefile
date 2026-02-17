@@ -77,11 +77,12 @@ KRAMDOWN_OPTS = {
   # Highlighting options
   syntax_highlighter: 'rouge',
   syntax_highlighter_opts: { guess_lang: false, default_lang: 'plaintext' }
-}
+}.freeze
 
 directory "#{CACHE_DIR}/tags"
 directory "#{OUTPUT_DIR}/tags"
 
+# Ensure that parent directories are auto-created.
 (
   CACHE_POST_FILES +
   CACHE_NON_POST_FILES +
@@ -92,7 +93,7 @@ directory "#{OUTPUT_DIR}/tags"
   directory fpath.pathmap('%d')
 end
 
-# We list these explicitly instead of using a rule because the static output
+# List these explicitly instead of using a rule because the static output
 # runs the risk of matching everything with a rule/glob/regexp.
 OUTPUT_STATIC_FILES.each do |fpath|
   next if File.directory?(fpath.pathmap("%{^#{OUTPUT_DIR}/,#{STATIC_DIR}/}p"))
@@ -102,7 +103,7 @@ OUTPUT_STATIC_FILES.each do |fpath|
   end
 end
 
-# We list these explicitly instead of using a rule because the non-post output
+# List these explicitly instead of using a rule because the non-post output
 # runs the risk of matching everything with a rule/glob/regexp.
 OUTPUT_NON_POST_FILES.each do |fpath|
   file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p"), fpath.pathmap('%d')]) do |t|
