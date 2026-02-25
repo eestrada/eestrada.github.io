@@ -25,7 +25,16 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a class="pure-button" href="http://purecss.io">Pure</a>
+                            <a class="pure-button" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="pure-button" href="/posts/">Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="pure-button" href="/tags/">Tags</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="pure-button" href="/SWE_Resume.pdf">Resume</a>
                         </li>
                     </ul>
                 </nav>
@@ -34,16 +43,7 @@
 
         <div class="content pure-u-1 pure-u-md-3-4">
             <div>
-                <!-- A wrapper for all the blog posts -->
-                <div class="posts">
-                    <h1 class="content-subhead">Pinned Post</h1>
-
-                    <!-- A single blog post -->
-                    <section class="post">
-                      <%= yield %>
-                    </section>
-                </div>
-
+                <%= yield %>
                 <div class="footer">
                     <div class="pure-menu pure-menu-horizontal">
                         <ul>
