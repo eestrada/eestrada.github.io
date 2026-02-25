@@ -54,6 +54,7 @@ OUTPUT_TAG_FEEDS = FileList["#{OUTPUT_DIR}/tags/*.xml"]
 OUTPUT_TAG_PAGES = FileList["#{OUTPUT_DIR}/tags/*.html"]
 OUTPUT_SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
 OUTPUT_POSTS_INDEX = "#{OUTPUT_DIR}/posts/index.html".freeze
+OUTPUT_TAGS_INDEX = "#{OUTPUT_DIR}/tags/index.html".freeze
 OUTPUT_RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 OUTPUT_SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 
@@ -360,12 +361,38 @@ file OUTPUT_POSTS_INDEX => [CACHE_RSS_FILE, OUTPUT_POSTS_INDEX.pathmap('%d')] do
   File.write(t.name, html)
 end
 
+directory OUTPUT_TAGS_INDEX.pathmap('%d')
+
+file OUTPUT_TAGS_INDEX => [CACHE_TAG_FILES_GLOB, OUTPUT_TAGS_INDEX.pathmap('%d')] do |t|
+  p "#{CACHE_TAG_FILES_GLOB} -> #{t.name}"
+
+  tags = Dir["#{CACHE_DIR}/tags/*/index.jsonl"].map do |jsonl_file|
+    entries = File.read(jsonl_file).each_line.map { |l| JSON.parse(l) }
+    tag_name = File.basename(File.dirname(jsonl_file))
+    {
+      name: tag_name,
+      slug: tag_name,
+      count: entries.length
+    }
+  end.sort_by { |tag| [-tag[:count], tag[:slug]] }
+
+  template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/tags_index.erb")
+  content = template.render(binding, { tags: tags })
+
+  outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
+  html = outer.render(binding, { title: "#{SITE_TITLE} - All Tags" }) do
+    content
+  end
+
+  File.write(t.name, html)
+end
+
 file CACHE_RSS_FILE => CACHE_POST_FILES
 
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
-task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH, OUTPUT_POSTS_INDEX])
+task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH, OUTPUT_POSTS_INDEX, OUTPUT_TAGS_INDEX])
 
 desc 'Build site'
 task build: [:compile] do
