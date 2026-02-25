@@ -1,7 +1,7 @@
 <header class="post-header">
     <h2 class="post-title"><%= title %></h2>
     <p class="post-meta">
-        <%= date %> | <%= author %><% if tags && !tags.empty? %> | <%= tags.join(', ') %><% end %>
+        <%= date %> | <%= author %><% if tags && !tags.empty? %> | <% tags.each do |tag| %><a href="/tags/<%= tag.downcase.gsub(' ', '-') %>/index.html"><%= tag %></a><%= tag == tags.last ? '' : ', ' %><% end %><% end %>
     </p>
 </header>
 
