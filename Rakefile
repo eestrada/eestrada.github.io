@@ -101,7 +101,7 @@ def build_post_data(entries)
     fm = entry['front_matter']
     cache_path = entry['name'].pathmap("%{#{CACHE_DIR}/,#{OUTPUT_DIR}/}p")
     html_path = entry['name'].pathmap("%{#{CACHE_DIR}/,#{OUTPUT_DIR}/}X/").sub(%r{/$}, '') + '/index.html'
-    url = html_path.pathmap("%{^#{OUTPUT_DIR}/,}p")
+    url = '/' + html_path.pathmap("%{^#{OUTPUT_DIR}/,}p")
 
     excerpt = if File.exist?(entry['name'])
       extract_first_paragraph(File.read(entry['name']))
