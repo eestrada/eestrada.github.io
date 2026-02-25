@@ -105,10 +105,10 @@ def build_post_data(entries)
     url = '/' + html_path.pathmap("%{^#{OUTPUT_DIR}/,}p")
 
     excerpt = if File.exist?(entry['name'])
-      extract_first_paragraph(File.read(entry['name']))
-    else
-      ''
-    end
+                extract_first_paragraph(File.read(entry['name']))
+              else
+                ''
+              end
 
     {
       title: fm['title'],
@@ -154,7 +154,9 @@ end
 # List these explicitly instead of using a rule because the non-post output
 # runs the risk of matching everything with a rule/glob/regexp.
 OUTPUT_NON_POST_FILES.each do |fpath|
-  file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p"), fpath.pathmap('%d'), CACHE_RSS_FILE]) do |t|
+  file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p"),
+                 fpath.pathmap('%d'),
+                 CACHE_RSS_FILE]) do |t|
     if t.name == OUTPUT_SITE_INDEX
       all_posts = get_sorted_posts
       recent_posts = all_posts.take(3)
@@ -268,11 +270,11 @@ rule(%r{^#{OUTPUT_DIR}/posts/.*/index\.html$} => [
 
   template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/post.erb")
   content = template.render(binding, front_matter.merge(
-    prev_post: prev_post ? prev_post[:url] : nil,
-    prev_post_title: prev_post ? prev_post[:title] : nil,
-    next_post: next_post ? next_post[:url] : nil,
-    next_post_title: next_post ? next_post[:title] : nil
-  )) do
+                                       prev_post: prev_post ? prev_post[:url] : nil,
+                                       prev_post_title: prev_post ? prev_post[:title] : nil,
+                                       next_post: next_post ? next_post[:url] : nil,
+                                       next_post_title: next_post ? next_post[:title] : nil
+                                     )) do
     File.read(t.source)
   end
 
@@ -292,7 +294,9 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.html$} => [
   p "#{t.source} -> #{t.name}"
 
   tag_name = t.name.sub(%r{^#{OUTPUT_DIR}/tags/}, '').sub('/index.html', '')
-  entries = File.read(t.sources[0]).each_line.map { |l| JSON.parse(l) }.sort_by { |e| e.dig('front_matter', 'date') }.reverse
+  entries = File.read(t.sources[0]).each_line.map do |l|
+    JSON.parse(l)
+  end.sort_by { |e| e.dig('front_matter', 'date') }.reverse
   posts = build_post_data(entries)
 
   template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/tag.erb")
@@ -392,7 +396,8 @@ file CACHE_RSS_FILE => CACHE_POST_FILES
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
-task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH, OUTPUT_POSTS_INDEX, OUTPUT_TAGS_INDEX])
+task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH,
+                                                                                          OUTPUT_POSTS_INDEX, OUTPUT_TAGS_INDEX])
 
 desc 'Build site'
 task build: [:compile] do
