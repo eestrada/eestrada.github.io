@@ -126,7 +126,7 @@ DEPENDENCIES
   kramdown
   kramdown-parser-gfm
   launchy
-  nokogiri
+  nokogiri (>= 1.18.9)
   rake
   rouge
   rss

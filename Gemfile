@@ -27,7 +27,7 @@ gem 'rss'
 gem 'rake'
 
 # For parsing HTML to extract excerpts
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.18.9'
 
 # For simple previewing of static site locally
 gem 'webrick'
