@@ -1,4 +1,4 @@
-<h1 class="tag-title">Posts tagged "<%= tag_name %>"</h1>
+<h1 class="section-title">All Posts</h1>
 
 <div class="posts-list">
     <% posts.each do |post| %>
@@ -6,7 +6,7 @@
         <h2 class="post-preview-title">
             <a href="<%= post[:url] %>"><%= post[:title] %></a>
         </h2>
-        <p class="post-preview-meta"><%= post[:date] %></p>
+        <p class="post-preview-meta"><%= post[:date] %><% if post[:tags] && !post[:tags].empty? %> | <%= post[:tags].join(', ') %><% end %></p>
         <div class="post-preview-excerpt">
             <%= post[:excerpt] %>
         </div>

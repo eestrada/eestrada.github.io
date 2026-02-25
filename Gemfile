@@ -23,6 +23,12 @@ gem 'erubi'
 # For generating RSS and/or Atom feeds
 gem 'rss'
 
+# For running build tasks
+gem 'rake'
+
+# For parsing HTML to extract excerpts
+gem 'nokogiri'
+
 # For simple previewing of static site locally
 gem 'webrick'
 

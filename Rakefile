@@ -53,6 +53,7 @@ OUTPUT_STATIC_FILES = INPUT_STATIC_FILES.pathmap("%{^#{STATIC_DIR}/,#{OUTPUT_DIR
 OUTPUT_TAG_FEEDS = FileList["#{OUTPUT_DIR}/tags/*.xml"]
 OUTPUT_TAG_PAGES = FileList["#{OUTPUT_DIR}/tags/*.html"]
 OUTPUT_SITE_INDEX = "#{OUTPUT_DIR}/index.html".freeze
+OUTPUT_POSTS_INDEX = "#{OUTPUT_DIR}/posts/index.html".freeze
 OUTPUT_RSS_FILE_PATH = "#{OUTPUT_DIR}/#{RSS_FILENAME}".freeze
 OUTPUT_SITEMAP_FILE = "#{OUTPUT_DIR}/sitemap.xml".freeze
 
@@ -78,6 +79,52 @@ KRAMDOWN_OPTS = {
   syntax_highlighter: 'rouge',
   syntax_highlighter_opts: { guess_lang: false, default_lang: 'plaintext' }
 }.freeze
+
+def load_posts_from_jsonl(jsonl_path)
+  return [] unless File.exist?(jsonl_path)
+
+  File.read(jsonl_path).each_line.map do |line|
+    JSON.parse(line)
+  end.sort_by { |e| e.dig('front_matter', 'date') }.reverse
+end
+
+def extract_first_paragraph(html_content)
+  return '' if html_content.nil? || html_content.empty?
+
+  doc = Nokogiri::HTML(html_content)
+  first_p = doc.at_css('p')
+  first_p ? first_p.to_html : ''
+end
+
+def build_post_data(entries)
+  entries.map do |entry|
+    fm = entry['front_matter']
+    cache_path = entry['name'].pathmap("%{#{CACHE_DIR}/,#{OUTPUT_DIR}/}p")
+    html_path = entry['name'].pathmap("%{#{CACHE_DIR}/,#{OUTPUT_DIR}/}X/").sub(%r{/$}, '') + '/index.html'
+    url = html_path.pathmap("%{^#{OUTPUT_DIR}/,}p")
+
+    excerpt = if File.exist?(entry['name'])
+      extract_first_paragraph(File.read(entry['name']))
+    else
+      ''
+    end
+
+    {
+      title: fm['title'],
+      date: fm['date'],
+      author: fm['author'],
+      tags: fm['tags'] || [],
+      url: url,
+      excerpt: excerpt,
+      name: entry['name']
+    }
+  end
+end
+
+def get_sorted_posts
+  entries = load_posts_from_jsonl(CACHE_RSS_FILE)
+  build_post_data(entries)
+end
 
 directory "#{CACHE_DIR}/tags"
 directory "#{OUTPUT_DIR}/tags"
@@ -106,8 +153,23 @@ end
 # List these explicitly instead of using a rule because the non-post output
 # runs the risk of matching everything with a rule/glob/regexp.
 OUTPUT_NON_POST_FILES.each do |fpath|
-  file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p"), fpath.pathmap('%d')]) do |t|
-    cp t.source, t.name
+  file(fpath => [fpath.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p"), fpath.pathmap('%d'), CACHE_RSS_FILE]) do |t|
+    if t.name == OUTPUT_SITE_INDEX
+      all_posts = get_sorted_posts
+      recent_posts = all_posts.take(3)
+
+      template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/index.erb")
+      content = template.render(binding, { posts: recent_posts })
+
+      outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
+      html = outer.render(binding, { title: SITE_TITLE }) do
+        content
+      end
+
+      File.write(t.name, html)
+    else
+      cp t.source, t.name
+    end
   end
 end
 
@@ -188,20 +250,34 @@ end
 rule(%r{^#{OUTPUT_DIR}/posts/.*/index\.html$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}d.html") },
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{INPUT_DIR}/}d.md") },
-       proc { |tn| tn.pathmap('%d') }
+       proc { |tn| tn.pathmap('%d') },
+       CACHE_RSS_FILE
      ]) do |t|
-  # p "Did #{t.name} get called?"
-  # p "What are the prereqs? #{t.prerequisites}"
-  # p "What are the sources? #{t.sources}"
-
-  # TODO: create HTML index page for post.
   p "#{t.source} -> #{t.name}"
 
   parsed = FrontMatterParser::Parser.parse_file(t.sources[1])
+  front_matter = parsed.front_matter
+
+  all_posts = get_sorted_posts
+  current_url = t.name.pathmap("%{^#{OUTPUT_DIR}/,}p")
+
+  current_index = all_posts.index { |p| p[:url] == current_url }
+  prev_post = current_index && current_index < all_posts.length - 1 ? all_posts[current_index + 1] : nil
+  next_post = current_index && current_index > 0 ? all_posts[current_index - 1] : nil
+
+  template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/post.erb")
+  content = template.render(binding, front_matter.merge(
+    prev_post: prev_post ? prev_post[:url] : nil,
+    prev_post_title: prev_post ? prev_post[:title] : nil,
+    next_post: next_post ? next_post[:url] : nil,
+    next_post_title: next_post ? next_post[:title] : nil
+  )) do
+    File.read(t.source)
+  end
 
   outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
-  html = outer.render(binding, parsed.front_matter) do
-    File.read(t.source)
+  html = outer.render(binding, front_matter) do
+    content
   end
 
   File.write(t.name, html)
@@ -212,13 +288,21 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.html$} => [
        proc { |tn| tn.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/}X.jsonl") },
        proc { |tn| tn.pathmap('%d') }
      ]) do |t|
-  # p "Did #{t.name} get called?"
-  # p "What are the prereqs? #{t.prerequisites}"
-  # p "What are the sources? #{t.sources}"
-
-  # TODO: create HTML index page for tag.
-  sh 'touch', t.name
   p "#{t.source} -> #{t.name}"
+
+  tag_name = t.name.sub(%r{^#{OUTPUT_DIR}/tags/}, '').sub('/index.html', '')
+  entries = File.read(t.sources[0]).each_line.map { |l| JSON.parse(l) }.sort_by { |e| e.dig('front_matter', 'date') }.reverse
+  posts = build_post_data(entries)
+
+  template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/tag.erb")
+  content = template.render(binding, { tag_name: tag_name, posts: posts })
+
+  outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
+  html = outer.render(binding, { title: "Posts tagged \"#{tag_name}\"" }) do
+    content
+  end
+
+  File.write(t.name, html)
 end
 
 # Build tag XML Atom/RSS indexes.
@@ -258,12 +342,30 @@ file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE, OUTPUT_RSS_FILE_PATH.pathmap('%d')
   make_rss(t.source, t.name, RSS_FILENAME)
 end
 
+directory OUTPUT_POSTS_INDEX.pathmap('%d')
+
+file OUTPUT_POSTS_INDEX => [CACHE_RSS_FILE, OUTPUT_POSTS_INDEX.pathmap('%d')] do |t|
+  p "#{CACHE_RSS_FILE} -> #{t.name}"
+
+  all_posts = get_sorted_posts
+
+  template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/posts_index.erb")
+  content = template.render(binding, { posts: all_posts })
+
+  outer = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/layout.erb")
+  html = outer.render(binding, { title: "#{SITE_TITLE} - All Posts" }) do
+    content
+  end
+
+  File.write(t.name, html)
+end
+
 file CACHE_RSS_FILE => CACHE_POST_FILES
 
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
-task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH])
+task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH, OUTPUT_POSTS_INDEX])
 
 desc 'Build site'
 task build: [:compile] do
