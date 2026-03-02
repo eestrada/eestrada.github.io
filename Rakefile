@@ -123,9 +123,6 @@ def get_sorted_posts
   build_post_data(sorted_entries)
 end
 
-directory "#{CACHE_DIR}/tags"
-directory "#{OUTPUT_DIR}/tags"
-
 # Ensure that parent directories are auto-created.
 (
   CACHE_POST_FILES +
@@ -136,6 +133,12 @@ directory "#{OUTPUT_DIR}/tags"
 ).each do |fpath|
   directory fpath.pathmap('%d')
 end
+
+directory "#{CACHE_DIR}/tags"
+directory "#{OUTPUT_DIR}/tags"
+
+directory OUTPUT_POSTS_INDEX.pathmap('%d')
+directory OUTPUT_TAGS_INDEX.pathmap('%d')
 
 # List these explicitly instead of using a rule because the static output
 # runs the risk of matching everything with a rule/glob/regexp.
@@ -343,8 +346,6 @@ file OUTPUT_RSS_FILE_PATH => [CACHE_RSS_FILE, OUTPUT_RSS_FILE_PATH.pathmap('%d')
   make_rss(t.source, t.name, RSS_FILENAME)
 end
 
-directory OUTPUT_POSTS_INDEX.pathmap('%d')
-
 file OUTPUT_POSTS_INDEX => [CACHE_RSS_FILE, OUTPUT_POSTS_INDEX.pathmap('%d')] do |t|
   p "#{CACHE_RSS_FILE} -> #{t.name}"
 
@@ -360,8 +361,6 @@ file OUTPUT_POSTS_INDEX => [CACHE_RSS_FILE, OUTPUT_POSTS_INDEX.pathmap('%d')] do
 
   File.write(t.name, html)
 end
-
-directory OUTPUT_TAGS_INDEX.pathmap('%d')
 
 file OUTPUT_TAGS_INDEX => [CACHE_TAG_FILES_GLOB, OUTPUT_TAGS_INDEX.pathmap('%d')] do |t|
   p "#{CACHE_TAG_FILES_GLOB} -> #{t.name}"
