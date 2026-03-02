@@ -81,14 +81,6 @@ KRAMDOWN_OPTS = {
   syntax_highlighter_opts: { guess_lang: false, default_lang: 'plaintext' }
 }.freeze
 
-def load_posts_from_jsonl(jsonl_path)
-  return [] unless File.exist?(jsonl_path)
-
-  File.read(jsonl_path).each_line.map do |line|
-    JSON.parse(line)
-  end.sort_by { |e| e.dig('front_matter', 'date') }.reverse
-end
-
 def extract_first_paragraph(html_content)
   return '' if html_content.nil? || html_content.empty?
 
@@ -99,7 +91,7 @@ end
 
 def build_post_data(entries)
   entries.map do |entry|
-    fm = entry['front_matter']
+    front_matter = entry['front_matter']
     cache_path = entry['name'].pathmap("%{#{CACHE_DIR}/,#{OUTPUT_DIR}/}p")
     html_path = entry['name'].pathmap("%{#{CACHE_DIR}/,#{OUTPUT_DIR}/}X/").sub(%r{/$}, '') + '/index.html'
     url = '/' + html_path.pathmap("%{^#{OUTPUT_DIR}/,}p")
@@ -111,10 +103,10 @@ def build_post_data(entries)
               end
 
     {
-      title: fm['title'],
-      date: fm['date'],
-      author: fm['author'],
-      tags: fm['tags'] || [],
+      title: front_matter['title'],
+      date: front_matter['date'],
+      author: front_matter['author'],
+      tags: front_matter['tags'] || [],
       url: url,
       excerpt: excerpt,
       name: entry['name']
@@ -123,8 +115,12 @@ def build_post_data(entries)
 end
 
 def get_sorted_posts
-  entries = load_posts_from_jsonl(CACHE_RSS_FILE)
-  build_post_data(entries)
+  return [] unless File.exist?(CACHE_RSS_FILE)
+
+  entries = File.read(CACHE_RSS_FILE).each_line.map { |l| JSON.parse(l) }
+  sorted_entries = entries.sort_by { |e| e.dig('front_matter', 'date') }.reverse
+
+  build_post_data(sorted_entries)
 end
 
 directory "#{CACHE_DIR}/tags"
