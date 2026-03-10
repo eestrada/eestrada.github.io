@@ -117,7 +117,7 @@ end
 def get_sorted_posts
   return [] unless File.exist?(CACHE_RSS_FILE)
 
-  entries = File.read(CACHE_RSS_FILE).each_line.map { |l| JSON.parse(l) }
+  entries = FILE_LOCK.synchronize { File.read(CACHE_RSS_FILE) }.each_line.map { |l| JSON.parse(l) }
   sorted_entries = entries.sort_by { |e| e.dig('front_matter', 'date') }.reverse
 
   build_post_data(sorted_entries)
@@ -293,7 +293,7 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.html$} => [
   p "#{t.source} -> #{t.name}"
 
   tag_name = t.name.sub(%r{^#{OUTPUT_DIR}/tags/}, '').sub('/index.html', '')
-  entries = File.read(t.sources[0]).each_line.map do |l|
+  entries = FILE_LOCK.synchronize { File.read(t.sources[0]) }.each_line.map do |l|
     JSON.parse(l)
   end.sort_by { |e| e.dig('front_matter', 'date') }.reverse
   posts = build_post_data(entries)
@@ -366,14 +366,14 @@ file OUTPUT_TAGS_INDEX => [CACHE_TAG_FILES_GLOB, OUTPUT_TAGS_INDEX.pathmap('%d')
   p "#{CACHE_TAG_FILES_GLOB} -> #{t.name}"
 
   tags = Dir["#{CACHE_DIR}/tags/*/index.jsonl"].map do |jsonl_file|
-    entries = File.read(jsonl_file).each_line.map { |l| JSON.parse(l) }
+    entries_length = FILE_LOCK.synchronize { File.read(jsonl_file) }.each_line.count
     tag_name = File.basename(File.dirname(jsonl_file))
     {
       name: tag_name,
       slug: tag_name,
-      count: entries.length
+      count: entries_length
     }
-  end.sort_by { |tag| [-tag[:count], tag[:slug]] }
+  end.sort_by { |tag| [tag[:slug]] }
 
   template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/tags_index.erb")
   content = template.render(binding, { tags: tags })
