@@ -386,13 +386,60 @@ file OUTPUT_TAGS_INDEX => [CACHE_TAG_FILES_GLOB, OUTPUT_TAGS_INDEX.pathmap('%d')
   File.write(t.name, html)
 end
 
+file OUTPUT_SITEMAP_FILE => [CACHE_RSS_FILE, CACHE_TAG_FILES_GLOB, OUTPUT_SITEMAP_FILE.pathmap('%d')] do |t|
+  urls = []
+
+  urls << { loc: "#{BASE_URL}/", lastmod: Time.now.iso8601 }
+  urls << { loc: "#{BASE_URL}/posts/", lastmod: Time.now.iso8601 }
+  urls << { loc: "#{BASE_URL}/tags/", lastmod: Time.now.iso8601 }
+
+  FILE_LOCK.synchronize { File.read(CACHE_RSS_FILE) }.each_line do |l|
+    entry = JSON.parse(l)
+    front_matter = entry['front_matter']
+    url_path = '/' + entry['name'].pathmap("%{#{CACHE_DIR}/,}X/").sub(%r{/$}, '') + '/'
+    urls << {
+      loc: "#{BASE_URL}#{url_path}",
+      lastmod: front_matter['date'] || front_matter['lastmod'] || Time.now.iso8601
+    }
+  end
+
+  OUTPUT_NON_POST_FILES.each do |output_path|
+    next if output_path == OUTPUT_SITE_INDEX
+
+    url_path = output_path.pathmap("%{^#{OUTPUT_DIR}/,}p").sub(%r{/index\.html$}, '/')
+    url_path = '/' if url_path == '/'
+
+    source_path = output_path.pathmap("%{^#{OUTPUT_DIR}/,#{CACHE_DIR}/non_posts/}p").sub(%r{/index\.html$}, '.html')
+    source_path = source_path.pathmap("%{^#{CACHE_DIR}/,#{INPUT_DIR}/}X.md")
+
+    lastmod = Time.now.iso8601
+    if File.exist?(source_path)
+      parsed = FrontMatterParser::Parser.parse_file(source_path)
+      lastmod = parsed.front_matter['date'] || parsed.front_matter['lastmod'] || Time.now.iso8601
+    end
+
+    urls << { loc: "#{BASE_URL}#{url_path}", lastmod: lastmod }
+  end
+
+  FileList[CACHE_TAG_FILES_GLOB].to_a.each do |jsonl_file|
+    tag_name = File.basename(File.dirname(jsonl_file))
+    urls << { loc: "#{BASE_URL}/tags/#{tag_name}/", lastmod: Time.now.iso8601 }
+  end
+
+  template = Tilt::ERBTemplate.new("#{TEMPLATE_DIR}/sitemap_xml.erb")
+  File.write(t.name, template.render(binding, { urls: urls }))
+end
+
 file CACHE_RSS_FILE => CACHE_POST_FILES
 
 desc 'Compile site parts'
 task compile: (CACHE_POST_FILES + CACHE_NON_POST_FILES + FileList[CACHE_RSS_FILE])
 
-task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES + OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH,
-                                                                                          OUTPUT_POSTS_INDEX, OUTPUT_TAGS_INDEX])
+task _build_internal: (OUTPUT_POST_FILES + OUTPUT_NON_POST_FILES +
+                       OUTPUT_STATIC_FILES + [OUTPUT_RSS_FILE_PATH,
+                                              OUTPUT_POSTS_INDEX,
+                                              OUTPUT_TAGS_INDEX,
+                                              OUTPUT_SITEMAP_FILE])
 
 desc 'Build site'
 task build: [:compile] do
