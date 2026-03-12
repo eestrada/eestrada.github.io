@@ -6,6 +6,7 @@ require 'bundler/setup'
 Bundler.require(:default)
 
 require 'json'
+require 'tempfile'
 
 # Just always multitask, because why not?
 Rake.application.options.always_multitask = true
@@ -470,18 +471,22 @@ task :preview do
 end
 
 desc <<~DESC
-  Make new post.
-  New post file is immediately opened with $VISUAL or $EDITOR.
-  Renaming the new post file is left to the user.
+  Make a new post.
+  The new post is initially a temporary file filled with a basic post structure.
+  The temporary file is immediately opened with $VISUAL or $EDITOR.
+  Once the editor exits cleanly,
+  the tempfile contents will be copied to a post
+  with a file name based on the title in the frontmatter of the post.
+  If the tempfile is empty, the new post operation is aborted.
+  Regardless of outcome, the tempfile is cleaned up at the end.
 DESC
 task :new_post do
   editor = ENV.fetch('VISUAL') { ENV.fetch('EDITOR') }
-  new_post_file = "#{INPUT_DIR}/posts/new_post.md"
   new_post_body = <<~POST_BODY
     ---
     title: 'New Post'
     date: '#{Time.now.iso8601}'
-    Author: '#{MAIN_SITE_AUTHOR}'
+    author: '#{MAIN_SITE_AUTHOR}'
     aliases: []
     tags: []
     draft: true
@@ -490,7 +495,19 @@ task :new_post do
     Post body. Replace me.
   POST_BODY
 
-  File.unlink(new_post_file) if File.file?(new_post_file)
-  File.write(new_post_file, new_post_body)
-  system(editor, new_post_file, exception: true)
+  Tempfile.create(['new_post', '.md']) do |fp|
+    fp.write(new_post_body)
+    fp.close
+
+    system(editor, fp.path, exception: true)
+
+    break unless File.size?(fp.path)
+
+    parsed = FrontMatterParser::Parser.parse_file(fp.path)
+    front_matter = parsed.front_matter
+    title = front_matter.fetch('title')
+    file_name = title.gsub(/[^0-9A-Za-z\-]/, '_').gsub(/_+/, '_').downcase
+
+    FileUtils.copy_file(fp.path, "#{INPUT_DIR}/posts/#{file_name}.md")
+  end
 end
