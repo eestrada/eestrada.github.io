@@ -319,20 +319,6 @@ rule(%r{^#{OUTPUT_DIR}/tags/.*/index\.xml$} => [
   make_rss(t.source, t.name, url_path)
 end
 
-# Prerequisites can only be dynamically generated if they are part of a `rule`.
-#
-# In this case, they are delayed and called as part of a `proc`.
-# Thus, the dynamically generated tag files
-# must be determined *after* the tag caches are generated, not before.
-rule(_gen_tag_outputs: proc {
-  FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.xml") +
-  FileList[CACHE_TAG_FILES_GLOB].pathmap("%{^#{CACHE_DIR}/,#{OUTPUT_DIR}/}X.html")
-}) do |t|
-  # p 'Tag outputs generated.'
-  # p "What are the prereqs? #{t.prerequisites}"
-  # p "What are the sources? #{t.sources}"
-end
-
 # FIXME: jsonl tag files trigger multiple times.
 # There must be something incorrect about how the file timestamps are generated.
 
@@ -447,7 +433,6 @@ task build: [:compile] do
   # This must run sequentially (i.e. never in parallel) after the :compile task,
   # so it is run explicitly within the task.
   Rake::Task[:_build_internal].invoke
-  Rake::Task[:_gen_tag_outputs].invoke
 end
 
 desc 'Build site'
