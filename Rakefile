@@ -38,7 +38,7 @@ INPUT_POST_FILES = FileList["#{INPUT_DIR}/posts/**/*.md"]
 INPUT_NON_POST_FILES = FileList["#{INPUT_DIR}/non_posts/**/*.md"]
 INPUT_STATIC_FILES = FileList["#{STATIC_DIR}/**/*"]
 
-p INPUT_STATIC_FILES
+# p INPUT_STATIC_FILES
 
 # Intermediate files
 CACHE_POST_FILES = INPUT_POST_FILES.pathmap("%{^#{INPUT_DIR}/,#{CACHE_DIR}/}X.html")
@@ -467,4 +467,30 @@ task :preview do
 
   # https://x.com/tenderlove/status/351554818579505152
   ruby '-run', '-e', 'httpd', OUTPUT_DIR, '-p5000'
+end
+
+desc <<~DESC
+  Make new post.
+  New post file is immediately opened with $VISUAL or $EDITOR.
+  Renaming the new post file is left to the user.
+DESC
+task :new_post do
+  editor = ENV.fetch('VISUAL') { ENV.fetch('EDITOR') }
+  new_post_file = "#{INPUT_DIR}/posts/new_post.md"
+  new_post_body = <<~POST_BODY
+    ---
+    title: 'New Post'
+    date: '#{Time.now.iso8601}'
+    Author: '#{MAIN_SITE_AUTHOR}'
+    aliases: []
+    tags: []
+    draft: true
+    ---
+
+    Post body. Replace me.
+  POST_BODY
+
+  File.unlink(new_post_file) if File.file?(new_post_file)
+  File.write(new_post_file, new_post_body)
+  system(editor, new_post_file, exception: true)
 end
